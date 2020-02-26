@@ -5,7 +5,7 @@ use error;
 use profile;
 use types;
 #[doc = r" The actual data of a `Message`."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct Field<T> {
     value:     T,
     scale:     Option<f64>,
@@ -20,7 +20,7 @@ impl types::field::Field for Field<profile::base::Float64> {
     }
 }
 #[doc = r" All the FIT message types."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Message {
     FileId(FileId),
     FileCreator(FileCreator),
@@ -433,7 +433,7 @@ impl Message {
     }
 }
 #[doc = "Must be first message in file."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FileId {
     Type(Field<profile::types::File>),
     Manufacturer(Field<profile::types::Manufacturer>),
@@ -521,7 +521,7 @@ impl FileId {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FileCreator {
     SoftwareVersion(Field<profile::base::Uint16>),
     HardwareVersion(Field<profile::base::Uint8>),
@@ -558,7 +558,7 @@ impl FileCreator {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TimestampCorrelation {
     #[doc = "Whole second part of UTC timestamp at the time the system \
              timestamp was recorded."]
@@ -654,7 +654,7 @@ impl TimestampCorrelation {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Software {
     MessageIndex(Field<profile::types::MessageIndex>),
     Version(Field<profile::base::Uint16>),
@@ -700,7 +700,7 @@ impl Software {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SlaveDevice {
     Manufacturer(Field<profile::types::Manufacturer>),
     Product(Field<profile::base::Uint16>),
@@ -737,7 +737,7 @@ impl SlaveDevice {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Capabilities {
     #[doc = "Use language_bits_x types where x is index of array."]
     Languages(Field<profile::base::Uint8z>),
@@ -801,7 +801,7 @@ impl Capabilities {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FileCapabilities {
     MessageIndex(Field<profile::types::MessageIndex>),
     Type(Field<profile::types::File>),
@@ -874,7 +874,7 @@ impl FileCapabilities {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum MesgCapabilities {
     MessageIndex(Field<profile::types::MessageIndex>),
     File(Field<profile::types::File>),
@@ -938,7 +938,7 @@ impl MesgCapabilities {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FieldCapabilities {
     MessageIndex(Field<profile::types::MessageIndex>),
     File(Field<profile::types::File>),
@@ -1002,7 +1002,7 @@ impl FieldCapabilities {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DeviceSettings {
     #[doc = "Index into time zone arrays."]
     ActiveTimeZone(Field<profile::base::Uint8>),
@@ -1263,7 +1263,7 @@ impl DeviceSettings {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum UserProfile {
     MessageIndex(Field<profile::types::MessageIndex>),
     FriendlyName(Field<profile::base::Utf8String>),
@@ -1570,7 +1570,7 @@ impl UserProfile {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum HrmProfile {
     MessageIndex(Field<profile::types::MessageIndex>),
     Enabled(Field<profile::base::Bool>),
@@ -1634,7 +1634,7 @@ impl HrmProfile {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SdmProfile {
     MessageIndex(Field<profile::types::MessageIndex>),
     Enabled(Field<profile::base::Bool>),
@@ -1730,7 +1730,7 @@ impl SdmProfile {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BikeProfile {
     MessageIndex(Field<profile::types::MessageIndex>),
     Name(Field<profile::base::Utf8String>),
@@ -2045,7 +2045,7 @@ impl BikeProfile {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Connectivity {
     #[doc = "Use Bluetooth for connectivity features"]
     BluetoothEnabled(Field<profile::base::Bool>),
@@ -2187,7 +2187,7 @@ impl Connectivity {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WatchfaceSettings {
     MessageIndex(Field<profile::types::MessageIndex>),
     Mode(Field<profile::types::WatchfaceMode>),
@@ -2233,7 +2233,7 @@ impl WatchfaceSettings {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum OhrSettings {
     Enabled(Field<profile::types::Switch>),
     Unknown { data:          Vec<u8>, field_def_num: u8 },
@@ -2261,7 +2261,7 @@ impl OhrSettings {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ZonesTarget {
     MaxHeartRate(Field<profile::base::Uint8>),
     ThresholdHeartRate(Field<profile::base::Uint8>),
@@ -2325,7 +2325,7 @@ impl ZonesTarget {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Sport {
     Sport(Field<profile::types::Sport>),
     SubSport(Field<profile::types::SubSport>),
@@ -2371,7 +2371,7 @@ impl Sport {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum HrZone {
     MessageIndex(Field<profile::types::MessageIndex>),
     HighBpm(Field<profile::base::Uint8>),
@@ -2417,7 +2417,7 @@ impl HrZone {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SpeedZone {
     MessageIndex(Field<profile::types::MessageIndex>),
     HighValue(Field<profile::base::Uint16>),
@@ -2463,7 +2463,7 @@ impl SpeedZone {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CadenceZone {
     MessageIndex(Field<profile::types::MessageIndex>),
     HighValue(Field<profile::base::Uint8>),
@@ -2509,7 +2509,7 @@ impl CadenceZone {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum PowerZone {
     MessageIndex(Field<profile::types::MessageIndex>),
     HighValue(Field<profile::base::Uint16>),
@@ -2555,7 +2555,7 @@ impl PowerZone {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum MetZone {
     MessageIndex(Field<profile::types::MessageIndex>),
     HighBpm(Field<profile::base::Uint8>),
@@ -2610,7 +2610,7 @@ impl MetZone {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DiveSettings {
     MessageIndex(Field<profile::types::MessageIndex>),
     Name(Field<profile::base::Utf8String>),
@@ -2841,7 +2841,7 @@ impl DiveSettings {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DiveAlarm {
     #[doc = "Index of the alarm"]
     MessageIndex(Field<profile::types::MessageIndex>),
@@ -2927,7 +2927,7 @@ impl DiveAlarm {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DiveGas {
     MessageIndex(Field<profile::types::MessageIndex>),
     HeliumContent(Field<profile::base::Uint8>),
@@ -2982,7 +2982,7 @@ impl DiveGas {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Goal {
     MessageIndex(Field<profile::types::MessageIndex>),
     Sport(Field<profile::types::Sport>),
@@ -3120,7 +3120,7 @@ impl Goal {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Activity {
     Timestamp(Field<profile::types::DateTime>),
     #[doc = "Exclude pauses"]
@@ -3217,7 +3217,7 @@ impl Activity {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Session {
     #[doc = "Selected bit is set for the current session."]
     MessageIndex(Field<profile::types::MessageIndex>),
@@ -4364,7 +4364,7 @@ impl Session {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Lap {
     MessageIndex(Field<profile::types::MessageIndex>),
     #[doc = "Lap end time."]
@@ -5386,7 +5386,7 @@ impl Lap {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Length {
     MessageIndex(Field<profile::types::MessageIndex>),
     Timestamp(Field<profile::types::DateTime>),
@@ -5572,7 +5572,7 @@ impl Length {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Record {
     Timestamp(Field<profile::types::DateTime>),
     PositionLat(Field<profile::base::Sint32>),
@@ -6224,7 +6224,7 @@ impl Record {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Event {
     Timestamp(Field<profile::types::DateTime>),
     Event(Field<profile::types::Event>),
@@ -6377,7 +6377,7 @@ impl Event {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DeviceInfo {
     Timestamp(Field<profile::types::DateTime>),
     DeviceIndex(Field<profile::types::DeviceIndex>),
@@ -6566,7 +6566,7 @@ impl DeviceInfo {
     }
 }
 #[doc = "Corresponds to file_id of workout or course."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TrainingFile {
     Timestamp(Field<profile::types::DateTime>),
     Type(Field<profile::types::File>),
@@ -6640,7 +6640,7 @@ impl TrainingFile {
     }
 }
 #[doc = "Heart rate variability"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Hrv {
     #[doc = "Time between beats"]
     Time(Field<profile::base::Uint16>),
@@ -6672,7 +6672,7 @@ impl Hrv {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WeatherConditions {
     #[doc = "time of update for current conditions, else forecast time"]
     Timestamp(Field<profile::types::DateTime>),
@@ -6845,7 +6845,7 @@ impl WeatherConditions {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WeatherAlert {
     Timestamp(Field<profile::types::DateTime>),
     #[doc = "Unique identifier from GCS report ID string, length is 12"]
@@ -6930,7 +6930,7 @@ impl WeatherAlert {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum GpsMetadata {
     #[doc = "Whole second part of the timestamp."]
     Timestamp(Field<profile::types::DateTime>),
@@ -7040,7 +7040,7 @@ impl GpsMetadata {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CameraEvent {
     #[doc = "Whole second part of the timestamp."]
     Timestamp(Field<profile::types::DateTime>),
@@ -7113,7 +7113,7 @@ impl CameraEvent {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum GyroscopeData {
     #[doc = "Whole second part of the timestamp"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7235,7 +7235,7 @@ impl GyroscopeData {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AccelerometerData {
     #[doc = "Whole second part of the timestamp"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7387,7 +7387,7 @@ impl AccelerometerData {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum MagnetometerData {
     #[doc = "Whole second part of the timestamp"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7509,7 +7509,7 @@ impl MagnetometerData {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BarometerData {
     #[doc = "Whole second part of the timestamp"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7576,7 +7576,7 @@ impl BarometerData {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ThreeDSensorCalibration {
     #[doc = "Whole second part of the timestamp"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7669,7 +7669,7 @@ impl ThreeDSensorCalibration {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum OneDSensorCalibration {
     #[doc = "Whole second part of the timestamp"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7752,7 +7752,7 @@ impl OneDSensorCalibration {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum VideoFrame {
     #[doc = "Whole second part of the timestamp"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7805,7 +7805,7 @@ impl VideoFrame {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ObdiiData {
     #[doc = "Timestamp message was output"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7924,7 +7924,7 @@ impl ObdiiData {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum NmeaSentence {
     #[doc = "Timestamp message was output"]
     Timestamp(Field<profile::types::DateTime>),
@@ -7976,7 +7976,7 @@ impl NmeaSentence {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AviationAttitude {
     #[doc = "Timestamp message was output"]
     Timestamp(Field<profile::types::DateTime>),
@@ -8120,7 +8120,7 @@ impl AviationAttitude {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Video {
     Url(Field<profile::base::Utf8String>),
     HostingProvider(Field<profile::base::Utf8String>),
@@ -8170,7 +8170,7 @@ impl Video {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum VideoTitle {
     #[doc = "Long titles will be split into multiple parts"]
     MessageIndex(Field<profile::types::MessageIndex>),
@@ -8221,7 +8221,7 @@ impl VideoTitle {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum VideoDescription {
     #[doc = "Long descriptions will be split into multiple parts"]
     MessageIndex(Field<profile::types::MessageIndex>),
@@ -8272,7 +8272,7 @@ impl VideoDescription {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum VideoClip {
     ClipNumber(Field<profile::base::Uint16>),
     StartTimestamp(Field<profile::types::DateTime>),
@@ -8359,7 +8359,7 @@ impl VideoClip {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Set {
     #[doc = "Timestamp of the set"]
     Timestamp(Field<profile::types::DateTime>),
@@ -8488,7 +8488,7 @@ impl Set {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Course {
     Sport(Field<profile::types::Sport>),
     Name(Field<profile::base::Utf8String>),
@@ -8545,7 +8545,7 @@ impl Course {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CoursePoint {
     MessageIndex(Field<profile::types::MessageIndex>),
     Timestamp(Field<profile::types::DateTime>),
@@ -8637,7 +8637,7 @@ impl CoursePoint {
     }
 }
 #[doc = "Unique Identification data for a segment file"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentId {
     #[doc = "Friendly name assigned to segment"]
     Name(Field<profile::base::Utf8String>),
@@ -8756,7 +8756,7 @@ impl SegmentId {
 }
 #[doc = "Unique Identification data for an individual segment leader within a \
          segment file"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentLeaderboardEntry {
     MessageIndex(Field<profile::types::MessageIndex>),
     #[doc = "Friendly name assigned to leader"]
@@ -8853,7 +8853,7 @@ impl SegmentLeaderboardEntry {
 #[doc = "Navigation and race evaluation point for a segment decribing a point \
          along the segment path and time it took each segment leader to reach \
          that point"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentPoint {
     MessageIndex(Field<profile::types::MessageIndex>),
     PositionLat(Field<profile::base::Sint32>),
@@ -8934,7 +8934,7 @@ impl SegmentPoint {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentLap {
     MessageIndex(Field<profile::types::MessageIndex>),
     #[doc = "Lap end time."]
@@ -9775,7 +9775,7 @@ impl SegmentLap {
          file describing all segment files on a device. The segment list file \
          is used when refreshing the contents of a segment file with the \
          latest available leaderboard information."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentFile {
     MessageIndex(Field<profile::types::MessageIndex>),
     #[doc = "UUID of the segment file"]
@@ -9890,7 +9890,7 @@ impl SegmentFile {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Workout {
     Sport(Field<profile::types::Sport>),
     Capabilities(Field<profile::types::WorkoutCapabilities>),
@@ -9980,7 +9980,7 @@ impl Workout {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WorkoutSession {
     MessageIndex(Field<profile::types::MessageIndex>),
     Sport(Field<profile::types::Sport>),
@@ -10064,7 +10064,7 @@ impl WorkoutSession {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WorkoutStep {
     MessageIndex(Field<profile::types::MessageIndex>),
     WktStepName(Field<profile::base::Utf8String>),
@@ -10224,7 +10224,7 @@ impl WorkoutStep {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExerciseTitle {
     MessageIndex(Field<profile::types::MessageIndex>),
     ExerciseCategory(Field<profile::types::ExerciseCategory>),
@@ -10281,7 +10281,7 @@ impl ExerciseTitle {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Schedule {
     #[doc = "Corresponds to file_id of scheduled workout / course."]
     Manufacturer(Field<profile::types::Manufacturer>),
@@ -10371,7 +10371,7 @@ impl Schedule {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Totals {
     MessageIndex(Field<profile::types::MessageIndex>),
     Timestamp(Field<profile::types::DateTime>),
@@ -10485,7 +10485,7 @@ impl Totals {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WeightScale {
     Timestamp(Field<profile::types::DateTime>),
     Weight(Field<profile::types::Weight>),
@@ -10628,7 +10628,7 @@ impl WeightScale {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BloodPressure {
     Timestamp(Field<profile::types::DateTime>),
     SystolicPressure(Field<profile::base::Uint16>),
@@ -10752,7 +10752,7 @@ impl BloodPressure {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum MonitoringInfo {
     Timestamp(Field<profile::types::DateTime>),
     #[doc = "Use to convert activity timestamps to local time if device does \
@@ -10832,7 +10832,7 @@ impl MonitoringInfo {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Monitoring {
     #[doc = "Must align to logging interval, for example, time must be \
              00:00:00 for daily log."]
@@ -11135,7 +11135,7 @@ impl Monitoring {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Hr {
     Timestamp(Field<profile::types::DateTime>),
     FractionalTimestamp(Field<profile::base::Uint16>),
@@ -11209,7 +11209,7 @@ impl Hr {
     }
 }
 #[doc = "Value from 1 to 100 calculated by FirstBeat"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum StressLevel {
     StressLevelValue(Field<profile::base::Sint16>),
     #[doc = "Time stress score was calculated"]
@@ -11250,7 +11250,7 @@ impl StressLevel {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum MemoGlob {
     #[doc = "Sequence number of memo blocks"]
     PartIndex(Field<profile::base::Uint32>),
@@ -11313,7 +11313,7 @@ impl MemoGlob {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AntChannelId {
     ChannelNumber(Field<profile::base::Uint8>),
     DeviceType(Field<profile::base::Uint8z>),
@@ -11377,7 +11377,7 @@ impl AntChannelId {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AntRx {
     Timestamp(Field<profile::types::DateTime>),
     FractionalTimestamp(Field<profile::base::Uint16>),
@@ -11450,7 +11450,7 @@ impl AntRx {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AntTx {
     Timestamp(Field<profile::types::DateTime>),
     FractionalTimestamp(Field<profile::base::Uint16>),
@@ -11523,7 +11523,7 @@ impl AntTx {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExdScreenConfiguration {
     ScreenIndex(Field<profile::base::Uint8>),
     #[doc = "number of fields in screen"]
@@ -11582,7 +11582,7 @@ impl ExdScreenConfiguration {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExdDataFieldConfiguration {
     ScreenIndex(Field<profile::base::Uint8>),
     ConceptField(Field<profile::base::Bytes>),
@@ -11657,7 +11657,7 @@ impl ExdDataFieldConfiguration {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExdDataConceptConfiguration {
     ScreenIndex(Field<profile::base::Uint8>),
     ConceptField(Field<profile::base::Bytes>),
@@ -11778,7 +11778,7 @@ impl ExdDataConceptConfiguration {
     }
 }
 #[doc = "Must be logged before developer field is used"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FieldDescription {
     DeveloperDataIndex(Field<profile::base::Uint8>),
     FieldDefinitionNumber(Field<profile::base::Uint8>),
@@ -11924,7 +11924,7 @@ impl FieldDescription {
     }
 }
 #[doc = "Must be logged before field description"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DeveloperDataId {
     DeveloperId(Field<profile::base::Bytes>),
     ApplicationId(Field<profile::base::Bytes>),
@@ -11988,7 +11988,7 @@ impl DeveloperDataId {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DiveSummary {
     Timestamp(Field<profile::types::DateTime>),
     ReferenceMesg(Field<profile::types::MesgNum>),

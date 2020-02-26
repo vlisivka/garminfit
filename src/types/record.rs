@@ -15,6 +15,7 @@ use std::{
     convert::TryFrom,
 };
 
+#[derive(Debug,Clone)]
 pub struct Record {
     pub header:  Header,
     pub content: Message,
@@ -30,10 +31,11 @@ impl Record {
         // Decode record content according to the header we got
         let content = match header {
             Header::Definition {
-                ..
+                local_mesg_num: _,
+                has_dev_fields,
             } => {
                 Message::Definition(
-                    Definition::decode(r)
+                    Definition::decode(r, has_dev_fields)
                         .map_err(Error::decoding("definition message"))?,
                 )
             },
@@ -75,9 +77,11 @@ impl Record {
     }
 }
 
+#[derive(Debug,Clone)]
 pub enum Header {
     Definition {
         local_mesg_num: u8,
+        has_dev_fields: bool,
     },
     Data {
         local_mesg_num: u8,
@@ -100,7 +104,8 @@ impl Header {
             // 0: Data Message
             if byte.bit_is_set(6) {
                 Ok(Header::Definition {
-                    local_mesg_num: byte.bit_range(0, 3)
+                    local_mesg_num: byte.bit_range(0, 3),
+                    has_dev_fields: byte.bit_is_set(5),
                 })
             }
             else {
@@ -123,6 +128,7 @@ impl Header {
         match self {
             Header::Definition {
                 local_mesg_num,
+                ..
             } => *local_mesg_num,
             Header::Data {
                 local_mesg_num,
@@ -134,6 +140,7 @@ impl Header {
     }
 }
 
+#[derive(Debug,Clone)]
 pub enum Message {
     Definition(Definition),
     Data(Data),
@@ -147,10 +154,12 @@ pub struct Definition {
     global_mesg_num: u16,
     nfields:         u8,
     field_defs:      Vec<FieldDefinition>,
+    ndevfields:      Option<u8>,
+    devfield_defs:   Option<Vec<FieldDefinition>>,
 }
 
 impl Definition {
-    pub(super) fn decode<R: ReadBytesExt>(r: &mut R) -> Result<Self> {
+    pub(super) fn decode<R: ReadBytesExt>(r: &mut R, has_dev_fields: bool) -> Result<Self> {
         // NOTE: Discarding the reserved byte
         r.read_u8().map_err(Error::reading("reserved byte"))?;
 
@@ -182,12 +191,33 @@ impl Definition {
             field_defs.push(field_def);
         }
 
-        Ok(Definition {
-            arch,
-            global_mesg_num,
-            nfields,
-            field_defs,
-        })
+        if has_dev_fields {
+            let ndevfields =
+                r.read_u8().map_err(Error::reading("number of fields"))?;
+            let mut devfield_defs = Vec::with_capacity(nfields as usize);
+            for i in 0..ndevfields {
+                let field_def = FieldDefinition::decode(r)
+                    .map_err(Error::reading(format!("field definition #{}", i)))?;
+                devfield_defs.push(field_def);
+            }
+            Ok(Definition {
+                arch,
+                global_mesg_num,
+                nfields,
+                field_defs,
+                ndevfields: Some(ndevfields),
+                devfield_defs: Some(devfield_defs),
+            })
+        } else {
+            Ok(Definition {
+                arch,
+                global_mesg_num,
+                nfields,
+                field_defs,
+                ndevfields: None,
+                devfield_defs: None,
+            })
+        }
     }
 }
 
@@ -215,6 +245,7 @@ impl FieldDefinition {
     }
 }
 
+#[derive(Debug,Clone)]
 pub struct Data(pub Vec<profile::messages::Message>);
 
 // TODO
@@ -235,6 +266,22 @@ impl Data {
             )?;
             mesgs.push(mesg);
         }
+
+        if let Some(devfield_defs) = definition.clone().devfield_defs {
+            // TODO: FIXME: Decode developer fields properly!
+            for field_def in devfield_defs.iter() {
+                let mut buffer = vec![0; field_def.size as usize];
+                r.read(&mut buffer).map_err(Error::reading("buffer"))?;
+                let _mesg = profile::messages::Message::decode::<T>(
+                    &buffer,
+                    definition.global_mesg_num,
+                    field_def.num,
+                )?;
+                // FIXME: It produces garbage value, so it easier to skip it.
+                //mesgs.push(mesg);
+            }
+        }
+
         Ok(Data(mesgs))
     }
 }

@@ -4,7 +4,7 @@ FIT_SDK ?= sdk/FitSDKRelease_20.66.00
 FIT_SDK_PROFILE ?= $(FIT_SDK)/Profile.xlsx
 # Attempt to get the FIT_SDK_VERSION by splitting on the final underscore
 FIT_SDK_VERSION ?= $(shell echo $(FIT_SDK) | awk -F_ '{print $$NF}')
-CARGO = cargo --color always
+CARGO = cargo
 
 
 .PHONY: all

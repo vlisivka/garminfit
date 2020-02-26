@@ -1,7 +1,7 @@
 # ! [ doc = "Generated for FIT SDK profile version: " ] # ! [ doc = "20.66.00" ]use byteorder::ByteOrder;
 use error;
 use profile;
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum File {
     #[doc = "Read only, single file. Must be in root directory."]
     Device = 1,
@@ -74,7 +74,7 @@ impl File {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum MesgNum {
     FileId = 0,
     Capabilities = 1,
@@ -264,7 +264,7 @@ impl MesgNum {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Checksum {
     #[doc = "Allows clear of checksum for flash memory where can only write 1 \
              to 0 without erasing sector."]
@@ -285,7 +285,7 @@ impl Checksum {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FileFlags {
     Read = 2,
     Write = 4,
@@ -303,7 +303,7 @@ impl FileFlags {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum MesgCount {
     NumPerFile = 0,
     MaxPerFile = 1,
@@ -323,7 +323,7 @@ impl MesgCount {
 }
 #[doc = "seconds since UTC 00:00 Dec 31 1989; if date_time is < 0x10000000 \
          then it is system time (seconds from device power on)"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct DateTime(pub u32);
 impl DateTime {
     pub(crate) fn decode<T: ByteOrder>(buffer: &[u8]) -> error::Result<Self> {
@@ -332,14 +332,14 @@ impl DateTime {
 }
 #[doc = "seconds since 00:00 Dec 31 1989 in local time zone; if date_time is < \
          0x10000000 then it is system time (seconds from device power on)"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct LocalDateTime(pub u32);
 impl LocalDateTime {
     pub(crate) fn decode<T: ByteOrder>(buffer: &[u8]) -> error::Result<Self> {
         Ok(LocalDateTime(T::read_u32(buffer)))
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum MessageIndex {
     #[doc = "message is selected if set"]
     Selected = 32768,
@@ -360,7 +360,7 @@ impl MessageIndex {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DeviceIndex {
     #[doc = "Creator of the file is always device index 0."]
     Creator = 0,
@@ -375,7 +375,7 @@ impl DeviceIndex {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Gender {
     Female = 0,
     Male = 1,
@@ -391,7 +391,7 @@ impl Gender {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Language {
     English = 0,
     French = 1,
@@ -482,7 +482,7 @@ impl Language {
     }
 }
 #[doc = "Bit field corresponding to language enum type (1 << language)."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LanguageBits0 {
     English = 1,
     French = 2,
@@ -510,7 +510,7 @@ impl LanguageBits0 {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LanguageBits1 {
     Dutch = 1,
     Finnish = 2,
@@ -538,7 +538,7 @@ impl LanguageBits1 {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LanguageBits2 {
     Slovenian = 1,
     Swedish = 2,
@@ -566,7 +566,7 @@ impl LanguageBits2 {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LanguageBits3 {
     Bulgarian = 1,
     Romanian = 2,
@@ -594,7 +594,7 @@ impl LanguageBits3 {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LanguageBits4 {
     BrazilianPortuguese = 1,
     Indonesian = 2,
@@ -618,7 +618,7 @@ impl LanguageBits4 {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TimeZone {
     Almaty = 0,
     Bangkok = 1,
@@ -842,7 +842,7 @@ impl TimeZone {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DisplayMeasure {
     Metric = 0,
     Statute = 1,
@@ -860,7 +860,7 @@ impl DisplayMeasure {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DisplayHeart {
     Bpm = 0,
     Max = 1,
@@ -878,7 +878,7 @@ impl DisplayHeart {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DisplayPower {
     Watts = 0,
     PercentFtp = 1,
@@ -894,7 +894,7 @@ impl DisplayPower {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DisplayPosition {
     #[doc = "dd.dddddd"]
     Degree = 0,
@@ -1032,7 +1032,7 @@ impl DisplayPosition {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Switch {
     Off = 0,
     On = 1,
@@ -1050,7 +1050,7 @@ impl Switch {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Sport {
     Generic = 0,
     Running = 1,
@@ -1165,7 +1165,7 @@ impl Sport {
     }
 }
 #[doc = "Bit field corresponding to sport enum type (1 << sport)."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SportBits0 {
     Generic = 1,
     Running = 2,
@@ -1195,7 +1195,7 @@ impl SportBits0 {
     }
 }
 #[doc = "Bit field corresponding to sport enum type (1 << (sport-8))."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SportBits1 {
     Tennis = 1,
     AmericanFootball = 2,
@@ -1224,7 +1224,7 @@ impl SportBits1 {
     }
 }
 #[doc = "Bit field corresponding to sport enum type (1 << (sport-16))."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SportBits2 {
     Mountaineering = 1,
     Hiking = 2,
@@ -1253,7 +1253,7 @@ impl SportBits2 {
     }
 }
 #[doc = "Bit field corresponding to sport enum type (1 << (sport-24))."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SportBits3 {
     Driving = 1,
     Golf = 2,
@@ -1282,7 +1282,7 @@ impl SportBits3 {
     }
 }
 #[doc = "Bit field corresponding to sport enum type (1 << (sport-32))."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SportBits4 {
     Sailing = 1,
     IceSkating = 2,
@@ -1311,7 +1311,7 @@ impl SportBits4 {
     }
 }
 #[doc = "Bit field corresponding to sport enum type (1 << (sport-40))."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SportBits5 {
     WaterSkiing = 1,
     Kayaking = 2,
@@ -1340,7 +1340,7 @@ impl SportBits5 {
     }
 }
 #[doc = "Bit field corresponding to sport enum type (1 << (sport-48))."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SportBits6 {
     FloorClimbing = 1,
     Unknown,
@@ -1354,7 +1354,7 @@ impl SportBits6 {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SubSport {
     Generic = 0,
     #[doc = "Run/Fitness Equipment"]
@@ -1543,7 +1543,7 @@ impl SubSport {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SportEvent {
     Uncategorized = 0,
     Geocaching = 1,
@@ -1573,7 +1573,7 @@ impl SportEvent {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Activity {
     Manual = 0,
     AutoMultiSport = 1,
@@ -1589,7 +1589,7 @@ impl Activity {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Intensity {
     Active = 0,
     Rest = 1,
@@ -1609,7 +1609,7 @@ impl Intensity {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SessionTrigger {
     ActivityEnd = 0,
     #[doc = "User changed sport."]
@@ -1633,7 +1633,7 @@ impl SessionTrigger {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AutolapTrigger {
     Time = 0,
     Distance = 1,
@@ -1659,7 +1659,7 @@ impl AutolapTrigger {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LapTrigger {
     Manual = 0,
     Time = 1,
@@ -1689,7 +1689,7 @@ impl LapTrigger {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TimeMode {
     Hour12 = 0,
     #[doc = "Does not use a leading zero and has a colon"]
@@ -1715,7 +1715,7 @@ impl TimeMode {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BacklightMode {
     Off = 0,
     Manual = 1,
@@ -1741,7 +1741,7 @@ impl BacklightMode {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DateMode {
     DayMonth = 0,
     MonthDay = 1,
@@ -1758,7 +1758,7 @@ impl DateMode {
     }
 }
 #[doc = "Timeout in seconds."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BacklightTimeout {
     #[doc = "Backlight stays on forever."]
     Infinite = 0,
@@ -1773,7 +1773,7 @@ impl BacklightTimeout {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Event {
     #[doc = "Group 0.  Start / stop_all"]
     Timer = 0,
@@ -1901,7 +1901,7 @@ impl Event {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum EventType {
     Start = 0,
     Stop = 1,
@@ -1934,7 +1934,7 @@ impl EventType {
     }
 }
 #[doc = "timer event data"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TimerTrigger {
     Manual = 0,
     Auto = 1,
@@ -1953,7 +1953,7 @@ impl TimerTrigger {
     }
 }
 #[doc = "fitness equipment event data"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FitnessEquipmentState {
     Ready = 0,
     InUse = 1,
@@ -1972,7 +1972,7 @@ impl FitnessEquipmentState {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Tone {
     Off = 0,
     Tone = 1,
@@ -1992,7 +1992,7 @@ impl Tone {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Autoscroll {
     None = 0,
     Slow = 1,
@@ -2012,7 +2012,7 @@ impl Autoscroll {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ActivityClass {
     #[doc = "0 to 100"]
     Level = 127,
@@ -2031,7 +2031,7 @@ impl ActivityClass {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum HrZoneCalc {
     Custom = 0,
     PercentMaxHr = 1,
@@ -2049,7 +2049,7 @@ impl HrZoneCalc {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum PwrZoneCalc {
     Custom = 0,
     PercentFtp = 1,
@@ -2065,7 +2065,7 @@ impl PwrZoneCalc {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WktStepDuration {
     Time = 0,
     Distance = 1,
@@ -2137,7 +2137,7 @@ impl WktStepDuration {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WktStepTarget {
     Speed = 0,
     HeartRate = 1,
@@ -2177,7 +2177,7 @@ impl WktStepTarget {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Goal {
     Time = 0,
     Distance = 1,
@@ -2203,7 +2203,7 @@ impl Goal {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum GoalRecurrence {
     Off = 0,
     Daily = 1,
@@ -2227,7 +2227,7 @@ impl GoalRecurrence {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum GoalSource {
     #[doc = "Device generated"]
     Auto = 0,
@@ -2248,7 +2248,7 @@ impl GoalSource {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Schedule {
     Workout = 0,
     Course = 1,
@@ -2264,7 +2264,7 @@ impl Schedule {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CoursePoint {
     Generic = 0,
     Summit = 1,
@@ -2328,7 +2328,7 @@ impl CoursePoint {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Manufacturer {
     Garmin = 1,
     #[doc = "Do not use.  Used by FR405 for ANTFS man id."]
@@ -2669,7 +2669,7 @@ impl Manufacturer {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum GarminProduct {
     Hrm1 = 1,
     #[doc = "AXH01 HRM chipset"]
@@ -3011,7 +3011,7 @@ impl GarminProduct {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AntplusDeviceType {
     Antfs = 1,
     BikePower = 11,
@@ -3069,7 +3069,7 @@ impl AntplusDeviceType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AntNetwork {
     Public = 0,
     Antplus = 1,
@@ -3089,7 +3089,7 @@ impl AntNetwork {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WorkoutCapabilities {
     Interval = 1,
     Custom = 2,
@@ -3138,7 +3138,7 @@ impl WorkoutCapabilities {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BatteryStatus {
     New = 1,
     Good = 2,
@@ -3163,7 +3163,7 @@ impl BatteryStatus {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum HrType {
     Normal = 0,
     Irregular = 1,
@@ -3179,7 +3179,7 @@ impl HrType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CourseCapabilities {
     Processed = 1,
     Valid = 2,
@@ -3213,7 +3213,7 @@ impl CourseCapabilities {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Weight {
     Calculating = 65534,
     Unknown,
@@ -3228,7 +3228,7 @@ impl Weight {
     }
 }
 #[doc = "0 - 100 indicates% of max hr; >100 indicates bpm (255 max) plus 100"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WorkoutHr {
     BpmOffset = 100,
     Unknown,
@@ -3244,7 +3244,7 @@ impl WorkoutHr {
 }
 #[doc = "0 - 1000 indicates % of functional threshold power; >1000 indicates \
          watts plus 1000."]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WorkoutPower {
     WattsOffset = 1000,
     Unknown,
@@ -3258,7 +3258,7 @@ impl WorkoutPower {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BpStatus {
     NoError = 0,
     ErrorIncompleteData = 1,
@@ -3280,7 +3280,7 @@ impl BpStatus {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum UserLocalId {
     LocalMin = 0,
     LocalMax = 15,
@@ -3304,7 +3304,7 @@ impl UserLocalId {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SwimStroke {
     Freestyle = 0,
     Backstroke = 1,
@@ -3333,7 +3333,7 @@ impl SwimStroke {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ActivityType {
     Generic = 0,
     Running = 1,
@@ -3365,7 +3365,7 @@ impl ActivityType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ActivitySubtype {
     Generic = 0,
     #[doc = "Run"]
@@ -3435,7 +3435,7 @@ impl ActivitySubtype {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ActivityLevel {
     Low = 0,
     Medium = 1,
@@ -3453,7 +3453,7 @@ impl ActivityLevel {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum Side {
     Right = 0,
     Left = 1,
@@ -3469,7 +3469,7 @@ impl Side {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LeftRightBalance {
     #[doc = "% contribution"]
     Mask = 127,
@@ -3487,7 +3487,7 @@ impl LeftRightBalance {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LeftRightBalance100 {
     #[doc = "% contribution scaled by 100"]
     Mask = 16383,
@@ -3505,7 +3505,7 @@ impl LeftRightBalance100 {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LengthType {
     #[doc = "Rest period. Length with no strokes"]
     Idle = 0,
@@ -3523,7 +3523,7 @@ impl LengthType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DayOfWeek {
     Sunday = 0,
     Monday = 1,
@@ -3549,7 +3549,7 @@ impl DayOfWeek {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ConnectivityCapabilities {
     Bluetooth = 1,
     BluetoothLe = 2,
@@ -3636,7 +3636,7 @@ impl ConnectivityCapabilities {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WeatherReport {
     Current = 0,
     HourlyForecast = 1,
@@ -3654,7 +3654,7 @@ impl WeatherReport {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WeatherStatus {
     Clear = 0,
     PartlyCloudy = 1,
@@ -3708,7 +3708,7 @@ impl WeatherStatus {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WeatherSeverity {
     Warning = 1,
     Watch = 2,
@@ -3729,7 +3729,7 @@ impl WeatherSeverity {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WeatherSevereType {
     Unspecified = 0,
     Tornado = 1,
@@ -3912,7 +3912,7 @@ impl WeatherSevereType {
     }
 }
 #[doc = "number of seconds into the day since 00:00:00 UTC"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct TimeIntoDay(pub u32);
 impl TimeIntoDay {
     pub(crate) fn decode<T: ByteOrder>(buffer: &[u8]) -> error::Result<Self> {
@@ -3920,14 +3920,14 @@ impl TimeIntoDay {
     }
 }
 #[doc = "number of seconds into the day since local 00:00:00"]
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct LocaltimeIntoDay(pub u32);
 impl LocaltimeIntoDay {
     pub(crate) fn decode<T: ByteOrder>(buffer: &[u8]) -> error::Result<Self> {
         Ok(LocaltimeIntoDay(T::read_u32(buffer)))
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum StrokeType {
     NoEvent = 0,
     #[doc = "stroke was detected but cannot be identified"]
@@ -3952,7 +3952,7 @@ impl StrokeType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BodyLocation {
     LeftLeg = 0,
     LeftCalf = 1,
@@ -4048,7 +4048,7 @@ impl BodyLocation {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentLapStatus {
     End = 0,
     Fail = 1,
@@ -4064,7 +4064,7 @@ impl SegmentLapStatus {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentLeaderboardType {
     Overall = 0,
     PersonalBest = 1,
@@ -4098,7 +4098,7 @@ impl SegmentLeaderboardType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentDeleteStatus {
     DoNotDelete = 0,
     DeleteOne = 1,
@@ -4116,7 +4116,7 @@ impl SegmentDeleteStatus {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SegmentSelectionType {
     Starred = 0,
     Suggested = 1,
@@ -4132,7 +4132,7 @@ impl SegmentSelectionType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SourceType {
     #[doc = "External device connected with ANT"]
     Ant = 0,
@@ -4162,14 +4162,14 @@ impl SourceType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct LocalDeviceType(pub u8);
 impl LocalDeviceType {
     pub(crate) fn decode<T: ByteOrder>(buffer: &[u8]) -> error::Result<Self> {
         Ok(LocalDeviceType(buffer[0]))
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DisplayOrientation {
     #[doc = "automatic if the device supports it"]
     Auto = 0,
@@ -4194,7 +4194,7 @@ impl DisplayOrientation {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WorkoutEquipment {
     None = 0,
     SwimFins = 1,
@@ -4218,7 +4218,7 @@ impl WorkoutEquipment {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WatchfaceMode {
     Digital = 0,
     Analog = 1,
@@ -4238,7 +4238,7 @@ impl WatchfaceMode {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DigitalWatchfaceLayout {
     Traditional = 0,
     Modern = 1,
@@ -4256,7 +4256,7 @@ impl DigitalWatchfaceLayout {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AnalogWatchfaceLayout {
     Minimal = 0,
     Traditional = 1,
@@ -4274,7 +4274,7 @@ impl AnalogWatchfaceLayout {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum RiderPositionType {
     Seated = 0,
     Standing = 1,
@@ -4294,7 +4294,7 @@ impl RiderPositionType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum PowerPhaseType {
     PowerPhaseStartAngle = 0,
     PowerPhaseEndAngle = 1,
@@ -4314,7 +4314,7 @@ impl PowerPhaseType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CameraEventType {
     #[doc = "Start of video recording"]
     VideoStart = 0,
@@ -4360,7 +4360,7 @@ impl CameraEventType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SensorType {
     Accelerometer = 0,
     Gyroscope = 1,
@@ -4381,7 +4381,7 @@ impl SensorType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BikeLightNetworkConfigType {
     Auto = 0,
     Individual = 4,
@@ -4401,7 +4401,7 @@ impl BikeLightNetworkConfigType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CommTimeoutType {
     #[doc = "Timeout pairing to any device"]
     WildcardPairingTimeout = 0,
@@ -4425,7 +4425,7 @@ impl CommTimeoutType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CameraOrientationType {
     CameraOrientation0 = 0,
     CameraOrientation90 = 1,
@@ -4445,7 +4445,7 @@ impl CameraOrientationType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AttitudeStage {
     Failed = 0,
     Aligning = 1,
@@ -4465,7 +4465,7 @@ impl AttitudeStage {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AttitudeValidity {
     TrackAngleHeadingValid = 1,
     PitchValid = 2,
@@ -4503,7 +4503,7 @@ impl AttitudeValidity {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AutoSyncFrequency {
     Never = 0,
     Occasionally = 1,
@@ -4525,7 +4525,7 @@ impl AutoSyncFrequency {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExdLayout {
     FullScreen = 0,
     HalfVertical = 1,
@@ -4553,7 +4553,7 @@ impl ExdLayout {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExdDisplayType {
     Numerical = 0,
     Simple = 1,
@@ -4587,7 +4587,7 @@ impl ExdDisplayType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExdDataUnits {
     NoUnits = 0,
     Laps = 1,
@@ -4699,7 +4699,7 @@ impl ExdDataUnits {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExdQualifiers {
     NoQualifier = 0,
     Instantaneous = 1,
@@ -4799,7 +4799,7 @@ impl ExdQualifiers {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExdDescriptors {
     BikeLightBatteryStatus = 0,
     BeamAngleStatus = 1,
@@ -5006,7 +5006,7 @@ impl ExdDescriptors {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum AutoActivityDetect {
     None = 0,
     Running = 1,
@@ -5032,7 +5032,7 @@ impl AutoActivityDetect {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SupportedExdScreenLayouts {
     FullScreen = 1,
     HalfVertical = 2,
@@ -5060,7 +5060,7 @@ impl SupportedExdScreenLayouts {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FitBaseType {
     Enum = 0,
     Sint8 = 1,
@@ -5106,7 +5106,7 @@ impl FitBaseType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TurnType {
     ArrivingIdx = 0,
     ArrivingLeftIdx = 1,
@@ -5194,7 +5194,7 @@ impl TurnType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BikeLightBeamAngleMode {
     Manual = 0,
     Auto = 1,
@@ -5210,7 +5210,7 @@ impl BikeLightBeamAngleMode {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FitBaseUnit {
     Other = 0,
     Kilogram = 1,
@@ -5228,7 +5228,7 @@ impl FitBaseUnit {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SetType {
     Rest = 0,
     Active = 1,
@@ -5244,7 +5244,7 @@ impl SetType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ExerciseCategory {
     BenchPress = 0,
     CalfRaise = 1,
@@ -5323,7 +5323,7 @@ impl ExerciseCategory {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum BenchPressExerciseName {
     AlternatingDumbbellChestPressOnSwissBall = 0,
     BarbellBenchPress = 1,
@@ -5360,7 +5360,7 @@ impl BenchPressExerciseName {
         match base_value . 0 { 0 => Ok ( BenchPressExerciseName :: AlternatingDumbbellChestPressOnSwissBall ) , 1 => Ok ( BenchPressExerciseName :: BarbellBenchPress ) , 2 => Ok ( BenchPressExerciseName :: BarbellBoardBenchPress ) , 3 => Ok ( BenchPressExerciseName :: BarbellFloorPress ) , 4 => Ok ( BenchPressExerciseName :: CloseGripBarbellBenchPress ) , 5 => Ok ( BenchPressExerciseName :: DeclineDumbbellBenchPress ) , 6 => Ok ( BenchPressExerciseName :: DumbbellBenchPress ) , 7 => Ok ( BenchPressExerciseName :: DumbbellFloorPress ) , 8 => Ok ( BenchPressExerciseName :: InclineBarbellBenchPress ) , 9 => Ok ( BenchPressExerciseName :: InclineDumbbellBenchPress ) , 10 => Ok ( BenchPressExerciseName :: InclineSmithMachineBenchPress ) , 11 => Ok ( BenchPressExerciseName :: IsometricBarbellBenchPress ) , 12 => Ok ( BenchPressExerciseName :: KettlebellChestPress ) , 13 => Ok ( BenchPressExerciseName :: NeutralGripDumbbellBenchPress ) , 14 => Ok ( BenchPressExerciseName :: NeutralGripDumbbellInclineBenchPress ) , 15 => Ok ( BenchPressExerciseName :: OneArmFloorPress ) , 16 => Ok ( BenchPressExerciseName :: WeightedOneArmFloorPress ) , 17 => Ok ( BenchPressExerciseName :: PartialLockout ) , 18 => Ok ( BenchPressExerciseName :: ReverseGripBarbellBenchPress ) , 19 => Ok ( BenchPressExerciseName :: ReverseGripInclineBenchPress ) , 20 => Ok ( BenchPressExerciseName :: SingleArmCableChestPress ) , 21 => Ok ( BenchPressExerciseName :: SingleArmDumbbellBenchPress ) , 22 => Ok ( BenchPressExerciseName :: SmithMachineBenchPress ) , 23 => Ok ( BenchPressExerciseName :: SwissBallDumbbellChestPress ) , 24 => Ok ( BenchPressExerciseName :: TripleStopBarbellBenchPress ) , 25 => Ok ( BenchPressExerciseName :: WideGripBarbellBenchPress ) , 26 => Ok ( BenchPressExerciseName :: AlternatingDumbbellChestPress ) , _ => Ok ( BenchPressExerciseName :: Unknown ) , }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CalfRaiseExerciseName {
     ThreeWayCalfRaise = 0,
     ThreeWayWeightedCalfRaise = 1,
@@ -5414,7 +5414,7 @@ impl CalfRaiseExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CardioExerciseName {
     BobAndWeaveCircle = 0,
     WeightedBobAndWeaveCircle = 1,
@@ -5470,7 +5470,7 @@ impl CardioExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CarryExerciseName {
     BarHolds = 0,
     FarmersWalk = 1,
@@ -5492,7 +5492,7 @@ impl CarryExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ChopExerciseName {
     CablePullThrough = 0,
     CableRotationalLift = 1,
@@ -5550,7 +5550,7 @@ impl ChopExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CoreExerciseName {
     AbsJabs = 0,
     WeightedAbsJabs = 1,
@@ -5654,7 +5654,7 @@ impl CoreExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CrunchExerciseName {
     BicycleCrunch = 0,
     CableCrunch = 1,
@@ -5840,7 +5840,7 @@ impl CrunchExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum CurlExerciseName {
     AlternatingDumbbellBicepsCurl = 0,
     AlternatingDumbbellBicepsCurlOnSwissBall = 1,
@@ -5942,7 +5942,7 @@ impl CurlExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DeadliftExerciseName {
     BarbellDeadlift = 0,
     BarbellStraightLegDeadlift = 1,
@@ -5996,7 +5996,7 @@ impl DeadliftExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum FlyeExerciseName {
     CableCrossover = 0,
     DeclineDumbbellFlye = 1,
@@ -6024,7 +6024,7 @@ impl FlyeExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum HipRaiseExerciseName {
     BarbellHipThrustOnFloor = 0,
     BarbellHipThrustWithBench = 1,
@@ -6077,7 +6077,7 @@ impl HipRaiseExerciseName {
         match base_value . 0 { 0 => Ok ( HipRaiseExerciseName :: BarbellHipThrustOnFloor ) , 1 => Ok ( HipRaiseExerciseName :: BarbellHipThrustWithBench ) , 2 => Ok ( HipRaiseExerciseName :: BentKneeSwissBallReverseHipRaise ) , 3 => Ok ( HipRaiseExerciseName :: WeightedBentKneeSwissBallReverseHipRaise ) , 4 => Ok ( HipRaiseExerciseName :: BridgeWithLegExtension ) , 5 => Ok ( HipRaiseExerciseName :: WeightedBridgeWithLegExtension ) , 6 => Ok ( HipRaiseExerciseName :: ClamBridge ) , 7 => Ok ( HipRaiseExerciseName :: FrontKickTabletop ) , 8 => Ok ( HipRaiseExerciseName :: WeightedFrontKickTabletop ) , 9 => Ok ( HipRaiseExerciseName :: HipExtensionAndCross ) , 10 => Ok ( HipRaiseExerciseName :: WeightedHipExtensionAndCross ) , 11 => Ok ( HipRaiseExerciseName :: HipRaise ) , 12 => Ok ( HipRaiseExerciseName :: WeightedHipRaise ) , 13 => Ok ( HipRaiseExerciseName :: HipRaiseWithFeetOnSwissBall ) , 14 => Ok ( HipRaiseExerciseName :: WeightedHipRaiseWithFeetOnSwissBall ) , 15 => Ok ( HipRaiseExerciseName :: HipRaiseWithHeadOnBosuBall ) , 16 => Ok ( HipRaiseExerciseName :: WeightedHipRaiseWithHeadOnBosuBall ) , 17 => Ok ( HipRaiseExerciseName :: HipRaiseWithHeadOnSwissBall ) , 18 => Ok ( HipRaiseExerciseName :: WeightedHipRaiseWithHeadOnSwissBall ) , 19 => Ok ( HipRaiseExerciseName :: HipRaiseWithKneeSqueeze ) , 20 => Ok ( HipRaiseExerciseName :: WeightedHipRaiseWithKneeSqueeze ) , 21 => Ok ( HipRaiseExerciseName :: InclineRearLegExtension ) , 22 => Ok ( HipRaiseExerciseName :: WeightedInclineRearLegExtension ) , 23 => Ok ( HipRaiseExerciseName :: KettlebellSwing ) , 24 => Ok ( HipRaiseExerciseName :: MarchingHipRaise ) , 25 => Ok ( HipRaiseExerciseName :: WeightedMarchingHipRaise ) , 26 => Ok ( HipRaiseExerciseName :: MarchingHipRaiseWithFeetOnASwissBall ) , 27 => Ok ( HipRaiseExerciseName :: WeightedMarchingHipRaiseWithFeetOnASwissBall ) , 28 => Ok ( HipRaiseExerciseName :: ReverseHipRaise ) , 29 => Ok ( HipRaiseExerciseName :: WeightedReverseHipRaise ) , 30 => Ok ( HipRaiseExerciseName :: SingleLegHipRaise ) , 31 => Ok ( HipRaiseExerciseName :: WeightedSingleLegHipRaise ) , 32 => Ok ( HipRaiseExerciseName :: SingleLegHipRaiseWithFootOnBench ) , 33 => Ok ( HipRaiseExerciseName :: WeightedSingleLegHipRaiseWithFootOnBench ) , 34 => Ok ( HipRaiseExerciseName :: SingleLegHipRaiseWithFootOnBosuBall ) , 35 => Ok ( HipRaiseExerciseName :: WeightedSingleLegHipRaiseWithFootOnBosuBall ) , 36 => Ok ( HipRaiseExerciseName :: SingleLegHipRaiseWithFootOnFoamRoller ) , 37 => Ok ( HipRaiseExerciseName :: WeightedSingleLegHipRaiseWithFootOnFoamRoller ) , 38 => Ok ( HipRaiseExerciseName :: SingleLegHipRaiseWithFootOnMedicineBall ) , 39 => Ok ( HipRaiseExerciseName :: WeightedSingleLegHipRaiseWithFootOnMedicineBall ) , 40 => Ok ( HipRaiseExerciseName :: SingleLegHipRaiseWithHeadOnBosuBall ) , 41 => Ok ( HipRaiseExerciseName :: WeightedSingleLegHipRaiseWithHeadOnBosuBall ) , 42 => Ok ( HipRaiseExerciseName :: WeightedClamBridge ) , _ => Ok ( HipRaiseExerciseName :: Unknown ) , }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum HipStabilityExerciseName {
     BandSideLyingLegRaise = 0,
     DeadBug = 1,
@@ -6161,7 +6161,7 @@ impl HipStabilityExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum HipSwingExerciseName {
     SingleArmKettlebellSwing = 0,
     SingleArmDumbbellSwing = 1,
@@ -6179,7 +6179,7 @@ impl HipSwingExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum HyperextensionExerciseName {
     BackExtensionWithOppositeArmAndLegReach = 0,
     WeightedBackExtensionWithOppositeArmAndLegReach = 1,
@@ -6226,7 +6226,7 @@ impl HyperextensionExerciseName {
         match base_value . 0 { 0 => Ok ( HyperextensionExerciseName :: BackExtensionWithOppositeArmAndLegReach ) , 1 => Ok ( HyperextensionExerciseName :: WeightedBackExtensionWithOppositeArmAndLegReach ) , 2 => Ok ( HyperextensionExerciseName :: BaseRotations ) , 3 => Ok ( HyperextensionExerciseName :: WeightedBaseRotations ) , 4 => Ok ( HyperextensionExerciseName :: BentKneeReverseHyperextension ) , 5 => Ok ( HyperextensionExerciseName :: WeightedBentKneeReverseHyperextension ) , 6 => Ok ( HyperextensionExerciseName :: HollowHoldAndRoll ) , 7 => Ok ( HyperextensionExerciseName :: WeightedHollowHoldAndRoll ) , 8 => Ok ( HyperextensionExerciseName :: Kicks ) , 9 => Ok ( HyperextensionExerciseName :: WeightedKicks ) , 10 => Ok ( HyperextensionExerciseName :: KneeRaises ) , 11 => Ok ( HyperextensionExerciseName :: WeightedKneeRaises ) , 12 => Ok ( HyperextensionExerciseName :: KneelingSuperman ) , 13 => Ok ( HyperextensionExerciseName :: WeightedKneelingSuperman ) , 14 => Ok ( HyperextensionExerciseName :: LatPullDownWithRow ) , 15 => Ok ( HyperextensionExerciseName :: MedicineBallDeadliftToReach ) , 16 => Ok ( HyperextensionExerciseName :: OneArmOneLegRow ) , 17 => Ok ( HyperextensionExerciseName :: OneArmRowWithBand ) , 18 => Ok ( HyperextensionExerciseName :: OverheadLungeWithMedicineBall ) , 19 => Ok ( HyperextensionExerciseName :: PlankKneeTucks ) , 20 => Ok ( HyperextensionExerciseName :: WeightedPlankKneeTucks ) , 21 => Ok ( HyperextensionExerciseName :: SideStep ) , 22 => Ok ( HyperextensionExerciseName :: WeightedSideStep ) , 23 => Ok ( HyperextensionExerciseName :: SingleLegBackExtension ) , 24 => Ok ( HyperextensionExerciseName :: WeightedSingleLegBackExtension ) , 25 => Ok ( HyperextensionExerciseName :: SpineExtension ) , 26 => Ok ( HyperextensionExerciseName :: WeightedSpineExtension ) , 27 => Ok ( HyperextensionExerciseName :: StaticBackExtension ) , 28 => Ok ( HyperextensionExerciseName :: WeightedStaticBackExtension ) , 29 => Ok ( HyperextensionExerciseName :: SupermanFromFloor ) , 30 => Ok ( HyperextensionExerciseName :: WeightedSupermanFromFloor ) , 31 => Ok ( HyperextensionExerciseName :: SwissBallBackExtension ) , 32 => Ok ( HyperextensionExerciseName :: WeightedSwissBallBackExtension ) , 33 => Ok ( HyperextensionExerciseName :: SwissBallHyperextension ) , 34 => Ok ( HyperextensionExerciseName :: WeightedSwissBallHyperextension ) , 35 => Ok ( HyperextensionExerciseName :: SwissBallOppositeArmAndLegLift ) , 36 => Ok ( HyperextensionExerciseName :: WeightedSwissBallOppositeArmAndLegLift ) , _ => Ok ( HyperextensionExerciseName :: Unknown ) , }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LateralRaiseExerciseName {
     FourtyFiveDegreeCableExternalRotation = 0,
     AlternatingLateralRaiseWithStaticHold = 1,
@@ -6306,7 +6306,7 @@ impl LateralRaiseExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LegCurlExerciseName {
     LegCurl = 0,
     WeightedLegCurl = 1,
@@ -6342,7 +6342,7 @@ impl LegCurlExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LegRaiseExerciseName {
     HangingKneeRaise = 0,
     HangingLegRaise = 1,
@@ -6398,7 +6398,7 @@ impl LegRaiseExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum LungeExerciseName {
     OverheadLunge = 0,
     LungeMatrix = 1,
@@ -6489,7 +6489,7 @@ impl LungeExerciseName {
         match base_value . 0 { 0 => Ok ( LungeExerciseName :: OverheadLunge ) , 1 => Ok ( LungeExerciseName :: LungeMatrix ) , 2 => Ok ( LungeExerciseName :: WeightedLungeMatrix ) , 3 => Ok ( LungeExerciseName :: AlternatingBarbellForwardLunge ) , 4 => Ok ( LungeExerciseName :: AlternatingDumbbellLungeWithReach ) , 5 => Ok ( LungeExerciseName :: BackFootElevatedDumbbellSplitSquat ) , 6 => Ok ( LungeExerciseName :: BarbellBoxLunge ) , 7 => Ok ( LungeExerciseName :: BarbellBulgarianSplitSquat ) , 8 => Ok ( LungeExerciseName :: BarbellCrossoverLunge ) , 9 => Ok ( LungeExerciseName :: BarbellFrontSplitSquat ) , 10 => Ok ( LungeExerciseName :: BarbellLunge ) , 11 => Ok ( LungeExerciseName :: BarbellReverseLunge ) , 12 => Ok ( LungeExerciseName :: BarbellSideLunge ) , 13 => Ok ( LungeExerciseName :: BarbellSplitSquat ) , 14 => Ok ( LungeExerciseName :: CoreControlRearLunge ) , 15 => Ok ( LungeExerciseName :: DiagonalLunge ) , 16 => Ok ( LungeExerciseName :: DropLunge ) , 17 => Ok ( LungeExerciseName :: DumbbellBoxLunge ) , 18 => Ok ( LungeExerciseName :: DumbbellBulgarianSplitSquat ) , 19 => Ok ( LungeExerciseName :: DumbbellCrossoverLunge ) , 20 => Ok ( LungeExerciseName :: DumbbellDiagonalLunge ) , 21 => Ok ( LungeExerciseName :: DumbbellLunge ) , 22 => Ok ( LungeExerciseName :: DumbbellLungeAndRotation ) , 23 => Ok ( LungeExerciseName :: DumbbellOverheadBulgarianSplitSquat ) , 24 => Ok ( LungeExerciseName :: DumbbellReverseLungeToHighKneeAndPress ) , 25 => Ok ( LungeExerciseName :: DumbbellSideLunge ) , 26 => Ok ( LungeExerciseName :: ElevatedFrontFootBarbellSplitSquat ) , 27 => Ok ( LungeExerciseName :: FrontFootElevatedDumbbellSplitSquat ) , 28 => Ok ( LungeExerciseName :: GunslingerLunge ) , 29 => Ok ( LungeExerciseName :: LawnmowerLunge ) , 30 => Ok ( LungeExerciseName :: LowLungeWithIsometricAdduction ) , 31 => Ok ( LungeExerciseName :: LowSideToSideLunge ) , 32 => Ok ( LungeExerciseName :: Lunge ) , 33 => Ok ( LungeExerciseName :: WeightedLunge ) , 34 => Ok ( LungeExerciseName :: LungeWithArmReach ) , 35 => Ok ( LungeExerciseName :: LungeWithDiagonalReach ) , 36 => Ok ( LungeExerciseName :: LungeWithSideBend ) , 37 => Ok ( LungeExerciseName :: OffsetDumbbellLunge ) , 38 => Ok ( LungeExerciseName :: OffsetDumbbellReverseLunge ) , 39 => Ok ( LungeExerciseName :: OverheadBulgarianSplitSquat ) , 40 => Ok ( LungeExerciseName :: OverheadDumbbellReverseLunge ) , 41 => Ok ( LungeExerciseName :: OverheadDumbbellSplitSquat ) , 42 => Ok ( LungeExerciseName :: OverheadLungeWithRotation ) , 43 => Ok ( LungeExerciseName :: ReverseBarbellBoxLunge ) , 44 => Ok ( LungeExerciseName :: ReverseBoxLunge ) , 45 => Ok ( LungeExerciseName :: ReverseDumbbellBoxLunge ) , 46 => Ok ( LungeExerciseName :: ReverseDumbbellCrossoverLunge ) , 47 => Ok ( LungeExerciseName :: ReverseDumbbellDiagonalLunge ) , 48 => Ok ( LungeExerciseName :: ReverseLungeWithReachBack ) , 49 => Ok ( LungeExerciseName :: WeightedReverseLungeWithReachBack ) , 50 => Ok ( LungeExerciseName :: ReverseLungeWithTwistAndOverheadReach ) , 51 => Ok ( LungeExerciseName :: WeightedReverseLungeWithTwistAndOverheadReach ) , 52 => Ok ( LungeExerciseName :: ReverseSlidingBoxLunge ) , 53 => Ok ( LungeExerciseName :: WeightedReverseSlidingBoxLunge ) , 54 => Ok ( LungeExerciseName :: ReverseSlidingLunge ) , 55 => Ok ( LungeExerciseName :: WeightedReverseSlidingLunge ) , 56 => Ok ( LungeExerciseName :: RunnersLungeToBalance ) , 57 => Ok ( LungeExerciseName :: WeightedRunnersLungeToBalance ) , 58 => Ok ( LungeExerciseName :: ShiftingSideLunge ) , 59 => Ok ( LungeExerciseName :: SideAndCrossoverLunge ) , 60 => Ok ( LungeExerciseName :: WeightedSideAndCrossoverLunge ) , 61 => Ok ( LungeExerciseName :: SideLunge ) , 62 => Ok ( LungeExerciseName :: WeightedSideLunge ) , 63 => Ok ( LungeExerciseName :: SideLungeAndPress ) , 64 => Ok ( LungeExerciseName :: SideLungeJumpOff ) , 65 => Ok ( LungeExerciseName :: SideLungeSweep ) , 66 => Ok ( LungeExerciseName :: WeightedSideLungeSweep ) , 67 => Ok ( LungeExerciseName :: SideLungeToCrossoverTap ) , 68 => Ok ( LungeExerciseName :: WeightedSideLungeToCrossoverTap ) , 69 => Ok ( LungeExerciseName :: SideToSideLungeChops ) , 70 => Ok ( LungeExerciseName :: WeightedSideToSideLungeChops ) , 71 => Ok ( LungeExerciseName :: SiffJumpLunge ) , 72 => Ok ( LungeExerciseName :: WeightedSiffJumpLunge ) , 73 => Ok ( LungeExerciseName :: SingleArmReverseLungeAndPress ) , 74 => Ok ( LungeExerciseName :: SlidingLateralLunge ) , 75 => Ok ( LungeExerciseName :: WeightedSlidingLateralLunge ) , 76 => Ok ( LungeExerciseName :: WalkingBarbellLunge ) , 77 => Ok ( LungeExerciseName :: WalkingDumbbellLunge ) , 78 => Ok ( LungeExerciseName :: WalkingLunge ) , 79 => Ok ( LungeExerciseName :: WeightedWalkingLunge ) , 80 => Ok ( LungeExerciseName :: WideGripOverheadBarbellSplitSquat ) , _ => Ok ( LungeExerciseName :: Unknown ) , }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum OlympicLiftExerciseName {
     BarbellHangPowerClean = 0,
     BarbellHangSquatClean = 1,
@@ -6543,7 +6543,7 @@ impl OlympicLiftExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum PlankExerciseName {
     FourtyFiveDegreePlank = 0,
     Weighted45DegreePlank = 1,
@@ -6681,7 +6681,7 @@ impl PlankExerciseName {
         match base_value . 0 { 0 => Ok ( PlankExerciseName :: FourtyFiveDegreePlank ) , 1 => Ok ( PlankExerciseName :: Weighted45DegreePlank ) , 2 => Ok ( PlankExerciseName :: NinetyDegreeStaticHold ) , 3 => Ok ( PlankExerciseName :: Weighted90DegreeStaticHold ) , 4 => Ok ( PlankExerciseName :: BearCrawl ) , 5 => Ok ( PlankExerciseName :: WeightedBearCrawl ) , 6 => Ok ( PlankExerciseName :: CrossBodyMountainClimber ) , 7 => Ok ( PlankExerciseName :: WeightedCrossBodyMountainClimber ) , 8 => Ok ( PlankExerciseName :: ElbowPlankPikeJacks ) , 9 => Ok ( PlankExerciseName :: WeightedElbowPlankPikeJacks ) , 10 => Ok ( PlankExerciseName :: ElevatedFeetPlank ) , 11 => Ok ( PlankExerciseName :: WeightedElevatedFeetPlank ) , 12 => Ok ( PlankExerciseName :: ElevatorAbs ) , 13 => Ok ( PlankExerciseName :: WeightedElevatorAbs ) , 14 => Ok ( PlankExerciseName :: ExtendedPlank ) , 15 => Ok ( PlankExerciseName :: WeightedExtendedPlank ) , 16 => Ok ( PlankExerciseName :: FullPlankPasseTwist ) , 17 => Ok ( PlankExerciseName :: WeightedFullPlankPasseTwist ) , 18 => Ok ( PlankExerciseName :: InchingElbowPlank ) , 19 => Ok ( PlankExerciseName :: WeightedInchingElbowPlank ) , 20 => Ok ( PlankExerciseName :: InchwormToSidePlank ) , 21 => Ok ( PlankExerciseName :: WeightedInchwormToSidePlank ) , 22 => Ok ( PlankExerciseName :: KneelingPlank ) , 23 => Ok ( PlankExerciseName :: WeightedKneelingPlank ) , 24 => Ok ( PlankExerciseName :: KneelingSidePlankWithLegLift ) , 25 => Ok ( PlankExerciseName :: WeightedKneelingSidePlankWithLegLift ) , 26 => Ok ( PlankExerciseName :: LateralRoll ) , 27 => Ok ( PlankExerciseName :: WeightedLateralRoll ) , 28 => Ok ( PlankExerciseName :: LyingReversePlank ) , 29 => Ok ( PlankExerciseName :: WeightedLyingReversePlank ) , 30 => Ok ( PlankExerciseName :: MedicineBallMountainClimber ) , 31 => Ok ( PlankExerciseName :: WeightedMedicineBallMountainClimber ) , 32 => Ok ( PlankExerciseName :: ModifiedMountainClimberAndExtension ) , 33 => Ok ( PlankExerciseName :: WeightedModifiedMountainClimberAndExtension ) , 34 => Ok ( PlankExerciseName :: MountainClimber ) , 35 => Ok ( PlankExerciseName :: WeightedMountainClimber ) , 36 => Ok ( PlankExerciseName :: MountainClimberOnSlidingDiscs ) , 37 => Ok ( PlankExerciseName :: WeightedMountainClimberOnSlidingDiscs ) , 38 => Ok ( PlankExerciseName :: MountainClimberWithFeetOnBosuBall ) , 39 => Ok ( PlankExerciseName :: WeightedMountainClimberWithFeetOnBosuBall ) , 40 => Ok ( PlankExerciseName :: MountainClimberWithHandsOnBench ) , 41 => Ok ( PlankExerciseName :: MountainClimberWithHandsOnSwissBall ) , 42 => Ok ( PlankExerciseName :: WeightedMountainClimberWithHandsOnSwissBall ) , 43 => Ok ( PlankExerciseName :: Plank ) , 44 => Ok ( PlankExerciseName :: PlankJacksWithFeetOnSlidingDiscs ) , 45 => Ok ( PlankExerciseName :: WeightedPlankJacksWithFeetOnSlidingDiscs ) , 46 => Ok ( PlankExerciseName :: PlankKneeTwist ) , 47 => Ok ( PlankExerciseName :: WeightedPlankKneeTwist ) , 48 => Ok ( PlankExerciseName :: PlankPikeJumps ) , 49 => Ok ( PlankExerciseName :: WeightedPlankPikeJumps ) , 50 => Ok ( PlankExerciseName :: PlankPikes ) , 51 => Ok ( PlankExerciseName :: WeightedPlankPikes ) , 52 => Ok ( PlankExerciseName :: PlankToStandUp ) , 53 => Ok ( PlankExerciseName :: WeightedPlankToStandUp ) , 54 => Ok ( PlankExerciseName :: PlankWithArmRaise ) , 55 => Ok ( PlankExerciseName :: WeightedPlankWithArmRaise ) , 56 => Ok ( PlankExerciseName :: PlankWithKneeToElbow ) , 57 => Ok ( PlankExerciseName :: WeightedPlankWithKneeToElbow ) , 58 => Ok ( PlankExerciseName :: PlankWithObliqueCrunch ) , 59 => Ok ( PlankExerciseName :: WeightedPlankWithObliqueCrunch ) , 60 => Ok ( PlankExerciseName :: PlyometricSidePlank ) , 61 => Ok ( PlankExerciseName :: WeightedPlyometricSidePlank ) , 62 => Ok ( PlankExerciseName :: RollingSidePlank ) , 63 => Ok ( PlankExerciseName :: WeightedRollingSidePlank ) , 64 => Ok ( PlankExerciseName :: SideKickPlank ) , 65 => Ok ( PlankExerciseName :: WeightedSideKickPlank ) , 66 => Ok ( PlankExerciseName :: SidePlank ) , 67 => Ok ( PlankExerciseName :: WeightedSidePlank ) , 68 => Ok ( PlankExerciseName :: SidePlankAndRow ) , 69 => Ok ( PlankExerciseName :: WeightedSidePlankAndRow ) , 70 => Ok ( PlankExerciseName :: SidePlankLift ) , 71 => Ok ( PlankExerciseName :: WeightedSidePlankLift ) , 72 => Ok ( PlankExerciseName :: SidePlankWithElbowOnBosuBall ) , 73 => Ok ( PlankExerciseName :: WeightedSidePlankWithElbowOnBosuBall ) , 74 => Ok ( PlankExerciseName :: SidePlankWithFeetOnBench ) , 75 => Ok ( PlankExerciseName :: WeightedSidePlankWithFeetOnBench ) , 76 => Ok ( PlankExerciseName :: SidePlankWithKneeCircle ) , 77 => Ok ( PlankExerciseName :: WeightedSidePlankWithKneeCircle ) , 78 => Ok ( PlankExerciseName :: SidePlankWithKneeTuck ) , 79 => Ok ( PlankExerciseName :: WeightedSidePlankWithKneeTuck ) , 80 => Ok ( PlankExerciseName :: SidePlankWithLegLift ) , 81 => Ok ( PlankExerciseName :: WeightedSidePlankWithLegLift ) , 82 => Ok ( PlankExerciseName :: SidePlankWithReachUnder ) , 83 => Ok ( PlankExerciseName :: WeightedSidePlankWithReachUnder ) , 84 => Ok ( PlankExerciseName :: SingleLegElevatedFeetPlank ) , 85 => Ok ( PlankExerciseName :: WeightedSingleLegElevatedFeetPlank ) , 86 => Ok ( PlankExerciseName :: SingleLegFlexAndExtend ) , 87 => Ok ( PlankExerciseName :: WeightedSingleLegFlexAndExtend ) , 88 => Ok ( PlankExerciseName :: SingleLegSidePlank ) , 89 => Ok ( PlankExerciseName :: WeightedSingleLegSidePlank ) , 90 => Ok ( PlankExerciseName :: SpidermanPlank ) , 91 => Ok ( PlankExerciseName :: WeightedSpidermanPlank ) , 92 => Ok ( PlankExerciseName :: StraightArmPlank ) , 93 => Ok ( PlankExerciseName :: WeightedStraightArmPlank ) , 94 => Ok ( PlankExerciseName :: StraightArmPlankWithShoulderTouch ) , 95 => Ok ( PlankExerciseName :: WeightedStraightArmPlankWithShoulderTouch ) , 96 => Ok ( PlankExerciseName :: SwissBallPlank ) , 97 => Ok ( PlankExerciseName :: WeightedSwissBallPlank ) , 98 => Ok ( PlankExerciseName :: SwissBallPlankLegLift ) , 99 => Ok ( PlankExerciseName :: WeightedSwissBallPlankLegLift ) , 100 => Ok ( PlankExerciseName :: SwissBallPlankLegLiftAndHold ) , 101 => Ok ( PlankExerciseName :: SwissBallPlankWithFeetOnBench ) , 102 => Ok ( PlankExerciseName :: WeightedSwissBallPlankWithFeetOnBench ) , 103 => Ok ( PlankExerciseName :: SwissBallProneJackknife ) , 104 => Ok ( PlankExerciseName :: WeightedSwissBallProneJackknife ) , 105 => Ok ( PlankExerciseName :: SwissBallSidePlank ) , 106 => Ok ( PlankExerciseName :: WeightedSwissBallSidePlank ) , 107 => Ok ( PlankExerciseName :: ThreeWayPlank ) , 108 => Ok ( PlankExerciseName :: WeightedThreeWayPlank ) , 109 => Ok ( PlankExerciseName :: TowelPlankAndKneeIn ) , 110 => Ok ( PlankExerciseName :: WeightedTowelPlankAndKneeIn ) , 111 => Ok ( PlankExerciseName :: TStabilization ) , 112 => Ok ( PlankExerciseName :: WeightedTStabilization ) , 113 => Ok ( PlankExerciseName :: TurkishGetUpToSidePlank ) , 114 => Ok ( PlankExerciseName :: WeightedTurkishGetUpToSidePlank ) , 115 => Ok ( PlankExerciseName :: TwoPointPlank ) , 116 => Ok ( PlankExerciseName :: WeightedTwoPointPlank ) , 117 => Ok ( PlankExerciseName :: WeightedPlank ) , 118 => Ok ( PlankExerciseName :: WideStancePlankWithDiagonalArmLift ) , 119 => Ok ( PlankExerciseName :: WeightedWideStancePlankWithDiagonalArmLift ) , 120 => Ok ( PlankExerciseName :: WideStancePlankWithDiagonalLegLift ) , 121 => Ok ( PlankExerciseName :: WeightedWideStancePlankWithDiagonalLegLift ) , 122 => Ok ( PlankExerciseName :: WideStancePlankWithLegLift ) , 123 => Ok ( PlankExerciseName :: WeightedWideStancePlankWithLegLift ) , 124 => Ok ( PlankExerciseName :: WideStancePlankWithOppositeArmAndLegLift ) , 125 => Ok ( PlankExerciseName :: WeightedMountainClimberWithHandsOnBench ) , 126 => Ok ( PlankExerciseName :: WeightedSwissBallPlankLegLiftAndHold ) , 127 => Ok ( PlankExerciseName :: WeightedWideStancePlankWithOppositeArmAndLegLift ) , _ => Ok ( PlankExerciseName :: Unknown ) , }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum PlyoExerciseName {
     AlternatingJumpLunge = 0,
     WeightedAlternatingJumpLunge = 1,
@@ -6759,7 +6759,7 @@ impl PlyoExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum PullUpExerciseName {
     BandedPullUps = 0,
     ThirtyDegreeLatPulldown = 1,
@@ -6849,7 +6849,7 @@ impl PullUpExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum PushUpExerciseName {
     ChestPressWithBand = 0,
     AlternatingStaggeredPushUp = 1,
@@ -7021,7 +7021,7 @@ impl PushUpExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum RowExerciseName {
     BarbellStraightLegDeadliftToRow = 0,
     CableRowStanding = 1,
@@ -7103,7 +7103,7 @@ impl RowExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ShoulderPressExerciseName {
     AlternatingDumbbellShoulderPress = 0,
     ArnoldPress = 1,
@@ -7137,7 +7137,7 @@ impl ShoulderPressExerciseName {
         match base_value . 0 { 0 => Ok ( ShoulderPressExerciseName :: AlternatingDumbbellShoulderPress ) , 1 => Ok ( ShoulderPressExerciseName :: ArnoldPress ) , 2 => Ok ( ShoulderPressExerciseName :: BarbellFrontSquatToPushPress ) , 3 => Ok ( ShoulderPressExerciseName :: BarbellPushPress ) , 4 => Ok ( ShoulderPressExerciseName :: BarbellShoulderPress ) , 5 => Ok ( ShoulderPressExerciseName :: DeadCurlPress ) , 6 => Ok ( ShoulderPressExerciseName :: DumbbellAlternatingShoulderPressAndTwist ) , 7 => Ok ( ShoulderPressExerciseName :: DumbbellHammerCurlToLungeToPress ) , 8 => Ok ( ShoulderPressExerciseName :: DumbbellPushPress ) , 9 => Ok ( ShoulderPressExerciseName :: FloorInvertedShoulderPress ) , 10 => Ok ( ShoulderPressExerciseName :: WeightedFloorInvertedShoulderPress ) , 11 => Ok ( ShoulderPressExerciseName :: InvertedShoulderPress ) , 12 => Ok ( ShoulderPressExerciseName :: WeightedInvertedShoulderPress ) , 13 => Ok ( ShoulderPressExerciseName :: OneArmPushPress ) , 14 => Ok ( ShoulderPressExerciseName :: OverheadBarbellPress ) , 15 => Ok ( ShoulderPressExerciseName :: OverheadDumbbellPress ) , 16 => Ok ( ShoulderPressExerciseName :: SeatedBarbellShoulderPress ) , 17 => Ok ( ShoulderPressExerciseName :: SeatedDumbbellShoulderPress ) , 18 => Ok ( ShoulderPressExerciseName :: SingleArmDumbbellShoulderPress ) , 19 => Ok ( ShoulderPressExerciseName :: SingleArmStepUpAndPress ) , 20 => Ok ( ShoulderPressExerciseName :: SmithMachineOverheadPress ) , 21 => Ok ( ShoulderPressExerciseName :: SplitStanceHammerCurlToPress ) , 22 => Ok ( ShoulderPressExerciseName :: SwissBallDumbbellShoulderPress ) , 23 => Ok ( ShoulderPressExerciseName :: WeightPlateFrontRaise ) , _ => Ok ( ShoulderPressExerciseName :: Unknown ) , }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ShoulderStabilityExerciseName {
     NinetyDegreeCableExternalRotation = 0,
     BandExternalRotation = 1,
@@ -7180,7 +7180,7 @@ impl ShoulderStabilityExerciseName {
         match base_value . 0 { 0 => Ok ( ShoulderStabilityExerciseName :: NinetyDegreeCableExternalRotation ) , 1 => Ok ( ShoulderStabilityExerciseName :: BandExternalRotation ) , 2 => Ok ( ShoulderStabilityExerciseName :: BandInternalRotation ) , 3 => Ok ( ShoulderStabilityExerciseName :: BentArmLateralRaiseAndExternalRotation ) , 4 => Ok ( ShoulderStabilityExerciseName :: CableExternalRotation ) , 5 => Ok ( ShoulderStabilityExerciseName :: DumbbellFacePullWithExternalRotation ) , 6 => Ok ( ShoulderStabilityExerciseName :: FloorIRaise ) , 7 => Ok ( ShoulderStabilityExerciseName :: WeightedFloorIRaise ) , 8 => Ok ( ShoulderStabilityExerciseName :: FloorTRaise ) , 9 => Ok ( ShoulderStabilityExerciseName :: WeightedFloorTRaise ) , 10 => Ok ( ShoulderStabilityExerciseName :: FloorYRaise ) , 11 => Ok ( ShoulderStabilityExerciseName :: WeightedFloorYRaise ) , 12 => Ok ( ShoulderStabilityExerciseName :: InclineIRaise ) , 13 => Ok ( ShoulderStabilityExerciseName :: WeightedInclineIRaise ) , 14 => Ok ( ShoulderStabilityExerciseName :: InclineLRaise ) , 15 => Ok ( ShoulderStabilityExerciseName :: WeightedInclineLRaise ) , 16 => Ok ( ShoulderStabilityExerciseName :: InclineTRaise ) , 17 => Ok ( ShoulderStabilityExerciseName :: WeightedInclineTRaise ) , 18 => Ok ( ShoulderStabilityExerciseName :: InclineWRaise ) , 19 => Ok ( ShoulderStabilityExerciseName :: WeightedInclineWRaise ) , 20 => Ok ( ShoulderStabilityExerciseName :: InclineYRaise ) , 21 => Ok ( ShoulderStabilityExerciseName :: WeightedInclineYRaise ) , 22 => Ok ( ShoulderStabilityExerciseName :: LyingExternalRotation ) , 23 => Ok ( ShoulderStabilityExerciseName :: SeatedDumbbellExternalRotation ) , 24 => Ok ( ShoulderStabilityExerciseName :: StandingLRaise ) , 25 => Ok ( ShoulderStabilityExerciseName :: SwissBallIRaise ) , 26 => Ok ( ShoulderStabilityExerciseName :: WeightedSwissBallIRaise ) , 27 => Ok ( ShoulderStabilityExerciseName :: SwissBallTRaise ) , 28 => Ok ( ShoulderStabilityExerciseName :: WeightedSwissBallTRaise ) , 29 => Ok ( ShoulderStabilityExerciseName :: SwissBallWRaise ) , 30 => Ok ( ShoulderStabilityExerciseName :: WeightedSwissBallWRaise ) , 31 => Ok ( ShoulderStabilityExerciseName :: SwissBallYRaise ) , 32 => Ok ( ShoulderStabilityExerciseName :: WeightedSwissBallYRaise ) , _ => Ok ( ShoulderStabilityExerciseName :: Unknown ) , }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum ShrugExerciseName {
     BarbellJumpShrug = 0,
     BarbellShrug = 1,
@@ -7226,7 +7226,7 @@ impl ShrugExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SitUpExerciseName {
     AlternatingSitUp = 0,
     WeightedAlternatingSitUp = 1,
@@ -7314,7 +7314,7 @@ impl SitUpExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum SquatExerciseName {
     LegPress = 0,
     BackSquatWithBodyBar = 1,
@@ -7500,7 +7500,7 @@ impl SquatExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TotalBodyExerciseName {
     Burpee = 0,
     WeightedBurpee = 1,
@@ -7538,7 +7538,7 @@ impl TotalBodyExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TricepsExtensionExerciseName {
     BenchDip = 0,
     WeightedBenchDip = 1,
@@ -7589,7 +7589,7 @@ impl TricepsExtensionExerciseName {
         match base_value . 0 { 0 => Ok ( TricepsExtensionExerciseName :: BenchDip ) , 1 => Ok ( TricepsExtensionExerciseName :: WeightedBenchDip ) , 2 => Ok ( TricepsExtensionExerciseName :: BodyWeightDip ) , 3 => Ok ( TricepsExtensionExerciseName :: CableKickback ) , 4 => Ok ( TricepsExtensionExerciseName :: CableLyingTricepsExtension ) , 5 => Ok ( TricepsExtensionExerciseName :: CableOverheadTricepsExtension ) , 6 => Ok ( TricepsExtensionExerciseName :: DumbbellKickback ) , 7 => Ok ( TricepsExtensionExerciseName :: DumbbellLyingTricepsExtension ) , 8 => Ok ( TricepsExtensionExerciseName :: EzBarOverheadTricepsExtension ) , 9 => Ok ( TricepsExtensionExerciseName :: InclineDip ) , 10 => Ok ( TricepsExtensionExerciseName :: WeightedInclineDip ) , 11 => Ok ( TricepsExtensionExerciseName :: InclineEzBarLyingTricepsExtension ) , 12 => Ok ( TricepsExtensionExerciseName :: LyingDumbbellPulloverToExtension ) , 13 => Ok ( TricepsExtensionExerciseName :: LyingEzBarTricepsExtension ) , 14 => Ok ( TricepsExtensionExerciseName :: LyingTricepsExtensionToCloseGripBenchPress ) , 15 => Ok ( TricepsExtensionExerciseName :: OverheadDumbbellTricepsExtension ) , 16 => Ok ( TricepsExtensionExerciseName :: RecliningTricepsPress ) , 17 => Ok ( TricepsExtensionExerciseName :: ReverseGripPressdown ) , 18 => Ok ( TricepsExtensionExerciseName :: ReverseGripTricepsPressdown ) , 19 => Ok ( TricepsExtensionExerciseName :: RopePressdown ) , 20 => Ok ( TricepsExtensionExerciseName :: SeatedBarbellOverheadTricepsExtension ) , 21 => Ok ( TricepsExtensionExerciseName :: SeatedDumbbellOverheadTricepsExtension ) , 22 => Ok ( TricepsExtensionExerciseName :: SeatedEzBarOverheadTricepsExtension ) , 23 => Ok ( TricepsExtensionExerciseName :: SeatedSingleArmOverheadDumbbellExtension ) , 24 => Ok ( TricepsExtensionExerciseName :: SingleArmDumbbellOverheadTricepsExtension ) , 25 => Ok ( TricepsExtensionExerciseName :: SingleDumbbellSeatedOverheadTricepsExtension ) , 26 => Ok ( TricepsExtensionExerciseName :: SingleLegBenchDipAndKick ) , 27 => Ok ( TricepsExtensionExerciseName :: WeightedSingleLegBenchDipAndKick ) , 28 => Ok ( TricepsExtensionExerciseName :: SingleLegDip ) , 29 => Ok ( TricepsExtensionExerciseName :: WeightedSingleLegDip ) , 30 => Ok ( TricepsExtensionExerciseName :: StaticLyingTricepsExtension ) , 31 => Ok ( TricepsExtensionExerciseName :: SuspendedDip ) , 32 => Ok ( TricepsExtensionExerciseName :: WeightedSuspendedDip ) , 33 => Ok ( TricepsExtensionExerciseName :: SwissBallDumbbellLyingTricepsExtension ) , 34 => Ok ( TricepsExtensionExerciseName :: SwissBallEzBarLyingTricepsExtension ) , 35 => Ok ( TricepsExtensionExerciseName :: SwissBallEzBarOverheadTricepsExtension ) , 36 => Ok ( TricepsExtensionExerciseName :: TabletopDip ) , 37 => Ok ( TricepsExtensionExerciseName :: WeightedTabletopDip ) , 38 => Ok ( TricepsExtensionExerciseName :: TricepsExtensionOnFloor ) , 39 => Ok ( TricepsExtensionExerciseName :: TricepsPressdown ) , 40 => Ok ( TricepsExtensionExerciseName :: WeightedDip ) , _ => Ok ( TricepsExtensionExerciseName :: Unknown ) , }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WarmUpExerciseName {
     QuadrupedRocking = 0,
     NeckTilts = 1,
@@ -7663,7 +7663,7 @@ impl WarmUpExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum RunExerciseName {
     Run = 0,
     Walk = 1,
@@ -7683,7 +7683,7 @@ impl RunExerciseName {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum WaterType {
     Fresh = 0,
     Salt = 1,
@@ -7703,7 +7703,7 @@ impl WaterType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum TissueModelType {
     #[doc = "Buhlmann\'s decompression algorithm, version C"]
     Zhl16C = 0,
@@ -7718,7 +7718,7 @@ impl TissueModelType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DiveGasStatus {
     Disabled = 0,
     Enabled = 1,
@@ -7736,7 +7736,7 @@ impl DiveGasStatus {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DiveAlarmType {
     Depth = 0,
     Time = 1,
@@ -7752,7 +7752,7 @@ impl DiveAlarmType {
         }
     }
 }
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub enum DiveBacklightMode {
     AtDepth = 0,
     AlwaysOn = 1,

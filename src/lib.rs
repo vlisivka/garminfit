@@ -1,11 +1,8 @@
-#![feature(try_from)]
-#![feature(test)]
 #![allow(dead_code)]
 
 extern crate byteorder;
 extern crate chrono;
 extern crate failure;
-extern crate test;
 
 pub(crate) mod bits;
 pub(crate) mod dyncrc16;

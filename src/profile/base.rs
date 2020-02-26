@@ -2,7 +2,11 @@
 //! names in the FIT SDK.
 
 use byteorder::ByteOrder;
-use error::Result;
+use error::{
+    Error,
+    ErrorKind,
+    Result,
+};
 use std::{
     default::Default,
     f32,
@@ -18,7 +22,7 @@ macro_rules! base_type {
         $invalid:expr
     ) => {
         #[doc=$sdk_name]
-        #[derive(Debug)]
+        #[derive(Debug,Clone,Copy)]
         pub struct $name(pub $type);
 
         impl $name {
@@ -79,7 +83,7 @@ base_type!("uint64z", Uint64z, u64, read_u64, 0x0000000000000000);
 
 /// "string"
 /// Null terminated string encoded in UTF-8 format.
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct Utf8String(pub String);
 
 impl Utf8String {
@@ -104,7 +108,7 @@ impl Default for Utf8String {
 /// "byte"
 /// Array of bytes.  Field is invalid if all bytes are
 /// invalid.
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct Bytes(pub Vec<u8>);
 
 impl Bytes {
@@ -125,16 +129,16 @@ impl Default for Bytes {
 
 /// "bool"
 /// TODO: Because it doesn't seem to be documented anywhere.
-#[derive(Debug)]
+#[derive(Debug,Clone,Copy)]
 pub struct Bool(pub bool);
 
 impl Bool {
     pub(crate) fn decode<T: ByteOrder>(buffer: &[u8]) -> Result<Self> {
-        panic!(
-            "bool hasn't been implemented yet, but here's what it should \
-             decode: {:?}",
-            buffer
-        )
+      match buffer[0] {
+        0 => Ok(Bool(false)),
+        1 => Ok(Bool(true)),
+        something_else => Err(Error::from(ErrorKind::Decode{what:format!("Cann't decode boolean: {:?}", something_else)})),
+      }
     }
 
     pub(crate) fn is_valid(&self) -> bool {
