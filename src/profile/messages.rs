@@ -2647,7 +2647,7 @@ impl PowerZone {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             2 => {
@@ -2793,7 +2793,7 @@ impl DiveSettings {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             3 => {
@@ -2801,7 +2801,7 @@ impl DiveSettings {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             4 => {
@@ -2825,7 +2825,7 @@ impl DiveSettings {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             7 => {
@@ -2833,7 +2833,7 @@ impl DiveSettings {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             8 => {
@@ -2841,7 +2841,7 @@ impl DiveSettings {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             9 => {
@@ -3066,7 +3066,7 @@ impl DiveGas {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             1 => {
@@ -3074,7 +3074,7 @@ impl DiveGas {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             2 => {
@@ -3682,7 +3682,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             21 => {
@@ -3690,7 +3690,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             22 => {
@@ -3788,7 +3788,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             35 => {
@@ -3854,7 +3854,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             46 => {
@@ -4136,7 +4136,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             91 => {
@@ -4224,7 +4224,7 @@ impl Session {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             102 => {
@@ -4232,7 +4232,7 @@ impl Session {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             103 => {
@@ -4240,7 +4240,7 @@ impl Session {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             104 => {
@@ -4248,7 +4248,7 @@ impl Session {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             105 => {
@@ -4256,7 +4256,7 @@ impl Session {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             111 => {
@@ -4336,7 +4336,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             121 => {
@@ -4344,7 +4344,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             122 => {
@@ -4408,7 +4408,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             130 => {
@@ -4416,7 +4416,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             131 => {
@@ -4424,7 +4424,7 @@ impl Session {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             132 => {
@@ -4432,7 +4432,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             133 => {
@@ -4440,7 +4440,7 @@ impl Session {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             134 => {
@@ -4812,7 +4812,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             20 => {
@@ -4820,7 +4820,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             21 => {
@@ -4884,7 +4884,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             34 => {
@@ -5166,7 +5166,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             79 => {
@@ -5262,7 +5262,7 @@ impl Lap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             92 => {
@@ -5270,7 +5270,7 @@ impl Lap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             93 => {
@@ -5278,7 +5278,7 @@ impl Lap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             94 => {
@@ -5286,7 +5286,7 @@ impl Lap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             95 => {
@@ -5294,7 +5294,7 @@ impl Lap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             98 => {
@@ -5366,7 +5366,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             107 => {
@@ -5374,7 +5374,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             108 => {
@@ -5438,7 +5438,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             116 => {
@@ -5446,7 +5446,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             117 => {
@@ -5454,7 +5454,7 @@ impl Lap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             118 => {
@@ -5462,7 +5462,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             119 => {
@@ -5470,7 +5470,7 @@ impl Lap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             120 => {
@@ -5858,7 +5858,7 @@ impl Record {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             8 => {
@@ -5906,7 +5906,7 @@ impl Record {
                     raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("C"),
+                    units:  Some("°C"),
                 }))
             },
             17 => {
@@ -5938,7 +5938,7 @@ impl Record {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             29 => {
@@ -5946,7 +5946,7 @@ impl Record {
                     raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             30 => {
@@ -5996,7 +5996,7 @@ impl Record {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             41 => {
@@ -6020,7 +6020,7 @@ impl Record {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             44 => {
@@ -6028,7 +6028,7 @@ impl Record {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             45 => {
@@ -6036,7 +6036,7 @@ impl Record {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             46 => {
@@ -6044,7 +6044,7 @@ impl Record {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             47 => {
@@ -6052,7 +6052,7 @@ impl Record {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             48 => {
@@ -6228,7 +6228,7 @@ impl Record {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             82 => {
@@ -6236,7 +6236,7 @@ impl Record {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             83 => {
@@ -6244,7 +6244,7 @@ impl Record {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             84 => {
@@ -6252,7 +6252,7 @@ impl Record {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             85 => {
@@ -6316,7 +6316,7 @@ impl Record {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             98 => {
@@ -6324,7 +6324,7 @@ impl Record {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             _ => {
@@ -9354,7 +9354,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             20 => {
@@ -9362,7 +9362,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             21 => {
@@ -9442,7 +9442,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             31 => {
@@ -9676,7 +9676,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             60 => {
@@ -9684,7 +9684,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             61 => {
@@ -9692,7 +9692,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             62 => {
@@ -9700,7 +9700,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             63 => {
@@ -9708,7 +9708,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             64 => {
@@ -9838,7 +9838,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             80 => {
@@ -9846,7 +9846,7 @@ impl SegmentLap {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
-                    units:  Some("watts"),
+                    units:  Some("W"),
                 }))
             },
             81 => {
@@ -12182,7 +12182,7 @@ impl DiveSummary {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             6 => {
@@ -12190,7 +12190,7 @@ impl DiveSummary {
                     raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             7 => {
@@ -12198,7 +12198,7 @@ impl DiveSummary {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             8 => {
@@ -12206,7 +12206,7 @@ impl DiveSummary {
                     raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
-                    units:  Some("percent"),
+                    units:  Some("%"),
                 }))
             },
             9 => {
