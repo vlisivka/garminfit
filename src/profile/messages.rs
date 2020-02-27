@@ -7,7 +7,7 @@ use types;
 #[doc = r" The actual data of a `Message`."]
 #[derive(Debug,Clone)]
 pub struct Field<T> {
-    pub value:     T,
+    pub raw_value: T,
     pub scale:     Option<f64>,
     pub offset:    Option<f64>,
     pub units: Option<&'static str>,
@@ -17,7 +17,7 @@ impl types::field::Field for Field<profile::base::Float32> {
     type Value = f64;
 
     fn value(&self) -> Self::Value {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -25,7 +25,7 @@ impl types::field::Field for Field<profile::base::Float64> {
     type Value = f64;
 
     fn value(&self) -> Self::Value {
-        self.value.0 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -33,7 +33,7 @@ impl types::field::Field for Field<profile::base::Uint8> {
     type Value = f64;
 
     fn value(&self) -> Self::Value  {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -41,7 +41,7 @@ impl types::field::Field for Field<profile::base::Uint8z> {
     type Value = f64;
 
     fn value(&self) -> Self::Value  {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -49,7 +49,7 @@ impl types::field::Field for Field<profile::base::Sint8> {
     type Value = f64;
 
     fn value(&self) -> Self::Value {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -57,7 +57,7 @@ impl types::field::Field for Field<profile::base::Uint16> {
     type Value = f64;
 
     fn value(&self) -> Self::Value  {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -65,7 +65,7 @@ impl types::field::Field for Field<profile::base::Uint16z> {
     type Value = f64;
 
     fn value(&self) -> Self::Value  {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -73,7 +73,7 @@ impl types::field::Field for Field<profile::base::Sint16> {
     type Value = f64;
 
     fn value(&self) -> Self::Value {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -81,7 +81,7 @@ impl types::field::Field for Field<profile::base::Uint32> {
     type Value = f64;
 
     fn value(&self) -> Self::Value  {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -89,7 +89,7 @@ impl types::field::Field for Field<profile::base::Uint32z> {
     type Value = f64;
 
     fn value(&self) -> Self::Value  {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -97,7 +97,7 @@ impl types::field::Field for Field<profile::base::Sint32> {
     type Value = f64;
 
     fn value(&self) -> Self::Value {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -105,7 +105,7 @@ impl types::field::Field for Field<profile::base::Uint64> {
     type Value = f64;
 
     fn value(&self) -> Self::Value  {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -113,7 +113,7 @@ impl types::field::Field for Field<profile::base::Uint64z> {
     type Value = f64;
 
     fn value(&self) -> Self::Value  {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -121,7 +121,7 @@ impl types::field::Field for Field<profile::base::Sint64> {
     type Value = f64;
 
     fn value(&self) -> Self::Value {
-        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+        self.raw_value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
 
@@ -564,7 +564,7 @@ impl FileId {
         match field_def_num {
             0 => {
                 Ok(FileId::Type(Field {
-                    value:  profile::types::File::decode::<T>(buffer)?,
+                    raw_value:  profile::types::File::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -572,7 +572,7 @@ impl FileId {
             },
             1 => {
                 Ok(FileId::Manufacturer(Field {
-                    value:  profile::types::Manufacturer::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Manufacturer::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -580,7 +580,7 @@ impl FileId {
             },
             2 => {
                 Ok(FileId::Product(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -588,7 +588,7 @@ impl FileId {
             },
             3 => {
                 Ok(FileId::SerialNumber(Field {
-                    value:  profile::base::Uint32z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -596,7 +596,7 @@ impl FileId {
             },
             4 => {
                 Ok(FileId::TimeCreated(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -604,7 +604,7 @@ impl FileId {
             },
             5 => {
                 Ok(FileId::Number(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -612,7 +612,7 @@ impl FileId {
             },
             8 => {
                 Ok(FileId::ProductName(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -641,7 +641,7 @@ impl FileCreator {
         match field_def_num {
             0 => {
                 Ok(FileCreator::SoftwareVersion(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -649,7 +649,7 @@ impl FileCreator {
             },
             1 => {
                 Ok(FileCreator::HardwareVersion(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -697,7 +697,7 @@ impl TimestampCorrelation {
         match field_def_num {
             253 => {
                 Ok(TimestampCorrelation::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -705,7 +705,7 @@ impl TimestampCorrelation {
             },
             0 => {
                 Ok(TimestampCorrelation::FractionalTimestamp(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(32768.0),
                     offset: None,
                     units:  Some("s"),
@@ -713,7 +713,7 @@ impl TimestampCorrelation {
             },
             1 => {
                 Ok(TimestampCorrelation::SystemTimestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -721,7 +721,7 @@ impl TimestampCorrelation {
             },
             2 => {
                 Ok(TimestampCorrelation::FractionalSystemTimestamp(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(32768.0),
                     offset: None,
                     units:  Some("s"),
@@ -729,7 +729,7 @@ impl TimestampCorrelation {
             },
             3 => {
                 Ok(TimestampCorrelation::LocalTimestamp(Field {
-                    value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -737,7 +737,7 @@ impl TimestampCorrelation {
             },
             4 => {
                 Ok(TimestampCorrelation::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -745,7 +745,7 @@ impl TimestampCorrelation {
             },
             5 => {
                 Ok(TimestampCorrelation::SystemTimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -775,7 +775,7 @@ impl Software {
         match field_def_num {
             254 => {
                 Ok(Software::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -783,7 +783,7 @@ impl Software {
             },
             3 => {
                 Ok(Software::Version(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  None,
@@ -791,7 +791,7 @@ impl Software {
             },
             5 => {
                 Ok(Software::PartNumber(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -820,7 +820,7 @@ impl SlaveDevice {
         match field_def_num {
             0 => {
                 Ok(SlaveDevice::Manufacturer(Field {
-                    value:  profile::types::Manufacturer::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Manufacturer::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -828,7 +828,7 @@ impl SlaveDevice {
             },
             1 => {
                 Ok(SlaveDevice::Product(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -864,7 +864,7 @@ impl Capabilities {
         match field_def_num {
             0 => {
                 Ok(Capabilities::Languages(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -872,7 +872,7 @@ impl Capabilities {
             },
             1 => {
                 Ok(Capabilities::Sports(Field {
-                    value:  profile::types::SportBits0::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SportBits0::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -880,7 +880,7 @@ impl Capabilities {
             },
             21 => {
                 Ok(Capabilities::WorkoutsSupported(Field {
-                    value:  profile::types::WorkoutCapabilities::decode::<T>(
+                    raw_value:  profile::types::WorkoutCapabilities::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -890,7 +890,7 @@ impl Capabilities {
             },
             23 => {
                 Ok(Capabilities::ConnectivitySupported(Field {
-                    value:  profile::types::ConnectivityCapabilities::decode::<
+                    raw_value:  profile::types::ConnectivityCapabilities::decode::<
                         T,
                     >(buffer)?,
                     scale:  None,
@@ -925,7 +925,7 @@ impl FileCapabilities {
         match field_def_num {
             254 => {
                 Ok(FileCapabilities::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -933,7 +933,7 @@ impl FileCapabilities {
             },
             0 => {
                 Ok(FileCapabilities::Type(Field {
-                    value:  profile::types::File::decode::<T>(buffer)?,
+                    raw_value:  profile::types::File::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -941,7 +941,7 @@ impl FileCapabilities {
             },
             1 => {
                 Ok(FileCapabilities::Flags(Field {
-                    value:  profile::types::FileFlags::decode::<T>(buffer)?,
+                    raw_value:  profile::types::FileFlags::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -949,7 +949,7 @@ impl FileCapabilities {
             },
             2 => {
                 Ok(FileCapabilities::Directory(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -957,7 +957,7 @@ impl FileCapabilities {
             },
             3 => {
                 Ok(FileCapabilities::MaxCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -965,7 +965,7 @@ impl FileCapabilities {
             },
             4 => {
                 Ok(FileCapabilities::MaxSize(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bytes"),
@@ -997,7 +997,7 @@ impl MesgCapabilities {
         match field_def_num {
             254 => {
                 Ok(MesgCapabilities::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1005,7 +1005,7 @@ impl MesgCapabilities {
             },
             0 => {
                 Ok(MesgCapabilities::File(Field {
-                    value:  profile::types::File::decode::<T>(buffer)?,
+                    raw_value:  profile::types::File::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1013,7 +1013,7 @@ impl MesgCapabilities {
             },
             1 => {
                 Ok(MesgCapabilities::MesgNum(Field {
-                    value:  profile::types::MesgNum::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MesgNum::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1021,7 +1021,7 @@ impl MesgCapabilities {
             },
             2 => {
                 Ok(MesgCapabilities::CountType(Field {
-                    value:  profile::types::MesgCount::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MesgCount::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1029,7 +1029,7 @@ impl MesgCapabilities {
             },
             3 => {
                 Ok(MesgCapabilities::Count(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1061,7 +1061,7 @@ impl FieldCapabilities {
         match field_def_num {
             254 => {
                 Ok(FieldCapabilities::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1069,7 +1069,7 @@ impl FieldCapabilities {
             },
             0 => {
                 Ok(FieldCapabilities::File(Field {
-                    value:  profile::types::File::decode::<T>(buffer)?,
+                    raw_value:  profile::types::File::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1077,7 +1077,7 @@ impl FieldCapabilities {
             },
             1 => {
                 Ok(FieldCapabilities::MesgNum(Field {
-                    value:  profile::types::MesgNum::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MesgNum::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1085,7 +1085,7 @@ impl FieldCapabilities {
             },
             2 => {
                 Ok(FieldCapabilities::FieldNum(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1093,7 +1093,7 @@ impl FieldCapabilities {
             },
             3 => {
                 Ok(FieldCapabilities::Count(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1170,7 +1170,7 @@ impl DeviceSettings {
         match field_def_num {
             0 => {
                 Ok(DeviceSettings::ActiveTimeZone(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1178,7 +1178,7 @@ impl DeviceSettings {
             },
             1 => {
                 Ok(DeviceSettings::UtcOffset(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1186,7 +1186,7 @@ impl DeviceSettings {
             },
             2 => {
                 Ok(DeviceSettings::TimeOffset(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -1194,7 +1194,7 @@ impl DeviceSettings {
             },
             4 => {
                 Ok(DeviceSettings::TimeMode(Field {
-                    value:  profile::types::TimeMode::decode::<T>(buffer)?,
+                    raw_value:  profile::types::TimeMode::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1202,7 +1202,7 @@ impl DeviceSettings {
             },
             5 => {
                 Ok(DeviceSettings::TimeZoneOffset(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  Some(4.0),
                     offset: None,
                     units:  Some("hr"),
@@ -1210,7 +1210,7 @@ impl DeviceSettings {
             },
             12 => {
                 Ok(DeviceSettings::BacklightMode(Field {
-                    value:  profile::types::BacklightMode::decode::<T>(buffer)?,
+                    raw_value:  profile::types::BacklightMode::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1218,7 +1218,7 @@ impl DeviceSettings {
             },
             36 => {
                 Ok(DeviceSettings::ActivityTrackerEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1226,7 +1226,7 @@ impl DeviceSettings {
             },
             39 => {
                 Ok(DeviceSettings::ClockTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1234,7 +1234,7 @@ impl DeviceSettings {
             },
             40 => {
                 Ok(DeviceSettings::PagesEnabled(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1242,7 +1242,7 @@ impl DeviceSettings {
             },
             46 => {
                 Ok(DeviceSettings::MoveAlertEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1250,7 +1250,7 @@ impl DeviceSettings {
             },
             47 => {
                 Ok(DeviceSettings::DateMode(Field {
-                    value:  profile::types::DateMode::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateMode::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1258,7 +1258,7 @@ impl DeviceSettings {
             },
             55 => {
                 Ok(DeviceSettings::DisplayOrientation(Field {
-                    value:  profile::types::DisplayOrientation::decode::<T>(
+                    raw_value:  profile::types::DisplayOrientation::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1268,7 +1268,7 @@ impl DeviceSettings {
             },
             56 => {
                 Ok(DeviceSettings::MountingSide(Field {
-                    value:  profile::types::Side::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Side::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1276,7 +1276,7 @@ impl DeviceSettings {
             },
             57 => {
                 Ok(DeviceSettings::DefaultPage(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1284,7 +1284,7 @@ impl DeviceSettings {
             },
             58 => {
                 Ok(DeviceSettings::AutosyncMinSteps(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("steps"),
@@ -1292,7 +1292,7 @@ impl DeviceSettings {
             },
             59 => {
                 Ok(DeviceSettings::AutosyncMinTime(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("minutes"),
@@ -1300,7 +1300,7 @@ impl DeviceSettings {
             },
             80 => {
                 Ok(DeviceSettings::LactateThresholdAutodetectEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1308,7 +1308,7 @@ impl DeviceSettings {
             },
             86 => {
                 Ok(DeviceSettings::BleAutoUploadEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1316,7 +1316,7 @@ impl DeviceSettings {
             },
             89 => {
                 Ok(DeviceSettings::AutoSyncFrequency(Field {
-                    value:  profile::types::AutoSyncFrequency::decode::<T>(
+                    raw_value:  profile::types::AutoSyncFrequency::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1326,7 +1326,7 @@ impl DeviceSettings {
             },
             90 => {
                 Ok(DeviceSettings::AutoActivityDetect(Field {
-                    value:  profile::types::AutoActivityDetect::decode::<T>(
+                    raw_value:  profile::types::AutoActivityDetect::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1336,7 +1336,7 @@ impl DeviceSettings {
             },
             94 => {
                 Ok(DeviceSettings::NumberOfScreens(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1344,7 +1344,7 @@ impl DeviceSettings {
             },
             95 => {
                 Ok(DeviceSettings::SmartNotificationDisplayOrientation(Field {
-                    value:  profile::types::DisplayOrientation::decode::<T>(
+                    raw_value:  profile::types::DisplayOrientation::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1354,7 +1354,7 @@ impl DeviceSettings {
             },
             134 => {
                 Ok(DeviceSettings::TapInterface(Field {
-                    value:  profile::types::Switch::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Switch::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1417,7 +1417,7 @@ impl UserProfile {
         match field_def_num {
             254 => {
                 Ok(UserProfile::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1425,7 +1425,7 @@ impl UserProfile {
             },
             0 => {
                 Ok(UserProfile::FriendlyName(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1433,7 +1433,7 @@ impl UserProfile {
             },
             1 => {
                 Ok(UserProfile::Gender(Field {
-                    value:  profile::types::Gender::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Gender::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1441,7 +1441,7 @@ impl UserProfile {
             },
             2 => {
                 Ok(UserProfile::Age(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("years"),
@@ -1449,7 +1449,7 @@ impl UserProfile {
             },
             3 => {
                 Ok(UserProfile::Height(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -1457,7 +1457,7 @@ impl UserProfile {
             },
             4 => {
                 Ok(UserProfile::Weight(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("kg"),
@@ -1465,7 +1465,7 @@ impl UserProfile {
             },
             5 => {
                 Ok(UserProfile::Language(Field {
-                    value:  profile::types::Language::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Language::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1473,7 +1473,7 @@ impl UserProfile {
             },
             6 => {
                 Ok(UserProfile::ElevSetting(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1483,7 +1483,7 @@ impl UserProfile {
             },
             7 => {
                 Ok(UserProfile::WeightSetting(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1493,7 +1493,7 @@ impl UserProfile {
             },
             8 => {
                 Ok(UserProfile::RestingHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -1501,7 +1501,7 @@ impl UserProfile {
             },
             9 => {
                 Ok(UserProfile::DefaultMaxRunningHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -1509,7 +1509,7 @@ impl UserProfile {
             },
             10 => {
                 Ok(UserProfile::DefaultMaxBikingHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -1517,7 +1517,7 @@ impl UserProfile {
             },
             11 => {
                 Ok(UserProfile::DefaultMaxHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -1525,7 +1525,7 @@ impl UserProfile {
             },
             12 => {
                 Ok(UserProfile::HrSetting(Field {
-                    value:  profile::types::DisplayHeart::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DisplayHeart::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1533,7 +1533,7 @@ impl UserProfile {
             },
             13 => {
                 Ok(UserProfile::SpeedSetting(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1543,7 +1543,7 @@ impl UserProfile {
             },
             14 => {
                 Ok(UserProfile::DistSetting(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1553,7 +1553,7 @@ impl UserProfile {
             },
             16 => {
                 Ok(UserProfile::PowerSetting(Field {
-                    value:  profile::types::DisplayPower::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DisplayPower::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1561,7 +1561,7 @@ impl UserProfile {
             },
             17 => {
                 Ok(UserProfile::ActivityClass(Field {
-                    value:  profile::types::ActivityClass::decode::<T>(buffer)?,
+                    raw_value:  profile::types::ActivityClass::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1569,7 +1569,7 @@ impl UserProfile {
             },
             18 => {
                 Ok(UserProfile::PositionSetting(Field {
-                    value:  profile::types::DisplayPosition::decode::<T>(
+                    raw_value:  profile::types::DisplayPosition::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1579,7 +1579,7 @@ impl UserProfile {
             },
             21 => {
                 Ok(UserProfile::TemperatureSetting(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1589,7 +1589,7 @@ impl UserProfile {
             },
             22 => {
                 Ok(UserProfile::LocalId(Field {
-                    value:  profile::types::UserLocalId::decode::<T>(buffer)?,
+                    raw_value:  profile::types::UserLocalId::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1597,7 +1597,7 @@ impl UserProfile {
             },
             23 => {
                 Ok(UserProfile::GlobalId(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1605,7 +1605,7 @@ impl UserProfile {
             },
             28 => {
                 Ok(UserProfile::WakeTime(Field {
-                    value:  profile::types::LocaltimeIntoDay::decode::<T>(
+                    raw_value:  profile::types::LocaltimeIntoDay::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1615,7 +1615,7 @@ impl UserProfile {
             },
             29 => {
                 Ok(UserProfile::SleepTime(Field {
-                    value:  profile::types::LocaltimeIntoDay::decode::<T>(
+                    raw_value:  profile::types::LocaltimeIntoDay::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1625,7 +1625,7 @@ impl UserProfile {
             },
             30 => {
                 Ok(UserProfile::HeightSetting(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1635,7 +1635,7 @@ impl UserProfile {
             },
             31 => {
                 Ok(UserProfile::UserRunningStepLength(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -1643,7 +1643,7 @@ impl UserProfile {
             },
             32 => {
                 Ok(UserProfile::UserWalkingStepLength(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -1651,7 +1651,7 @@ impl UserProfile {
             },
             47 => {
                 Ok(UserProfile::DepthSetting(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -1661,7 +1661,7 @@ impl UserProfile {
             },
             49 => {
                 Ok(UserProfile::DiveCount(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1693,7 +1693,7 @@ impl HrmProfile {
         match field_def_num {
             254 => {
                 Ok(HrmProfile::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1701,7 +1701,7 @@ impl HrmProfile {
             },
             0 => {
                 Ok(HrmProfile::Enabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1709,7 +1709,7 @@ impl HrmProfile {
             },
             1 => {
                 Ok(HrmProfile::HrmAntId(Field {
-                    value:  profile::base::Uint16z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1717,7 +1717,7 @@ impl HrmProfile {
             },
             2 => {
                 Ok(HrmProfile::LogHrv(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1725,7 +1725,7 @@ impl HrmProfile {
             },
             3 => {
                 Ok(HrmProfile::HrmAntIdTransType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1765,7 +1765,7 @@ impl SdmProfile {
         match field_def_num {
             254 => {
                 Ok(SdmProfile::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1773,7 +1773,7 @@ impl SdmProfile {
             },
             0 => {
                 Ok(SdmProfile::Enabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1781,7 +1781,7 @@ impl SdmProfile {
             },
             1 => {
                 Ok(SdmProfile::SdmAntId(Field {
-                    value:  profile::base::Uint16z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1789,7 +1789,7 @@ impl SdmProfile {
             },
             2 => {
                 Ok(SdmProfile::SdmCalFactor(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -1797,7 +1797,7 @@ impl SdmProfile {
             },
             3 => {
                 Ok(SdmProfile::Odometer(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -1805,7 +1805,7 @@ impl SdmProfile {
             },
             4 => {
                 Ok(SdmProfile::SpeedSource(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1813,7 +1813,7 @@ impl SdmProfile {
             },
             5 => {
                 Ok(SdmProfile::SdmAntIdTransType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1821,7 +1821,7 @@ impl SdmProfile {
             },
             7 => {
                 Ok(SdmProfile::OdometerRollover(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1888,7 +1888,7 @@ impl BikeProfile {
         match field_def_num {
             254 => {
                 Ok(BikeProfile::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1896,7 +1896,7 @@ impl BikeProfile {
             },
             0 => {
                 Ok(BikeProfile::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1904,7 +1904,7 @@ impl BikeProfile {
             },
             1 => {
                 Ok(BikeProfile::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1912,7 +1912,7 @@ impl BikeProfile {
             },
             2 => {
                 Ok(BikeProfile::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1920,7 +1920,7 @@ impl BikeProfile {
             },
             3 => {
                 Ok(BikeProfile::Odometer(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -1928,7 +1928,7 @@ impl BikeProfile {
             },
             4 => {
                 Ok(BikeProfile::BikeSpdAntId(Field {
-                    value:  profile::base::Uint16z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1936,7 +1936,7 @@ impl BikeProfile {
             },
             5 => {
                 Ok(BikeProfile::BikeCadAntId(Field {
-                    value:  profile::base::Uint16z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1944,7 +1944,7 @@ impl BikeProfile {
             },
             6 => {
                 Ok(BikeProfile::BikeSpdcadAntId(Field {
-                    value:  profile::base::Uint16z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1952,7 +1952,7 @@ impl BikeProfile {
             },
             7 => {
                 Ok(BikeProfile::BikePowerAntId(Field {
-                    value:  profile::base::Uint16z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -1960,7 +1960,7 @@ impl BikeProfile {
             },
             8 => {
                 Ok(BikeProfile::CustomWheelsize(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -1968,7 +1968,7 @@ impl BikeProfile {
             },
             9 => {
                 Ok(BikeProfile::AutoWheelsize(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -1976,7 +1976,7 @@ impl BikeProfile {
             },
             10 => {
                 Ok(BikeProfile::BikeWeight(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("kg"),
@@ -1984,7 +1984,7 @@ impl BikeProfile {
             },
             11 => {
                 Ok(BikeProfile::PowerCalFactor(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -1992,7 +1992,7 @@ impl BikeProfile {
             },
             12 => {
                 Ok(BikeProfile::AutoWheelCal(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2000,7 +2000,7 @@ impl BikeProfile {
             },
             13 => {
                 Ok(BikeProfile::AutoPowerZero(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2008,7 +2008,7 @@ impl BikeProfile {
             },
             14 => {
                 Ok(BikeProfile::Id(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2016,7 +2016,7 @@ impl BikeProfile {
             },
             15 => {
                 Ok(BikeProfile::SpdEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2024,7 +2024,7 @@ impl BikeProfile {
             },
             16 => {
                 Ok(BikeProfile::CadEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2032,7 +2032,7 @@ impl BikeProfile {
             },
             17 => {
                 Ok(BikeProfile::SpdcadEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2040,7 +2040,7 @@ impl BikeProfile {
             },
             18 => {
                 Ok(BikeProfile::PowerEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2048,7 +2048,7 @@ impl BikeProfile {
             },
             19 => {
                 Ok(BikeProfile::CrankLength(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("mm"),
@@ -2056,7 +2056,7 @@ impl BikeProfile {
             },
             20 => {
                 Ok(BikeProfile::Enabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2064,7 +2064,7 @@ impl BikeProfile {
             },
             21 => {
                 Ok(BikeProfile::BikeSpdAntIdTransType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2072,7 +2072,7 @@ impl BikeProfile {
             },
             22 => {
                 Ok(BikeProfile::BikeCadAntIdTransType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2080,7 +2080,7 @@ impl BikeProfile {
             },
             23 => {
                 Ok(BikeProfile::BikeSpdcadAntIdTransType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2088,7 +2088,7 @@ impl BikeProfile {
             },
             24 => {
                 Ok(BikeProfile::BikePowerAntIdTransType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2096,7 +2096,7 @@ impl BikeProfile {
             },
             37 => {
                 Ok(BikeProfile::OdometerRollover(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2104,7 +2104,7 @@ impl BikeProfile {
             },
             38 => {
                 Ok(BikeProfile::FrontGearNum(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2112,7 +2112,7 @@ impl BikeProfile {
             },
             39 => {
                 Ok(BikeProfile::FrontGear(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2120,7 +2120,7 @@ impl BikeProfile {
             },
             40 => {
                 Ok(BikeProfile::RearGearNum(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2128,7 +2128,7 @@ impl BikeProfile {
             },
             41 => {
                 Ok(BikeProfile::RearGear(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2136,7 +2136,7 @@ impl BikeProfile {
             },
             44 => {
                 Ok(BikeProfile::ShimanoDi2Enabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2182,7 +2182,7 @@ impl Connectivity {
         match field_def_num {
             0 => {
                 Ok(Connectivity::BluetoothEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2190,7 +2190,7 @@ impl Connectivity {
             },
             1 => {
                 Ok(Connectivity::BluetoothLeEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2198,7 +2198,7 @@ impl Connectivity {
             },
             2 => {
                 Ok(Connectivity::AntEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2206,7 +2206,7 @@ impl Connectivity {
             },
             3 => {
                 Ok(Connectivity::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2214,7 +2214,7 @@ impl Connectivity {
             },
             4 => {
                 Ok(Connectivity::LiveTrackingEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2222,7 +2222,7 @@ impl Connectivity {
             },
             5 => {
                 Ok(Connectivity::WeatherConditionsEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2230,7 +2230,7 @@ impl Connectivity {
             },
             6 => {
                 Ok(Connectivity::WeatherAlertsEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2238,7 +2238,7 @@ impl Connectivity {
             },
             7 => {
                 Ok(Connectivity::AutoActivityUploadEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2246,7 +2246,7 @@ impl Connectivity {
             },
             8 => {
                 Ok(Connectivity::CourseDownloadEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2254,7 +2254,7 @@ impl Connectivity {
             },
             9 => {
                 Ok(Connectivity::WorkoutDownloadEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2262,7 +2262,7 @@ impl Connectivity {
             },
             10 => {
                 Ok(Connectivity::GpsEphemerisDownloadEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2270,7 +2270,7 @@ impl Connectivity {
             },
             11 => {
                 Ok(Connectivity::IncidentDetectionEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2278,7 +2278,7 @@ impl Connectivity {
             },
             12 => {
                 Ok(Connectivity::GrouptrackEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2308,7 +2308,7 @@ impl WatchfaceSettings {
         match field_def_num {
             254 => {
                 Ok(WatchfaceSettings::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2316,7 +2316,7 @@ impl WatchfaceSettings {
             },
             0 => {
                 Ok(WatchfaceSettings::Mode(Field {
-                    value:  profile::types::WatchfaceMode::decode::<T>(buffer)?,
+                    raw_value:  profile::types::WatchfaceMode::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2324,7 +2324,7 @@ impl WatchfaceSettings {
             },
             1 => {
                 Ok(WatchfaceSettings::Layout(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2352,7 +2352,7 @@ impl OhrSettings {
         match field_def_num {
             0 => {
                 Ok(OhrSettings::Enabled(Field {
-                    value:  profile::types::Switch::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Switch::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2384,7 +2384,7 @@ impl ZonesTarget {
         match field_def_num {
             1 => {
                 Ok(ZonesTarget::MaxHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2392,7 +2392,7 @@ impl ZonesTarget {
             },
             2 => {
                 Ok(ZonesTarget::ThresholdHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2400,7 +2400,7 @@ impl ZonesTarget {
             },
             3 => {
                 Ok(ZonesTarget::FunctionalThresholdPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2408,7 +2408,7 @@ impl ZonesTarget {
             },
             5 => {
                 Ok(ZonesTarget::HrCalcType(Field {
-                    value:  profile::types::HrZoneCalc::decode::<T>(buffer)?,
+                    raw_value:  profile::types::HrZoneCalc::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2416,7 +2416,7 @@ impl ZonesTarget {
             },
             7 => {
                 Ok(ZonesTarget::PwrCalcType(Field {
-                    value:  profile::types::PwrZoneCalc::decode::<T>(buffer)?,
+                    raw_value:  profile::types::PwrZoneCalc::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2446,7 +2446,7 @@ impl Sport {
         match field_def_num {
             0 => {
                 Ok(Sport::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2454,7 +2454,7 @@ impl Sport {
             },
             1 => {
                 Ok(Sport::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2462,7 +2462,7 @@ impl Sport {
             },
             3 => {
                 Ok(Sport::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2492,7 +2492,7 @@ impl HrZone {
         match field_def_num {
             254 => {
                 Ok(HrZone::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2500,7 +2500,7 @@ impl HrZone {
             },
             1 => {
                 Ok(HrZone::HighBpm(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -2508,7 +2508,7 @@ impl HrZone {
             },
             2 => {
                 Ok(HrZone::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2538,7 +2538,7 @@ impl SpeedZone {
         match field_def_num {
             254 => {
                 Ok(SpeedZone::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2546,7 +2546,7 @@ impl SpeedZone {
             },
             0 => {
                 Ok(SpeedZone::HighValue(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -2554,7 +2554,7 @@ impl SpeedZone {
             },
             1 => {
                 Ok(SpeedZone::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2584,7 +2584,7 @@ impl CadenceZone {
         match field_def_num {
             254 => {
                 Ok(CadenceZone::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2592,7 +2592,7 @@ impl CadenceZone {
             },
             0 => {
                 Ok(CadenceZone::HighValue(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -2600,7 +2600,7 @@ impl CadenceZone {
             },
             1 => {
                 Ok(CadenceZone::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2630,7 +2630,7 @@ impl PowerZone {
         match field_def_num {
             254 => {
                 Ok(PowerZone::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2638,7 +2638,7 @@ impl PowerZone {
             },
             1 => {
                 Ok(PowerZone::HighValue(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -2646,7 +2646,7 @@ impl PowerZone {
             },
             2 => {
                 Ok(PowerZone::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2677,7 +2677,7 @@ impl MetZone {
         match field_def_num {
             254 => {
                 Ok(MetZone::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2685,7 +2685,7 @@ impl MetZone {
             },
             1 => {
                 Ok(MetZone::HighBpm(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2693,7 +2693,7 @@ impl MetZone {
             },
             2 => {
                 Ok(MetZone::Calories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("kcal / min"),
@@ -2701,7 +2701,7 @@ impl MetZone {
             },
             3 => {
                 Ok(MetZone::FatCalories(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("kcal / min"),
@@ -2758,7 +2758,7 @@ impl DiveSettings {
         match field_def_num {
             254 => {
                 Ok(DiveSettings::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2766,7 +2766,7 @@ impl DiveSettings {
             },
             0 => {
                 Ok(DiveSettings::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2774,7 +2774,7 @@ impl DiveSettings {
             },
             1 => {
                 Ok(DiveSettings::Model(Field {
-                    value:  profile::types::TissueModelType::decode::<T>(
+                    raw_value:  profile::types::TissueModelType::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -2784,7 +2784,7 @@ impl DiveSettings {
             },
             2 => {
                 Ok(DiveSettings::GfLow(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("percent"),
@@ -2792,7 +2792,7 @@ impl DiveSettings {
             },
             3 => {
                 Ok(DiveSettings::GfHigh(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("percent"),
@@ -2800,7 +2800,7 @@ impl DiveSettings {
             },
             4 => {
                 Ok(DiveSettings::WaterType(Field {
-                    value:  profile::types::WaterType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::WaterType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2808,7 +2808,7 @@ impl DiveSettings {
             },
             5 => {
                 Ok(DiveSettings::WaterDensity(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kg/m^3"),
@@ -2816,7 +2816,7 @@ impl DiveSettings {
             },
             6 => {
                 Ok(DiveSettings::Po2Warn(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -2824,7 +2824,7 @@ impl DiveSettings {
             },
             7 => {
                 Ok(DiveSettings::Po2Critical(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -2832,7 +2832,7 @@ impl DiveSettings {
             },
             8 => {
                 Ok(DiveSettings::Po2Deco(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -2840,7 +2840,7 @@ impl DiveSettings {
             },
             9 => {
                 Ok(DiveSettings::SafetyStopEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2848,7 +2848,7 @@ impl DiveSettings {
             },
             10 => {
                 Ok(DiveSettings::BottomDepth(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2856,7 +2856,7 @@ impl DiveSettings {
             },
             11 => {
                 Ok(DiveSettings::BottomTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2864,7 +2864,7 @@ impl DiveSettings {
             },
             12 => {
                 Ok(DiveSettings::ApneaCountdownEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2872,7 +2872,7 @@ impl DiveSettings {
             },
             13 => {
                 Ok(DiveSettings::ApneaCountdownTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2880,7 +2880,7 @@ impl DiveSettings {
             },
             14 => {
                 Ok(DiveSettings::BacklightMode(Field {
-                    value:  profile::types::DiveBacklightMode::decode::<T>(
+                    raw_value:  profile::types::DiveBacklightMode::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -2890,7 +2890,7 @@ impl DiveSettings {
             },
             15 => {
                 Ok(DiveSettings::BacklightBrightness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2898,7 +2898,7 @@ impl DiveSettings {
             },
             16 => {
                 Ok(DiveSettings::BacklightTimeout(Field {
-                    value:  profile::types::BacklightTimeout::decode::<T>(
+                    raw_value:  profile::types::BacklightTimeout::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -2908,7 +2908,7 @@ impl DiveSettings {
             },
             17 => {
                 Ok(DiveSettings::RepeatDiveInterval(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("s"),
@@ -2916,7 +2916,7 @@ impl DiveSettings {
             },
             18 => {
                 Ok(DiveSettings::SafetyStopTime(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("s"),
@@ -2924,7 +2924,7 @@ impl DiveSettings {
             },
             19 => {
                 Ok(DiveSettings::HeartRateSourceType(Field {
-                    value:  profile::types::SourceType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SourceType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2932,7 +2932,7 @@ impl DiveSettings {
             },
             20 => {
                 Ok(DiveSettings::HeartRateSource(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2970,7 +2970,7 @@ impl DiveAlarm {
         match field_def_num {
             254 => {
                 Ok(DiveAlarm::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -2978,7 +2978,7 @@ impl DiveAlarm {
             },
             0 => {
                 Ok(DiveAlarm::Depth(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -2986,7 +2986,7 @@ impl DiveAlarm {
             },
             1 => {
                 Ok(DiveAlarm::Time(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("s"),
@@ -2994,7 +2994,7 @@ impl DiveAlarm {
             },
             2 => {
                 Ok(DiveAlarm::Enabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3002,7 +3002,7 @@ impl DiveAlarm {
             },
             3 => {
                 Ok(DiveAlarm::AlarmType(Field {
-                    value:  profile::types::DiveAlarmType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DiveAlarmType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3010,7 +3010,7 @@ impl DiveAlarm {
             },
             4 => {
                 Ok(DiveAlarm::Sound(Field {
-                    value:  profile::types::Tone::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Tone::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3018,7 +3018,7 @@ impl DiveAlarm {
             },
             5 => {
                 Ok(DiveAlarm::DiveTypes(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3049,7 +3049,7 @@ impl DiveGas {
         match field_def_num {
             254 => {
                 Ok(DiveGas::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3057,7 +3057,7 @@ impl DiveGas {
             },
             0 => {
                 Ok(DiveGas::HeliumContent(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("percent"),
@@ -3065,7 +3065,7 @@ impl DiveGas {
             },
             1 => {
                 Ok(DiveGas::OxygenContent(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("percent"),
@@ -3073,7 +3073,7 @@ impl DiveGas {
             },
             2 => {
                 Ok(DiveGas::Status(Field {
-                    value:  profile::types::DiveGasStatus::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DiveGasStatus::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3113,7 +3113,7 @@ impl Goal {
         match field_def_num {
             254 => {
                 Ok(Goal::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3121,7 +3121,7 @@ impl Goal {
             },
             0 => {
                 Ok(Goal::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3129,7 +3129,7 @@ impl Goal {
             },
             1 => {
                 Ok(Goal::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3137,7 +3137,7 @@ impl Goal {
             },
             2 => {
                 Ok(Goal::StartDate(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3145,7 +3145,7 @@ impl Goal {
             },
             3 => {
                 Ok(Goal::EndDate(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3153,7 +3153,7 @@ impl Goal {
             },
             4 => {
                 Ok(Goal::Type(Field {
-                    value:  profile::types::Goal::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Goal::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3161,7 +3161,7 @@ impl Goal {
             },
             5 => {
                 Ok(Goal::Value(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3169,7 +3169,7 @@ impl Goal {
             },
             6 => {
                 Ok(Goal::Repeat(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3177,7 +3177,7 @@ impl Goal {
             },
             7 => {
                 Ok(Goal::TargetValue(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3185,7 +3185,7 @@ impl Goal {
             },
             8 => {
                 Ok(Goal::Recurrence(Field {
-                    value:  profile::types::GoalRecurrence::decode::<T>(
+                    raw_value:  profile::types::GoalRecurrence::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -3195,7 +3195,7 @@ impl Goal {
             },
             9 => {
                 Ok(Goal::RecurrenceValue(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3203,7 +3203,7 @@ impl Goal {
             },
             10 => {
                 Ok(Goal::Enabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3211,7 +3211,7 @@ impl Goal {
             },
             11 => {
                 Ok(Goal::Source(Field {
-                    value:  profile::types::GoalSource::decode::<T>(buffer)?,
+                    raw_value:  profile::types::GoalSource::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3252,7 +3252,7 @@ impl Activity {
         match field_def_num {
             253 => {
                 Ok(Activity::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3260,7 +3260,7 @@ impl Activity {
             },
             0 => {
                 Ok(Activity::TotalTimerTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -3268,7 +3268,7 @@ impl Activity {
             },
             1 => {
                 Ok(Activity::NumSessions(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3276,7 +3276,7 @@ impl Activity {
             },
             2 => {
                 Ok(Activity::Type(Field {
-                    value:  profile::types::Activity::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Activity::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3284,7 +3284,7 @@ impl Activity {
             },
             3 => {
                 Ok(Activity::Event(Field {
-                    value:  profile::types::Event::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Event::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3292,7 +3292,7 @@ impl Activity {
             },
             4 => {
                 Ok(Activity::EventType(Field {
-                    value:  profile::types::EventType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::EventType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3300,7 +3300,7 @@ impl Activity {
             },
             5 => {
                 Ok(Activity::LocalTimestamp(Field {
-                    value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3308,7 +3308,7 @@ impl Activity {
             },
             6 => {
                 Ok(Activity::EventGroup(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3454,25 +3454,25 @@ pub enum Session {
     #[doc = "Average left power phase angles. Indexes defined by \
              power_phase_type."]
     AvgLeftPowerPhase(Field<profile::base::Uint8>),
-    #[doc = "Average left power phase peak angles. Data value indexes defined \
+    #[doc = "Average left power phase peak angles. Data raw_value indexes defined \
              by power_phase_type."]
     AvgLeftPowerPhasePeak(Field<profile::base::Uint8>),
-    #[doc = "Average right power phase angles. Data value indexes defined by \
+    #[doc = "Average right power phase angles. Data raw_value indexes defined by \
              power_phase_type."]
     AvgRightPowerPhase(Field<profile::base::Uint8>),
-    #[doc = "Average right power phase peak angles data value indexes  \
+    #[doc = "Average right power phase peak angles data raw_value indexes  \
              defined by power_phase_type."]
     AvgRightPowerPhasePeak(Field<profile::base::Uint8>),
-    #[doc = "Average power by position. Data value indexes defined by \
+    #[doc = "Average power by position. Data raw_value indexes defined by \
              rider_position_type."]
     AvgPowerPosition(Field<profile::base::Uint16>),
-    #[doc = "Maximum power by position. Data value indexes defined by \
+    #[doc = "Maximum power by position. Data raw_value indexes defined by \
              rider_position_type."]
     MaxPowerPosition(Field<profile::base::Uint16>),
-    #[doc = "Average cadence by position. Data value indexes defined by \
+    #[doc = "Average cadence by position. Data raw_value indexes defined by \
              rider_position_type."]
     AvgCadencePosition(Field<profile::base::Uint8>),
-    #[doc = "Maximum cadence by position. Data value indexes defined by \
+    #[doc = "Maximum cadence by position. Data raw_value indexes defined by \
              rider_position_type."]
     MaxCadencePosition(Field<profile::base::Uint8>),
     #[doc = "total_distance / total_timer_time"]
@@ -3505,7 +3505,7 @@ impl Session {
         match field_def_num {
             254 => {
                 Ok(Session::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3513,7 +3513,7 @@ impl Session {
             },
             253 => {
                 Ok(Session::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -3521,7 +3521,7 @@ impl Session {
             },
             0 => {
                 Ok(Session::Event(Field {
-                    value:  profile::types::Event::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Event::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3529,7 +3529,7 @@ impl Session {
             },
             1 => {
                 Ok(Session::EventType(Field {
-                    value:  profile::types::EventType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::EventType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3537,7 +3537,7 @@ impl Session {
             },
             2 => {
                 Ok(Session::StartTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3545,7 +3545,7 @@ impl Session {
             },
             3 => {
                 Ok(Session::StartPositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -3553,7 +3553,7 @@ impl Session {
             },
             4 => {
                 Ok(Session::StartPositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -3561,7 +3561,7 @@ impl Session {
             },
             5 => {
                 Ok(Session::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3569,7 +3569,7 @@ impl Session {
             },
             6 => {
                 Ok(Session::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3577,7 +3577,7 @@ impl Session {
             },
             7 => {
                 Ok(Session::TotalElapsedTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -3585,7 +3585,7 @@ impl Session {
             },
             8 => {
                 Ok(Session::TotalTimerTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -3593,7 +3593,7 @@ impl Session {
             },
             9 => {
                 Ok(Session::TotalDistance(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -3601,7 +3601,7 @@ impl Session {
             },
             10 => {
                 Ok(Session::TotalCycles(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("cycles"),
@@ -3609,7 +3609,7 @@ impl Session {
             },
             11 => {
                 Ok(Session::TotalCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -3617,7 +3617,7 @@ impl Session {
             },
             13 => {
                 Ok(Session::TotalFatCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -3625,7 +3625,7 @@ impl Session {
             },
             14 => {
                 Ok(Session::AvgSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -3633,7 +3633,7 @@ impl Session {
             },
             15 => {
                 Ok(Session::MaxSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -3641,7 +3641,7 @@ impl Session {
             },
             16 => {
                 Ok(Session::AvgHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -3649,7 +3649,7 @@ impl Session {
             },
             17 => {
                 Ok(Session::MaxHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -3657,7 +3657,7 @@ impl Session {
             },
             18 => {
                 Ok(Session::AvgCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -3665,7 +3665,7 @@ impl Session {
             },
             19 => {
                 Ok(Session::MaxCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -3673,7 +3673,7 @@ impl Session {
             },
             20 => {
                 Ok(Session::AvgPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -3681,7 +3681,7 @@ impl Session {
             },
             21 => {
                 Ok(Session::MaxPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -3689,7 +3689,7 @@ impl Session {
             },
             22 => {
                 Ok(Session::TotalAscent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -3697,7 +3697,7 @@ impl Session {
             },
             23 => {
                 Ok(Session::TotalDescent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -3705,7 +3705,7 @@ impl Session {
             },
             24 => {
                 Ok(Session::TotalTrainingEffect(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  None,
@@ -3713,7 +3713,7 @@ impl Session {
             },
             25 => {
                 Ok(Session::FirstLapIndex(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3721,7 +3721,7 @@ impl Session {
             },
             26 => {
                 Ok(Session::NumLaps(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3729,7 +3729,7 @@ impl Session {
             },
             27 => {
                 Ok(Session::EventGroup(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -3737,7 +3737,7 @@ impl Session {
             },
             28 => {
                 Ok(Session::Trigger(Field {
-                    value:  profile::types::SessionTrigger::decode::<T>(
+                    raw_value:  profile::types::SessionTrigger::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -3747,7 +3747,7 @@ impl Session {
             },
             29 => {
                 Ok(Session::NecLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -3755,7 +3755,7 @@ impl Session {
             },
             30 => {
                 Ok(Session::NecLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -3763,7 +3763,7 @@ impl Session {
             },
             31 => {
                 Ok(Session::SwcLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -3771,7 +3771,7 @@ impl Session {
             },
             32 => {
                 Ok(Session::SwcLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -3779,7 +3779,7 @@ impl Session {
             },
             34 => {
                 Ok(Session::NormalizedPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -3787,7 +3787,7 @@ impl Session {
             },
             35 => {
                 Ok(Session::TrainingStressScore(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("tss"),
@@ -3795,7 +3795,7 @@ impl Session {
             },
             36 => {
                 Ok(Session::IntensityFactor(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("if"),
@@ -3803,7 +3803,7 @@ impl Session {
             },
             37 => {
                 Ok(Session::LeftRightBalance(Field {
-                    value:  profile::types::LeftRightBalance100::decode::<T>(
+                    raw_value:  profile::types::LeftRightBalance100::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -3813,7 +3813,7 @@ impl Session {
             },
             41 => {
                 Ok(Session::AvgStrokeCount(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("strokes/lap"),
@@ -3821,7 +3821,7 @@ impl Session {
             },
             42 => {
                 Ok(Session::AvgStrokeDistance(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -3829,7 +3829,7 @@ impl Session {
             },
             43 => {
                 Ok(Session::SwimStroke(Field {
-                    value:  profile::types::SwimStroke::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SwimStroke::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("swim_stroke"),
@@ -3837,7 +3837,7 @@ impl Session {
             },
             44 => {
                 Ok(Session::PoolLength(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -3845,7 +3845,7 @@ impl Session {
             },
             45 => {
                 Ok(Session::ThresholdPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -3853,7 +3853,7 @@ impl Session {
             },
             46 => {
                 Ok(Session::PoolLengthUnit(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -3863,7 +3863,7 @@ impl Session {
             },
             47 => {
                 Ok(Session::NumActiveLengths(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("lengths"),
@@ -3871,7 +3871,7 @@ impl Session {
             },
             48 => {
                 Ok(Session::TotalWork(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("J"),
@@ -3879,7 +3879,7 @@ impl Session {
             },
             49 => {
                 Ok(Session::AvgAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -3887,7 +3887,7 @@ impl Session {
             },
             50 => {
                 Ok(Session::MaxAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -3895,7 +3895,7 @@ impl Session {
             },
             51 => {
                 Ok(Session::GpsAccuracy(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -3903,7 +3903,7 @@ impl Session {
             },
             52 => {
                 Ok(Session::AvgGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -3911,7 +3911,7 @@ impl Session {
             },
             53 => {
                 Ok(Session::AvgPosGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -3919,7 +3919,7 @@ impl Session {
             },
             54 => {
                 Ok(Session::AvgNegGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -3927,7 +3927,7 @@ impl Session {
             },
             55 => {
                 Ok(Session::MaxPosGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -3935,7 +3935,7 @@ impl Session {
             },
             56 => {
                 Ok(Session::MaxNegGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -3943,7 +3943,7 @@ impl Session {
             },
             57 => {
                 Ok(Session::AvgTemperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -3951,7 +3951,7 @@ impl Session {
             },
             58 => {
                 Ok(Session::MaxTemperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -3959,7 +3959,7 @@ impl Session {
             },
             59 => {
                 Ok(Session::TotalMovingTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -3967,7 +3967,7 @@ impl Session {
             },
             60 => {
                 Ok(Session::AvgPosVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -3975,7 +3975,7 @@ impl Session {
             },
             61 => {
                 Ok(Session::AvgNegVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -3983,7 +3983,7 @@ impl Session {
             },
             62 => {
                 Ok(Session::MaxPosVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -3991,7 +3991,7 @@ impl Session {
             },
             63 => {
                 Ok(Session::MaxNegVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -3999,7 +3999,7 @@ impl Session {
             },
             64 => {
                 Ok(Session::MinHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -4007,7 +4007,7 @@ impl Session {
             },
             65 => {
                 Ok(Session::TimeInHrZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -4015,7 +4015,7 @@ impl Session {
             },
             66 => {
                 Ok(Session::TimeInSpeedZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -4023,7 +4023,7 @@ impl Session {
             },
             67 => {
                 Ok(Session::TimeInCadenceZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -4031,7 +4031,7 @@ impl Session {
             },
             68 => {
                 Ok(Session::TimeInPowerZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -4039,7 +4039,7 @@ impl Session {
             },
             69 => {
                 Ok(Session::AvgLapTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -4047,7 +4047,7 @@ impl Session {
             },
             70 => {
                 Ok(Session::BestLapIndex(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4055,7 +4055,7 @@ impl Session {
             },
             71 => {
                 Ok(Session::MinAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -4063,7 +4063,7 @@ impl Session {
             },
             82 => {
                 Ok(Session::PlayerScore(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4071,7 +4071,7 @@ impl Session {
             },
             83 => {
                 Ok(Session::OpponentScore(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4079,7 +4079,7 @@ impl Session {
             },
             84 => {
                 Ok(Session::OpponentName(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4087,7 +4087,7 @@ impl Session {
             },
             85 => {
                 Ok(Session::StrokeCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -4095,7 +4095,7 @@ impl Session {
             },
             86 => {
                 Ok(Session::ZoneCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -4103,7 +4103,7 @@ impl Session {
             },
             87 => {
                 Ok(Session::MaxBallSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -4111,7 +4111,7 @@ impl Session {
             },
             88 => {
                 Ok(Session::AvgBallSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -4119,7 +4119,7 @@ impl Session {
             },
             89 => {
                 Ok(Session::AvgVerticalOscillation(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("mm"),
@@ -4127,7 +4127,7 @@ impl Session {
             },
             90 => {
                 Ok(Session::AvgStanceTimePercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4135,7 +4135,7 @@ impl Session {
             },
             91 => {
                 Ok(Session::AvgStanceTime(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("ms"),
@@ -4143,7 +4143,7 @@ impl Session {
             },
             92 => {
                 Ok(Session::AvgFractionalCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("rpm"),
@@ -4151,7 +4151,7 @@ impl Session {
             },
             93 => {
                 Ok(Session::MaxFractionalCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("rpm"),
@@ -4159,7 +4159,7 @@ impl Session {
             },
             94 => {
                 Ok(Session::TotalFractionalCycles(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("cycles"),
@@ -4167,7 +4167,7 @@ impl Session {
             },
             95 => {
                 Ok(Session::AvgTotalHemoglobinConc(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -4175,7 +4175,7 @@ impl Session {
             },
             96 => {
                 Ok(Session::MinTotalHemoglobinConc(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -4183,7 +4183,7 @@ impl Session {
             },
             97 => {
                 Ok(Session::MaxTotalHemoglobinConc(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -4191,7 +4191,7 @@ impl Session {
             },
             98 => {
                 Ok(Session::AvgSaturatedHemoglobinPercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -4199,7 +4199,7 @@ impl Session {
             },
             99 => {
                 Ok(Session::MinSaturatedHemoglobinPercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -4207,7 +4207,7 @@ impl Session {
             },
             100 => {
                 Ok(Session::MaxSaturatedHemoglobinPercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -4215,7 +4215,7 @@ impl Session {
             },
             101 => {
                 Ok(Session::AvgLeftTorqueEffectiveness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4223,7 +4223,7 @@ impl Session {
             },
             102 => {
                 Ok(Session::AvgRightTorqueEffectiveness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4231,7 +4231,7 @@ impl Session {
             },
             103 => {
                 Ok(Session::AvgLeftPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4239,7 +4239,7 @@ impl Session {
             },
             104 => {
                 Ok(Session::AvgRightPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4247,7 +4247,7 @@ impl Session {
             },
             105 => {
                 Ok(Session::AvgCombinedPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4255,7 +4255,7 @@ impl Session {
             },
             111 => {
                 Ok(Session::SportIndex(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4263,7 +4263,7 @@ impl Session {
             },
             112 => {
                 Ok(Session::TimeStanding(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -4271,7 +4271,7 @@ impl Session {
             },
             113 => {
                 Ok(Session::StandCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4279,7 +4279,7 @@ impl Session {
             },
             114 => {
                 Ok(Session::AvgLeftPco(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mm"),
@@ -4287,7 +4287,7 @@ impl Session {
             },
             115 => {
                 Ok(Session::AvgRightPco(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mm"),
@@ -4295,7 +4295,7 @@ impl Session {
             },
             116 => {
                 Ok(Session::AvgLeftPowerPhase(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -4303,7 +4303,7 @@ impl Session {
             },
             117 => {
                 Ok(Session::AvgLeftPowerPhasePeak(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -4311,7 +4311,7 @@ impl Session {
             },
             118 => {
                 Ok(Session::AvgRightPowerPhase(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -4319,7 +4319,7 @@ impl Session {
             },
             119 => {
                 Ok(Session::AvgRightPowerPhasePeak(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -4327,7 +4327,7 @@ impl Session {
             },
             120 => {
                 Ok(Session::AvgPowerPosition(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -4335,7 +4335,7 @@ impl Session {
             },
             121 => {
                 Ok(Session::MaxPowerPosition(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -4343,7 +4343,7 @@ impl Session {
             },
             122 => {
                 Ok(Session::AvgCadencePosition(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -4351,7 +4351,7 @@ impl Session {
             },
             123 => {
                 Ok(Session::MaxCadencePosition(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -4359,7 +4359,7 @@ impl Session {
             },
             124 => {
                 Ok(Session::EnhancedAvgSpeed(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -4367,7 +4367,7 @@ impl Session {
             },
             125 => {
                 Ok(Session::EnhancedMaxSpeed(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -4375,7 +4375,7 @@ impl Session {
             },
             126 => {
                 Ok(Session::EnhancedAvgAltitude(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -4383,7 +4383,7 @@ impl Session {
             },
             127 => {
                 Ok(Session::EnhancedMinAltitude(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -4391,7 +4391,7 @@ impl Session {
             },
             128 => {
                 Ok(Session::EnhancedMaxAltitude(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -4399,7 +4399,7 @@ impl Session {
             },
             129 => {
                 Ok(Session::AvgLevMotorPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -4407,7 +4407,7 @@ impl Session {
             },
             130 => {
                 Ok(Session::MaxLevMotorPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -4415,7 +4415,7 @@ impl Session {
             },
             131 => {
                 Ok(Session::LevBatteryConsumption(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4423,7 +4423,7 @@ impl Session {
             },
             132 => {
                 Ok(Session::AvgVerticalRatio(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4431,7 +4431,7 @@ impl Session {
             },
             133 => {
                 Ok(Session::AvgStanceTimeBalance(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -4439,7 +4439,7 @@ impl Session {
             },
             134 => {
                 Ok(Session::AvgStepLength(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("mm"),
@@ -4447,7 +4447,7 @@ impl Session {
             },
             137 => {
                 Ok(Session::TotalAnaerobicTrainingEffect(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  None,
@@ -4455,7 +4455,7 @@ impl Session {
             },
             139 => {
                 Ok(Session::AvgVam(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -4583,28 +4583,28 @@ pub enum Lap {
     AvgLeftPco(Field<profile::base::Sint8>),
     #[doc = "Average right platform center offset"]
     AvgRightPco(Field<profile::base::Sint8>),
-    #[doc = "Average left power phase angles. Data value indexes defined by \
+    #[doc = "Average left power phase angles. Data raw_value indexes defined by \
              power_phase_type."]
     AvgLeftPowerPhase(Field<profile::base::Uint8>),
-    #[doc = "Average left power phase peak angles. Data value indexes  \
+    #[doc = "Average left power phase peak angles. Data raw_value indexes  \
              defined by power_phase_type."]
     AvgLeftPowerPhasePeak(Field<profile::base::Uint8>),
-    #[doc = "Average right power phase angles. Data value indexes defined by \
+    #[doc = "Average right power phase angles. Data raw_value indexes defined by \
              power_phase_type."]
     AvgRightPowerPhase(Field<profile::base::Uint8>),
-    #[doc = "Average right power phase peak angles. Data value indexes  \
+    #[doc = "Average right power phase peak angles. Data raw_value indexes  \
              defined by power_phase_type."]
     AvgRightPowerPhasePeak(Field<profile::base::Uint8>),
-    #[doc = "Average power by position. Data value indexes defined by \
+    #[doc = "Average power by position. Data raw_value indexes defined by \
              rider_position_type."]
     AvgPowerPosition(Field<profile::base::Uint16>),
-    #[doc = "Maximum power by position. Data value indexes defined by \
+    #[doc = "Maximum power by position. Data raw_value indexes defined by \
              rider_position_type."]
     MaxPowerPosition(Field<profile::base::Uint16>),
-    #[doc = "Average cadence by position. Data value indexes defined by \
+    #[doc = "Average cadence by position. Data raw_value indexes defined by \
              rider_position_type."]
     AvgCadencePosition(Field<profile::base::Uint8>),
-    #[doc = "Maximum cadence by position. Data value indexes defined by \
+    #[doc = "Maximum cadence by position. Data raw_value indexes defined by \
              rider_position_type."]
     MaxCadencePosition(Field<profile::base::Uint8>),
     EnhancedAvgSpeed(Field<profile::base::Uint32>),
@@ -4635,7 +4635,7 @@ impl Lap {
         match field_def_num {
             254 => {
                 Ok(Lap::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4643,7 +4643,7 @@ impl Lap {
             },
             253 => {
                 Ok(Lap::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -4651,7 +4651,7 @@ impl Lap {
             },
             0 => {
                 Ok(Lap::Event(Field {
-                    value:  profile::types::Event::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Event::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4659,7 +4659,7 @@ impl Lap {
             },
             1 => {
                 Ok(Lap::EventType(Field {
-                    value:  profile::types::EventType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::EventType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4667,7 +4667,7 @@ impl Lap {
             },
             2 => {
                 Ok(Lap::StartTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4675,7 +4675,7 @@ impl Lap {
             },
             3 => {
                 Ok(Lap::StartPositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -4683,7 +4683,7 @@ impl Lap {
             },
             4 => {
                 Ok(Lap::StartPositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -4691,7 +4691,7 @@ impl Lap {
             },
             5 => {
                 Ok(Lap::EndPositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -4699,7 +4699,7 @@ impl Lap {
             },
             6 => {
                 Ok(Lap::EndPositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -4707,7 +4707,7 @@ impl Lap {
             },
             7 => {
                 Ok(Lap::TotalElapsedTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -4715,7 +4715,7 @@ impl Lap {
             },
             8 => {
                 Ok(Lap::TotalTimerTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -4723,7 +4723,7 @@ impl Lap {
             },
             9 => {
                 Ok(Lap::TotalDistance(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -4731,7 +4731,7 @@ impl Lap {
             },
             10 => {
                 Ok(Lap::TotalCycles(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("cycles"),
@@ -4739,7 +4739,7 @@ impl Lap {
             },
             11 => {
                 Ok(Lap::TotalCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -4747,7 +4747,7 @@ impl Lap {
             },
             12 => {
                 Ok(Lap::TotalFatCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -4755,7 +4755,7 @@ impl Lap {
             },
             13 => {
                 Ok(Lap::AvgSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -4763,7 +4763,7 @@ impl Lap {
             },
             14 => {
                 Ok(Lap::MaxSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -4771,7 +4771,7 @@ impl Lap {
             },
             15 => {
                 Ok(Lap::AvgHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -4779,7 +4779,7 @@ impl Lap {
             },
             16 => {
                 Ok(Lap::MaxHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -4787,7 +4787,7 @@ impl Lap {
             },
             17 => {
                 Ok(Lap::AvgCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -4795,7 +4795,7 @@ impl Lap {
             },
             18 => {
                 Ok(Lap::MaxCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -4803,7 +4803,7 @@ impl Lap {
             },
             19 => {
                 Ok(Lap::AvgPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -4811,7 +4811,7 @@ impl Lap {
             },
             20 => {
                 Ok(Lap::MaxPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -4819,7 +4819,7 @@ impl Lap {
             },
             21 => {
                 Ok(Lap::TotalAscent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -4827,7 +4827,7 @@ impl Lap {
             },
             22 => {
                 Ok(Lap::TotalDescent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -4835,7 +4835,7 @@ impl Lap {
             },
             23 => {
                 Ok(Lap::Intensity(Field {
-                    value:  profile::types::Intensity::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Intensity::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4843,7 +4843,7 @@ impl Lap {
             },
             24 => {
                 Ok(Lap::LapTrigger(Field {
-                    value:  profile::types::LapTrigger::decode::<T>(buffer)?,
+                    raw_value:  profile::types::LapTrigger::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4851,7 +4851,7 @@ impl Lap {
             },
             25 => {
                 Ok(Lap::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4859,7 +4859,7 @@ impl Lap {
             },
             26 => {
                 Ok(Lap::EventGroup(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4867,7 +4867,7 @@ impl Lap {
             },
             32 => {
                 Ok(Lap::NumLengths(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("lengths"),
@@ -4875,7 +4875,7 @@ impl Lap {
             },
             33 => {
                 Ok(Lap::NormalizedPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -4883,7 +4883,7 @@ impl Lap {
             },
             34 => {
                 Ok(Lap::LeftRightBalance(Field {
-                    value:  profile::types::LeftRightBalance100::decode::<T>(
+                    raw_value:  profile::types::LeftRightBalance100::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -4893,7 +4893,7 @@ impl Lap {
             },
             35 => {
                 Ok(Lap::FirstLengthIndex(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4901,7 +4901,7 @@ impl Lap {
             },
             37 => {
                 Ok(Lap::AvgStrokeDistance(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -4909,7 +4909,7 @@ impl Lap {
             },
             38 => {
                 Ok(Lap::SwimStroke(Field {
-                    value:  profile::types::SwimStroke::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SwimStroke::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4917,7 +4917,7 @@ impl Lap {
             },
             39 => {
                 Ok(Lap::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -4925,7 +4925,7 @@ impl Lap {
             },
             40 => {
                 Ok(Lap::NumActiveLengths(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("lengths"),
@@ -4933,7 +4933,7 @@ impl Lap {
             },
             41 => {
                 Ok(Lap::TotalWork(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("J"),
@@ -4941,7 +4941,7 @@ impl Lap {
             },
             42 => {
                 Ok(Lap::AvgAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -4949,7 +4949,7 @@ impl Lap {
             },
             43 => {
                 Ok(Lap::MaxAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -4957,7 +4957,7 @@ impl Lap {
             },
             44 => {
                 Ok(Lap::GpsAccuracy(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -4965,7 +4965,7 @@ impl Lap {
             },
             45 => {
                 Ok(Lap::AvgGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -4973,7 +4973,7 @@ impl Lap {
             },
             46 => {
                 Ok(Lap::AvgPosGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -4981,7 +4981,7 @@ impl Lap {
             },
             47 => {
                 Ok(Lap::AvgNegGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -4989,7 +4989,7 @@ impl Lap {
             },
             48 => {
                 Ok(Lap::MaxPosGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -4997,7 +4997,7 @@ impl Lap {
             },
             49 => {
                 Ok(Lap::MaxNegGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -5005,7 +5005,7 @@ impl Lap {
             },
             50 => {
                 Ok(Lap::AvgTemperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -5013,7 +5013,7 @@ impl Lap {
             },
             51 => {
                 Ok(Lap::MaxTemperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -5021,7 +5021,7 @@ impl Lap {
             },
             52 => {
                 Ok(Lap::TotalMovingTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5029,7 +5029,7 @@ impl Lap {
             },
             53 => {
                 Ok(Lap::AvgPosVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5037,7 +5037,7 @@ impl Lap {
             },
             54 => {
                 Ok(Lap::AvgNegVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5045,7 +5045,7 @@ impl Lap {
             },
             55 => {
                 Ok(Lap::MaxPosVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5053,7 +5053,7 @@ impl Lap {
             },
             56 => {
                 Ok(Lap::MaxNegVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5061,7 +5061,7 @@ impl Lap {
             },
             57 => {
                 Ok(Lap::TimeInHrZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5069,7 +5069,7 @@ impl Lap {
             },
             58 => {
                 Ok(Lap::TimeInSpeedZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5077,7 +5077,7 @@ impl Lap {
             },
             59 => {
                 Ok(Lap::TimeInCadenceZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5085,7 +5085,7 @@ impl Lap {
             },
             60 => {
                 Ok(Lap::TimeInPowerZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5093,7 +5093,7 @@ impl Lap {
             },
             61 => {
                 Ok(Lap::RepetitionNum(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5101,7 +5101,7 @@ impl Lap {
             },
             62 => {
                 Ok(Lap::MinAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -5109,7 +5109,7 @@ impl Lap {
             },
             63 => {
                 Ok(Lap::MinHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -5117,7 +5117,7 @@ impl Lap {
             },
             71 => {
                 Ok(Lap::WktStepIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5125,7 +5125,7 @@ impl Lap {
             },
             74 => {
                 Ok(Lap::OpponentScore(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5133,7 +5133,7 @@ impl Lap {
             },
             75 => {
                 Ok(Lap::StrokeCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -5141,7 +5141,7 @@ impl Lap {
             },
             76 => {
                 Ok(Lap::ZoneCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -5149,7 +5149,7 @@ impl Lap {
             },
             77 => {
                 Ok(Lap::AvgVerticalOscillation(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("mm"),
@@ -5157,7 +5157,7 @@ impl Lap {
             },
             78 => {
                 Ok(Lap::AvgStanceTimePercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5165,7 +5165,7 @@ impl Lap {
             },
             79 => {
                 Ok(Lap::AvgStanceTime(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("ms"),
@@ -5173,7 +5173,7 @@ impl Lap {
             },
             80 => {
                 Ok(Lap::AvgFractionalCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("rpm"),
@@ -5181,7 +5181,7 @@ impl Lap {
             },
             81 => {
                 Ok(Lap::MaxFractionalCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("rpm"),
@@ -5189,7 +5189,7 @@ impl Lap {
             },
             82 => {
                 Ok(Lap::TotalFractionalCycles(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("cycles"),
@@ -5197,7 +5197,7 @@ impl Lap {
             },
             83 => {
                 Ok(Lap::PlayerScore(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5205,7 +5205,7 @@ impl Lap {
             },
             84 => {
                 Ok(Lap::AvgTotalHemoglobinConc(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -5213,7 +5213,7 @@ impl Lap {
             },
             85 => {
                 Ok(Lap::MinTotalHemoglobinConc(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -5221,7 +5221,7 @@ impl Lap {
             },
             86 => {
                 Ok(Lap::MaxTotalHemoglobinConc(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -5229,7 +5229,7 @@ impl Lap {
             },
             87 => {
                 Ok(Lap::AvgSaturatedHemoglobinPercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -5237,7 +5237,7 @@ impl Lap {
             },
             88 => {
                 Ok(Lap::MinSaturatedHemoglobinPercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -5245,7 +5245,7 @@ impl Lap {
             },
             89 => {
                 Ok(Lap::MaxSaturatedHemoglobinPercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -5253,7 +5253,7 @@ impl Lap {
             },
             91 => {
                 Ok(Lap::AvgLeftTorqueEffectiveness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5261,7 +5261,7 @@ impl Lap {
             },
             92 => {
                 Ok(Lap::AvgRightTorqueEffectiveness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5269,7 +5269,7 @@ impl Lap {
             },
             93 => {
                 Ok(Lap::AvgLeftPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5277,7 +5277,7 @@ impl Lap {
             },
             94 => {
                 Ok(Lap::AvgRightPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5285,7 +5285,7 @@ impl Lap {
             },
             95 => {
                 Ok(Lap::AvgCombinedPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5293,7 +5293,7 @@ impl Lap {
             },
             98 => {
                 Ok(Lap::TimeStanding(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5301,7 +5301,7 @@ impl Lap {
             },
             99 => {
                 Ok(Lap::StandCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5309,7 +5309,7 @@ impl Lap {
             },
             100 => {
                 Ok(Lap::AvgLeftPco(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mm"),
@@ -5317,7 +5317,7 @@ impl Lap {
             },
             101 => {
                 Ok(Lap::AvgRightPco(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mm"),
@@ -5325,7 +5325,7 @@ impl Lap {
             },
             102 => {
                 Ok(Lap::AvgLeftPowerPhase(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -5333,7 +5333,7 @@ impl Lap {
             },
             103 => {
                 Ok(Lap::AvgLeftPowerPhasePeak(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -5341,7 +5341,7 @@ impl Lap {
             },
             104 => {
                 Ok(Lap::AvgRightPowerPhase(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -5349,7 +5349,7 @@ impl Lap {
             },
             105 => {
                 Ok(Lap::AvgRightPowerPhasePeak(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -5357,7 +5357,7 @@ impl Lap {
             },
             106 => {
                 Ok(Lap::AvgPowerPosition(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -5365,7 +5365,7 @@ impl Lap {
             },
             107 => {
                 Ok(Lap::MaxPowerPosition(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -5373,7 +5373,7 @@ impl Lap {
             },
             108 => {
                 Ok(Lap::AvgCadencePosition(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -5381,7 +5381,7 @@ impl Lap {
             },
             109 => {
                 Ok(Lap::MaxCadencePosition(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -5389,7 +5389,7 @@ impl Lap {
             },
             110 => {
                 Ok(Lap::EnhancedAvgSpeed(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5397,7 +5397,7 @@ impl Lap {
             },
             111 => {
                 Ok(Lap::EnhancedMaxSpeed(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5405,7 +5405,7 @@ impl Lap {
             },
             112 => {
                 Ok(Lap::EnhancedAvgAltitude(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -5413,7 +5413,7 @@ impl Lap {
             },
             113 => {
                 Ok(Lap::EnhancedMinAltitude(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -5421,7 +5421,7 @@ impl Lap {
             },
             114 => {
                 Ok(Lap::EnhancedMaxAltitude(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -5429,7 +5429,7 @@ impl Lap {
             },
             115 => {
                 Ok(Lap::AvgLevMotorPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -5437,7 +5437,7 @@ impl Lap {
             },
             116 => {
                 Ok(Lap::MaxLevMotorPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -5445,7 +5445,7 @@ impl Lap {
             },
             117 => {
                 Ok(Lap::LevBatteryConsumption(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5453,7 +5453,7 @@ impl Lap {
             },
             118 => {
                 Ok(Lap::AvgVerticalRatio(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5461,7 +5461,7 @@ impl Lap {
             },
             119 => {
                 Ok(Lap::AvgStanceTimeBalance(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5469,7 +5469,7 @@ impl Lap {
             },
             120 => {
                 Ok(Lap::AvgStepLength(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("mm"),
@@ -5477,7 +5477,7 @@ impl Lap {
             },
             121 => {
                 Ok(Lap::AvgVam(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5527,7 +5527,7 @@ impl Length {
         match field_def_num {
             254 => {
                 Ok(Length::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5535,7 +5535,7 @@ impl Length {
             },
             253 => {
                 Ok(Length::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5543,7 +5543,7 @@ impl Length {
             },
             0 => {
                 Ok(Length::Event(Field {
-                    value:  profile::types::Event::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Event::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5551,7 +5551,7 @@ impl Length {
             },
             1 => {
                 Ok(Length::EventType(Field {
-                    value:  profile::types::EventType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::EventType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5559,7 +5559,7 @@ impl Length {
             },
             2 => {
                 Ok(Length::StartTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5567,7 +5567,7 @@ impl Length {
             },
             3 => {
                 Ok(Length::TotalElapsedTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5575,7 +5575,7 @@ impl Length {
             },
             4 => {
                 Ok(Length::TotalTimerTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5583,7 +5583,7 @@ impl Length {
             },
             5 => {
                 Ok(Length::TotalStrokes(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("strokes"),
@@ -5591,7 +5591,7 @@ impl Length {
             },
             6 => {
                 Ok(Length::AvgSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5599,7 +5599,7 @@ impl Length {
             },
             7 => {
                 Ok(Length::SwimStroke(Field {
-                    value:  profile::types::SwimStroke::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SwimStroke::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("swim_stroke"),
@@ -5607,7 +5607,7 @@ impl Length {
             },
             9 => {
                 Ok(Length::AvgSwimmingCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("strokes/min"),
@@ -5615,7 +5615,7 @@ impl Length {
             },
             10 => {
                 Ok(Length::EventGroup(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5623,7 +5623,7 @@ impl Length {
             },
             11 => {
                 Ok(Length::TotalCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -5631,7 +5631,7 @@ impl Length {
             },
             12 => {
                 Ok(Length::LengthType(Field {
-                    value:  profile::types::LengthType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::LengthType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5639,7 +5639,7 @@ impl Length {
             },
             18 => {
                 Ok(Length::PlayerScore(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5647,7 +5647,7 @@ impl Length {
             },
             19 => {
                 Ok(Length::OpponentScore(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5655,7 +5655,7 @@ impl Length {
             },
             20 => {
                 Ok(Length::StrokeCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -5663,7 +5663,7 @@ impl Length {
             },
             21 => {
                 Ok(Length::ZoneCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -5740,16 +5740,16 @@ pub enum Record {
     LeftPco(Field<profile::base::Sint8>),
     #[doc = "Right platform center offset"]
     RightPco(Field<profile::base::Sint8>),
-    #[doc = "Left power phase angles. Data value indexes defined by \
+    #[doc = "Left power phase angles. Data raw_value indexes defined by \
              power_phase_type."]
     LeftPowerPhase(Field<profile::base::Uint8>),
-    #[doc = "Left power phase peak angles. Data value indexes defined by \
+    #[doc = "Left power phase peak angles. Data raw_value indexes defined by \
              power_phase_type."]
     LeftPowerPhasePeak(Field<profile::base::Uint8>),
-    #[doc = "Right power phase angles. Data value indexes defined by \
+    #[doc = "Right power phase angles. Data raw_value indexes defined by \
              power_phase_type."]
     RightPowerPhase(Field<profile::base::Uint8>),
-    #[doc = "Right power phase peak angles. Data value indexes defined by \
+    #[doc = "Right power phase peak angles. Data raw_value indexes defined by \
              power_phase_type."]
     RightPowerPhasePeak(Field<profile::base::Uint8>),
     EnhancedSpeed(Field<profile::base::Uint32>),
@@ -5785,7 +5785,7 @@ impl Record {
         match field_def_num {
             253 => {
                 Ok(Record::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -5793,7 +5793,7 @@ impl Record {
             },
             0 => {
                 Ok(Record::PositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -5801,7 +5801,7 @@ impl Record {
             },
             1 => {
                 Ok(Record::PositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -5809,7 +5809,7 @@ impl Record {
             },
             2 => {
                 Ok(Record::Altitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -5817,7 +5817,7 @@ impl Record {
             },
             3 => {
                 Ok(Record::HeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -5825,7 +5825,7 @@ impl Record {
             },
             4 => {
                 Ok(Record::Cadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -5833,7 +5833,7 @@ impl Record {
             },
             5 => {
                 Ok(Record::Distance(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -5841,7 +5841,7 @@ impl Record {
             },
             6 => {
                 Ok(Record::Speed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5849,7 +5849,7 @@ impl Record {
             },
             7 => {
                 Ok(Record::Power(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -5857,7 +5857,7 @@ impl Record {
             },
             8 => {
                 Ok(Record::CompressedSpeedDistance(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m/s,\r\nm"),
@@ -5865,7 +5865,7 @@ impl Record {
             },
             9 => {
                 Ok(Record::Grade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -5873,7 +5873,7 @@ impl Record {
             },
             10 => {
                 Ok(Record::Resistance(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -5881,7 +5881,7 @@ impl Record {
             },
             11 => {
                 Ok(Record::TimeFromCourse(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -5889,7 +5889,7 @@ impl Record {
             },
             12 => {
                 Ok(Record::CycleLength(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -5897,7 +5897,7 @@ impl Record {
             },
             13 => {
                 Ok(Record::Temperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -5905,7 +5905,7 @@ impl Record {
             },
             17 => {
                 Ok(Record::Speed1S(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(16.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5913,7 +5913,7 @@ impl Record {
             },
             18 => {
                 Ok(Record::Cycles(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("cycles"),
@@ -5921,7 +5921,7 @@ impl Record {
             },
             19 => {
                 Ok(Record::TotalCycles(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("cycles"),
@@ -5929,7 +5929,7 @@ impl Record {
             },
             28 => {
                 Ok(Record::CompressedAccumulatedPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -5937,7 +5937,7 @@ impl Record {
             },
             29 => {
                 Ok(Record::AccumulatedPower(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -5945,7 +5945,7 @@ impl Record {
             },
             30 => {
                 Ok(Record::LeftRightBalance(Field {
-                    value:  profile::types::LeftRightBalance::decode::<T>(
+                    raw_value:  profile::types::LeftRightBalance::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -5955,7 +5955,7 @@ impl Record {
             },
             31 => {
                 Ok(Record::GpsAccuracy(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -5963,7 +5963,7 @@ impl Record {
             },
             32 => {
                 Ok(Record::VerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -5971,7 +5971,7 @@ impl Record {
             },
             33 => {
                 Ok(Record::Calories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -5979,7 +5979,7 @@ impl Record {
             },
             39 => {
                 Ok(Record::VerticalOscillation(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("mm"),
@@ -5987,7 +5987,7 @@ impl Record {
             },
             40 => {
                 Ok(Record::StanceTimePercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -5995,7 +5995,7 @@ impl Record {
             },
             41 => {
                 Ok(Record::StanceTime(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("ms"),
@@ -6003,7 +6003,7 @@ impl Record {
             },
             42 => {
                 Ok(Record::ActivityType(Field {
-                    value:  profile::types::ActivityType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::ActivityType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6011,7 +6011,7 @@ impl Record {
             },
             43 => {
                 Ok(Record::LeftTorqueEffectiveness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6019,7 +6019,7 @@ impl Record {
             },
             44 => {
                 Ok(Record::RightTorqueEffectiveness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6027,7 +6027,7 @@ impl Record {
             },
             45 => {
                 Ok(Record::LeftPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6035,7 +6035,7 @@ impl Record {
             },
             46 => {
                 Ok(Record::RightPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6043,7 +6043,7 @@ impl Record {
             },
             47 => {
                 Ok(Record::CombinedPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6051,7 +6051,7 @@ impl Record {
             },
             48 => {
                 Ok(Record::Time128(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("s"),
@@ -6059,7 +6059,7 @@ impl Record {
             },
             49 => {
                 Ok(Record::StrokeType(Field {
-                    value:  profile::types::StrokeType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::StrokeType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6067,7 +6067,7 @@ impl Record {
             },
             50 => {
                 Ok(Record::Zone(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6075,7 +6075,7 @@ impl Record {
             },
             51 => {
                 Ok(Record::BallSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -6083,7 +6083,7 @@ impl Record {
             },
             52 => {
                 Ok(Record::Cadence256(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(256.0),
                     offset: None,
                     units:  Some("rpm"),
@@ -6091,7 +6091,7 @@ impl Record {
             },
             53 => {
                 Ok(Record::FractionalCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("rpm"),
@@ -6099,7 +6099,7 @@ impl Record {
             },
             54 => {
                 Ok(Record::TotalHemoglobinConc(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -6107,7 +6107,7 @@ impl Record {
             },
             55 => {
                 Ok(Record::TotalHemoglobinConcMin(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -6115,7 +6115,7 @@ impl Record {
             },
             56 => {
                 Ok(Record::TotalHemoglobinConcMax(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("g/dL"),
@@ -6123,7 +6123,7 @@ impl Record {
             },
             57 => {
                 Ok(Record::SaturatedHemoglobinPercent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -6131,7 +6131,7 @@ impl Record {
             },
             58 => {
                 Ok(Record::SaturatedHemoglobinPercentMin(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -6139,7 +6139,7 @@ impl Record {
             },
             59 => {
                 Ok(Record::SaturatedHemoglobinPercentMax(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("%"),
@@ -6147,7 +6147,7 @@ impl Record {
             },
             62 => {
                 Ok(Record::DeviceIndex(Field {
-                    value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6155,7 +6155,7 @@ impl Record {
             },
             67 => {
                 Ok(Record::LeftPco(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mm"),
@@ -6163,7 +6163,7 @@ impl Record {
             },
             68 => {
                 Ok(Record::RightPco(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mm"),
@@ -6171,7 +6171,7 @@ impl Record {
             },
             69 => {
                 Ok(Record::LeftPowerPhase(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -6179,7 +6179,7 @@ impl Record {
             },
             70 => {
                 Ok(Record::LeftPowerPhasePeak(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -6187,7 +6187,7 @@ impl Record {
             },
             71 => {
                 Ok(Record::RightPowerPhase(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -6195,7 +6195,7 @@ impl Record {
             },
             72 => {
                 Ok(Record::RightPowerPhasePeak(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -6203,7 +6203,7 @@ impl Record {
             },
             73 => {
                 Ok(Record::EnhancedSpeed(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -6211,7 +6211,7 @@ impl Record {
             },
             78 => {
                 Ok(Record::EnhancedAltitude(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -6219,7 +6219,7 @@ impl Record {
             },
             81 => {
                 Ok(Record::BatterySoc(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6227,7 +6227,7 @@ impl Record {
             },
             82 => {
                 Ok(Record::MotorPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -6235,7 +6235,7 @@ impl Record {
             },
             83 => {
                 Ok(Record::VerticalRatio(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6243,7 +6243,7 @@ impl Record {
             },
             84 => {
                 Ok(Record::StanceTimeBalance(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6251,7 +6251,7 @@ impl Record {
             },
             85 => {
                 Ok(Record::StepLength(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  Some("mm"),
@@ -6259,7 +6259,7 @@ impl Record {
             },
             91 => {
                 Ok(Record::AbsolutePressure(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("Pa"),
@@ -6267,7 +6267,7 @@ impl Record {
             },
             92 => {
                 Ok(Record::Depth(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -6275,7 +6275,7 @@ impl Record {
             },
             93 => {
                 Ok(Record::NextStopDepth(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -6283,7 +6283,7 @@ impl Record {
             },
             94 => {
                 Ok(Record::NextStopTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("s"),
@@ -6291,7 +6291,7 @@ impl Record {
             },
             95 => {
                 Ok(Record::TimeToSurface(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("s"),
@@ -6299,7 +6299,7 @@ impl Record {
             },
             96 => {
                 Ok(Record::NdlTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("s"),
@@ -6307,7 +6307,7 @@ impl Record {
             },
             97 => {
                 Ok(Record::CnsLoad(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("percent"),
@@ -6315,7 +6315,7 @@ impl Record {
             },
             98 => {
                 Ok(Record::N2Load(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("percent"),
@@ -6372,7 +6372,7 @@ impl Event {
         match field_def_num {
             253 => {
                 Ok(Event::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -6380,7 +6380,7 @@ impl Event {
             },
             0 => {
                 Ok(Event::Event(Field {
-                    value:  profile::types::Event::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Event::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6388,7 +6388,7 @@ impl Event {
             },
             1 => {
                 Ok(Event::EventType(Field {
-                    value:  profile::types::EventType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::EventType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6396,7 +6396,7 @@ impl Event {
             },
             2 => {
                 Ok(Event::Data16(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6404,7 +6404,7 @@ impl Event {
             },
             3 => {
                 Ok(Event::Data(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6412,7 +6412,7 @@ impl Event {
             },
             4 => {
                 Ok(Event::EventGroup(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6420,7 +6420,7 @@ impl Event {
             },
             7 => {
                 Ok(Event::Score(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6428,7 +6428,7 @@ impl Event {
             },
             8 => {
                 Ok(Event::OpponentScore(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6436,7 +6436,7 @@ impl Event {
             },
             9 => {
                 Ok(Event::FrontGearNum(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6444,7 +6444,7 @@ impl Event {
             },
             10 => {
                 Ok(Event::FrontGear(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6452,7 +6452,7 @@ impl Event {
             },
             11 => {
                 Ok(Event::RearGearNum(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6460,7 +6460,7 @@ impl Event {
             },
             12 => {
                 Ok(Event::RearGear(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6468,7 +6468,7 @@ impl Event {
             },
             13 => {
                 Ok(Event::DeviceIndex(Field {
-                    value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6520,7 +6520,7 @@ impl DeviceInfo {
         match field_def_num {
             253 => {
                 Ok(DeviceInfo::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -6528,7 +6528,7 @@ impl DeviceInfo {
             },
             0 => {
                 Ok(DeviceInfo::DeviceIndex(Field {
-                    value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6536,7 +6536,7 @@ impl DeviceInfo {
             },
             1 => {
                 Ok(DeviceInfo::DeviceType(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6544,7 +6544,7 @@ impl DeviceInfo {
             },
             2 => {
                 Ok(DeviceInfo::Manufacturer(Field {
-                    value:  profile::types::Manufacturer::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Manufacturer::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6552,7 +6552,7 @@ impl DeviceInfo {
             },
             3 => {
                 Ok(DeviceInfo::SerialNumber(Field {
-                    value:  profile::base::Uint32z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6560,7 +6560,7 @@ impl DeviceInfo {
             },
             4 => {
                 Ok(DeviceInfo::Product(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6568,7 +6568,7 @@ impl DeviceInfo {
             },
             5 => {
                 Ok(DeviceInfo::SoftwareVersion(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  None,
@@ -6576,7 +6576,7 @@ impl DeviceInfo {
             },
             6 => {
                 Ok(DeviceInfo::HardwareVersion(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6584,7 +6584,7 @@ impl DeviceInfo {
             },
             7 => {
                 Ok(DeviceInfo::CumOperatingTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -6592,7 +6592,7 @@ impl DeviceInfo {
             },
             10 => {
                 Ok(DeviceInfo::BatteryVoltage(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(256.0),
                     offset: None,
                     units:  Some("V"),
@@ -6600,7 +6600,7 @@ impl DeviceInfo {
             },
             11 => {
                 Ok(DeviceInfo::BatteryStatus(Field {
-                    value:  profile::types::BatteryStatus::decode::<T>(buffer)?,
+                    raw_value:  profile::types::BatteryStatus::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6608,7 +6608,7 @@ impl DeviceInfo {
             },
             18 => {
                 Ok(DeviceInfo::SensorPosition(Field {
-                    value:  profile::types::BodyLocation::decode::<T>(buffer)?,
+                    raw_value:  profile::types::BodyLocation::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6616,7 +6616,7 @@ impl DeviceInfo {
             },
             19 => {
                 Ok(DeviceInfo::Descriptor(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6624,7 +6624,7 @@ impl DeviceInfo {
             },
             20 => {
                 Ok(DeviceInfo::AntTransmissionType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6632,7 +6632,7 @@ impl DeviceInfo {
             },
             21 => {
                 Ok(DeviceInfo::AntDeviceNumber(Field {
-                    value:  profile::base::Uint16z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6640,7 +6640,7 @@ impl DeviceInfo {
             },
             22 => {
                 Ok(DeviceInfo::AntNetwork(Field {
-                    value:  profile::types::AntNetwork::decode::<T>(buffer)?,
+                    raw_value:  profile::types::AntNetwork::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6648,7 +6648,7 @@ impl DeviceInfo {
             },
             25 => {
                 Ok(DeviceInfo::SourceType(Field {
-                    value:  profile::types::SourceType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SourceType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6656,7 +6656,7 @@ impl DeviceInfo {
             },
             27 => {
                 Ok(DeviceInfo::ProductName(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6690,7 +6690,7 @@ impl TrainingFile {
         match field_def_num {
             253 => {
                 Ok(TrainingFile::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6698,7 +6698,7 @@ impl TrainingFile {
             },
             0 => {
                 Ok(TrainingFile::Type(Field {
-                    value:  profile::types::File::decode::<T>(buffer)?,
+                    raw_value:  profile::types::File::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6706,7 +6706,7 @@ impl TrainingFile {
             },
             1 => {
                 Ok(TrainingFile::Manufacturer(Field {
-                    value:  profile::types::Manufacturer::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Manufacturer::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6714,7 +6714,7 @@ impl TrainingFile {
             },
             2 => {
                 Ok(TrainingFile::Product(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6722,7 +6722,7 @@ impl TrainingFile {
             },
             3 => {
                 Ok(TrainingFile::SerialNumber(Field {
-                    value:  profile::base::Uint32z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6730,7 +6730,7 @@ impl TrainingFile {
             },
             4 => {
                 Ok(TrainingFile::TimeCreated(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6763,7 +6763,7 @@ impl Hrv {
         match field_def_num {
             0 => {
                 Ok(Hrv::Time(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -6816,7 +6816,7 @@ impl WeatherConditions {
         match field_def_num {
             253 => {
                 Ok(WeatherConditions::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6824,7 +6824,7 @@ impl WeatherConditions {
             },
             0 => {
                 Ok(WeatherConditions::WeatherReport(Field {
-                    value:  profile::types::WeatherReport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::WeatherReport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6832,7 +6832,7 @@ impl WeatherConditions {
             },
             1 => {
                 Ok(WeatherConditions::Temperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -6840,7 +6840,7 @@ impl WeatherConditions {
             },
             2 => {
                 Ok(WeatherConditions::Condition(Field {
-                    value:  profile::types::WeatherStatus::decode::<T>(buffer)?,
+                    raw_value:  profile::types::WeatherStatus::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6848,7 +6848,7 @@ impl WeatherConditions {
             },
             3 => {
                 Ok(WeatherConditions::WindDirection(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("degrees"),
@@ -6856,7 +6856,7 @@ impl WeatherConditions {
             },
             4 => {
                 Ok(WeatherConditions::WindSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -6864,7 +6864,7 @@ impl WeatherConditions {
             },
             5 => {
                 Ok(WeatherConditions::PrecipitationProbability(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6872,7 +6872,7 @@ impl WeatherConditions {
             },
             6 => {
                 Ok(WeatherConditions::TemperatureFeelsLike(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -6880,7 +6880,7 @@ impl WeatherConditions {
             },
             7 => {
                 Ok(WeatherConditions::RelativeHumidity(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6888,7 +6888,7 @@ impl WeatherConditions {
             },
             8 => {
                 Ok(WeatherConditions::Location(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6896,7 +6896,7 @@ impl WeatherConditions {
             },
             9 => {
                 Ok(WeatherConditions::ObservedAtTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6904,7 +6904,7 @@ impl WeatherConditions {
             },
             10 => {
                 Ok(WeatherConditions::ObservedLocationLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -6912,7 +6912,7 @@ impl WeatherConditions {
             },
             11 => {
                 Ok(WeatherConditions::ObservedLocationLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -6920,7 +6920,7 @@ impl WeatherConditions {
             },
             12 => {
                 Ok(WeatherConditions::DayOfWeek(Field {
-                    value:  profile::types::DayOfWeek::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DayOfWeek::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6928,7 +6928,7 @@ impl WeatherConditions {
             },
             13 => {
                 Ok(WeatherConditions::HighTemperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -6936,7 +6936,7 @@ impl WeatherConditions {
             },
             14 => {
                 Ok(WeatherConditions::LowTemperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -6977,7 +6977,7 @@ impl WeatherAlert {
         match field_def_num {
             253 => {
                 Ok(WeatherAlert::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6985,7 +6985,7 @@ impl WeatherAlert {
             },
             0 => {
                 Ok(WeatherAlert::ReportId(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -6993,7 +6993,7 @@ impl WeatherAlert {
             },
             1 => {
                 Ok(WeatherAlert::IssueTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7001,7 +7001,7 @@ impl WeatherAlert {
             },
             2 => {
                 Ok(WeatherAlert::ExpireTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7009,7 +7009,7 @@ impl WeatherAlert {
             },
             3 => {
                 Ok(WeatherAlert::Severity(Field {
-                    value:  profile::types::WeatherSeverity::decode::<T>(
+                    raw_value:  profile::types::WeatherSeverity::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -7019,7 +7019,7 @@ impl WeatherAlert {
             },
             4 => {
                 Ok(WeatherAlert::Type(Field {
-                    value:  profile::types::WeatherSevereType::decode::<T>(
+                    raw_value:  profile::types::WeatherSevereType::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -7067,7 +7067,7 @@ impl GpsMetadata {
         match field_def_num {
             253 => {
                 Ok(GpsMetadata::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7075,7 +7075,7 @@ impl GpsMetadata {
             },
             0 => {
                 Ok(GpsMetadata::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7083,7 +7083,7 @@ impl GpsMetadata {
             },
             1 => {
                 Ok(GpsMetadata::PositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -7091,7 +7091,7 @@ impl GpsMetadata {
             },
             2 => {
                 Ok(GpsMetadata::PositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -7099,7 +7099,7 @@ impl GpsMetadata {
             },
             3 => {
                 Ok(GpsMetadata::EnhancedAltitude(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -7107,7 +7107,7 @@ impl GpsMetadata {
             },
             4 => {
                 Ok(GpsMetadata::EnhancedSpeed(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -7115,7 +7115,7 @@ impl GpsMetadata {
             },
             5 => {
                 Ok(GpsMetadata::Heading(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("degrees"),
@@ -7123,7 +7123,7 @@ impl GpsMetadata {
             },
             6 => {
                 Ok(GpsMetadata::UtcTimestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7131,7 +7131,7 @@ impl GpsMetadata {
             },
             7 => {
                 Ok(GpsMetadata::Velocity(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -7168,7 +7168,7 @@ impl CameraEvent {
         match field_def_num {
             253 => {
                 Ok(CameraEvent::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7176,7 +7176,7 @@ impl CameraEvent {
             },
             0 => {
                 Ok(CameraEvent::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7184,7 +7184,7 @@ impl CameraEvent {
             },
             1 => {
                 Ok(CameraEvent::CameraEventType(Field {
-                    value:  profile::types::CameraEventType::decode::<T>(
+                    raw_value:  profile::types::CameraEventType::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -7194,7 +7194,7 @@ impl CameraEvent {
             },
             2 => {
                 Ok(CameraEvent::CameraFileUuid(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7202,7 +7202,7 @@ impl CameraEvent {
             },
             3 => {
                 Ok(CameraEvent::CameraOrientation(Field {
-                    value:  profile::types::CameraOrientationType::decode::<T>(
+                    raw_value:  profile::types::CameraOrientationType::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -7262,7 +7262,7 @@ impl GyroscopeData {
         match field_def_num {
             253 => {
                 Ok(GyroscopeData::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7270,7 +7270,7 @@ impl GyroscopeData {
             },
             0 => {
                 Ok(GyroscopeData::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7278,7 +7278,7 @@ impl GyroscopeData {
             },
             1 => {
                 Ok(GyroscopeData::SampleTimeOffset(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7286,7 +7286,7 @@ impl GyroscopeData {
             },
             2 => {
                 Ok(GyroscopeData::GyroX(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7294,7 +7294,7 @@ impl GyroscopeData {
             },
             3 => {
                 Ok(GyroscopeData::GyroY(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7302,7 +7302,7 @@ impl GyroscopeData {
             },
             4 => {
                 Ok(GyroscopeData::GyroZ(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7310,7 +7310,7 @@ impl GyroscopeData {
             },
             5 => {
                 Ok(GyroscopeData::CalibratedGyroX(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("deg/s"),
@@ -7318,7 +7318,7 @@ impl GyroscopeData {
             },
             6 => {
                 Ok(GyroscopeData::CalibratedGyroY(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("deg/s"),
@@ -7326,7 +7326,7 @@ impl GyroscopeData {
             },
             7 => {
                 Ok(GyroscopeData::CalibratedGyroZ(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("deg/s"),
@@ -7390,7 +7390,7 @@ impl AccelerometerData {
         match field_def_num {
             253 => {
                 Ok(AccelerometerData::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7398,7 +7398,7 @@ impl AccelerometerData {
             },
             0 => {
                 Ok(AccelerometerData::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7406,7 +7406,7 @@ impl AccelerometerData {
             },
             1 => {
                 Ok(AccelerometerData::SampleTimeOffset(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7414,7 +7414,7 @@ impl AccelerometerData {
             },
             2 => {
                 Ok(AccelerometerData::AccelX(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7422,7 +7422,7 @@ impl AccelerometerData {
             },
             3 => {
                 Ok(AccelerometerData::AccelY(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7430,7 +7430,7 @@ impl AccelerometerData {
             },
             4 => {
                 Ok(AccelerometerData::AccelZ(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7438,7 +7438,7 @@ impl AccelerometerData {
             },
             5 => {
                 Ok(AccelerometerData::CalibratedAccelX(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("g"),
@@ -7446,7 +7446,7 @@ impl AccelerometerData {
             },
             6 => {
                 Ok(AccelerometerData::CalibratedAccelY(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("g"),
@@ -7454,7 +7454,7 @@ impl AccelerometerData {
             },
             7 => {
                 Ok(AccelerometerData::CalibratedAccelZ(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("g"),
@@ -7462,7 +7462,7 @@ impl AccelerometerData {
             },
             8 => {
                 Ok(AccelerometerData::CompressedCalibratedAccelX(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mG"),
@@ -7470,7 +7470,7 @@ impl AccelerometerData {
             },
             9 => {
                 Ok(AccelerometerData::CompressedCalibratedAccelY(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mG"),
@@ -7478,7 +7478,7 @@ impl AccelerometerData {
             },
             10 => {
                 Ok(AccelerometerData::CompressedCalibratedAccelZ(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mG"),
@@ -7536,7 +7536,7 @@ impl MagnetometerData {
         match field_def_num {
             253 => {
                 Ok(MagnetometerData::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7544,7 +7544,7 @@ impl MagnetometerData {
             },
             0 => {
                 Ok(MagnetometerData::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7552,7 +7552,7 @@ impl MagnetometerData {
             },
             1 => {
                 Ok(MagnetometerData::SampleTimeOffset(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7560,7 +7560,7 @@ impl MagnetometerData {
             },
             2 => {
                 Ok(MagnetometerData::MagX(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7568,7 +7568,7 @@ impl MagnetometerData {
             },
             3 => {
                 Ok(MagnetometerData::MagY(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7576,7 +7576,7 @@ impl MagnetometerData {
             },
             4 => {
                 Ok(MagnetometerData::MagZ(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7584,7 +7584,7 @@ impl MagnetometerData {
             },
             5 => {
                 Ok(MagnetometerData::CalibratedMagX(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("G"),
@@ -7592,7 +7592,7 @@ impl MagnetometerData {
             },
             6 => {
                 Ok(MagnetometerData::CalibratedMagY(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("G"),
@@ -7600,7 +7600,7 @@ impl MagnetometerData {
             },
             7 => {
                 Ok(MagnetometerData::CalibratedMagZ(Field {
-                    value:  profile::base::Float32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Float32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("G"),
@@ -7643,7 +7643,7 @@ impl BarometerData {
         match field_def_num {
             253 => {
                 Ok(BarometerData::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7651,7 +7651,7 @@ impl BarometerData {
             },
             0 => {
                 Ok(BarometerData::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7659,7 +7659,7 @@ impl BarometerData {
             },
             1 => {
                 Ok(BarometerData::SampleTimeOffset(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7667,7 +7667,7 @@ impl BarometerData {
             },
             2 => {
                 Ok(BarometerData::BaroPres(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("Pa"),
@@ -7688,12 +7688,12 @@ pub enum ThreeDSensorCalibration {
     Timestamp(Field<profile::types::DateTime>),
     #[doc = "Indicates which sensor the calibration is for"]
     SensorType(Field<profile::types::SensorType>),
-    #[doc = "Calibration factor used to convert from raw ADC value to \
+    #[doc = "Calibration factor used to convert from raw ADC raw_value to \
              degrees, g,  etc."]
     CalibrationFactor(Field<profile::base::Uint32>),
     #[doc = "Calibration factor divisor"]
     CalibrationDivisor(Field<profile::base::Uint32>),
-    #[doc = "Level shift value used to shift the ADC value back into range"]
+    #[doc = "Level shift raw_value used to shift the ADC raw_value back into range"]
     LevelShift(Field<profile::base::Uint32>),
     #[doc = "Internal calibration factors, one for each: xy, yx, zx"]
     OffsetCal(Field<profile::base::Sint32>),
@@ -7712,7 +7712,7 @@ impl ThreeDSensorCalibration {
         match field_def_num {
             253 => {
                 Ok(ThreeDSensorCalibration::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7720,7 +7720,7 @@ impl ThreeDSensorCalibration {
             },
             0 => {
                 Ok(ThreeDSensorCalibration::SensorType(Field {
-                    value:  profile::types::SensorType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SensorType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7728,7 +7728,7 @@ impl ThreeDSensorCalibration {
             },
             1 => {
                 Ok(ThreeDSensorCalibration::CalibrationFactor(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7736,7 +7736,7 @@ impl ThreeDSensorCalibration {
             },
             2 => {
                 Ok(ThreeDSensorCalibration::CalibrationDivisor(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7744,7 +7744,7 @@ impl ThreeDSensorCalibration {
             },
             3 => {
                 Ok(ThreeDSensorCalibration::LevelShift(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7752,7 +7752,7 @@ impl ThreeDSensorCalibration {
             },
             4 => {
                 Ok(ThreeDSensorCalibration::OffsetCal(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7760,7 +7760,7 @@ impl ThreeDSensorCalibration {
             },
             5 => {
                 Ok(ThreeDSensorCalibration::OrientationMatrix(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  Some(65535.0),
                     offset: None,
                     units:  None,
@@ -7781,12 +7781,12 @@ pub enum OneDSensorCalibration {
     Timestamp(Field<profile::types::DateTime>),
     #[doc = "Indicates which sensor the calibration is for"]
     SensorType(Field<profile::types::SensorType>),
-    #[doc = "Calibration factor used to convert from raw ADC value to \
+    #[doc = "Calibration factor used to convert from raw ADC raw_value to \
              degrees, g,  etc."]
     CalibrationFactor(Field<profile::base::Uint32>),
     #[doc = "Calibration factor divisor"]
     CalibrationDivisor(Field<profile::base::Uint32>),
-    #[doc = "Level shift value used to shift the ADC value back into range"]
+    #[doc = "Level shift raw_value used to shift the ADC raw_value back into range"]
     LevelShift(Field<profile::base::Uint32>),
     #[doc = "Internal Calibration factor"]
     OffsetCal(Field<profile::base::Sint32>),
@@ -7803,7 +7803,7 @@ impl OneDSensorCalibration {
         match field_def_num {
             253 => {
                 Ok(OneDSensorCalibration::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7811,7 +7811,7 @@ impl OneDSensorCalibration {
             },
             0 => {
                 Ok(OneDSensorCalibration::SensorType(Field {
-                    value:  profile::types::SensorType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SensorType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7819,7 +7819,7 @@ impl OneDSensorCalibration {
             },
             1 => {
                 Ok(OneDSensorCalibration::CalibrationFactor(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7827,7 +7827,7 @@ impl OneDSensorCalibration {
             },
             2 => {
                 Ok(OneDSensorCalibration::CalibrationDivisor(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("counts"),
@@ -7835,7 +7835,7 @@ impl OneDSensorCalibration {
             },
             3 => {
                 Ok(OneDSensorCalibration::LevelShift(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7843,7 +7843,7 @@ impl OneDSensorCalibration {
             },
             4 => {
                 Ok(OneDSensorCalibration::OffsetCal(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7880,7 +7880,7 @@ impl VideoFrame {
         match field_def_num {
             253 => {
                 Ok(VideoFrame::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7888,7 +7888,7 @@ impl VideoFrame {
             },
             0 => {
                 Ok(VideoFrame::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7896,7 +7896,7 @@ impl VideoFrame {
             },
             1 => {
                 Ok(VideoFrame::FrameNumber(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7929,7 +7929,7 @@ pub enum ObdiiData {
              SAE J1979."]
     PidDataSize(Field<profile::base::Uint8>),
     #[doc = "System time associated with sample expressed in ms, can be used \
-             instead of time_offset.  There will be a system_time value for \
+             instead of time_offset.  There will be a system_time raw_value for \
              each raw_data element.  For multibyte pids the system_time is \
              repeated."]
     SystemTime(Field<profile::base::Uint32>),
@@ -7951,7 +7951,7 @@ impl ObdiiData {
         match field_def_num {
             253 => {
                 Ok(ObdiiData::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -7959,7 +7959,7 @@ impl ObdiiData {
             },
             0 => {
                 Ok(ObdiiData::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7967,7 +7967,7 @@ impl ObdiiData {
             },
             1 => {
                 Ok(ObdiiData::TimeOffset(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -7975,7 +7975,7 @@ impl ObdiiData {
             },
             2 => {
                 Ok(ObdiiData::Pid(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7983,7 +7983,7 @@ impl ObdiiData {
             },
             3 => {
                 Ok(ObdiiData::RawData(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7991,7 +7991,7 @@ impl ObdiiData {
             },
             4 => {
                 Ok(ObdiiData::PidDataSize(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -7999,7 +7999,7 @@ impl ObdiiData {
             },
             5 => {
                 Ok(ObdiiData::SystemTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8007,7 +8007,7 @@ impl ObdiiData {
             },
             6 => {
                 Ok(ObdiiData::StartTimestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8015,7 +8015,7 @@ impl ObdiiData {
             },
             7 => {
                 Ok(ObdiiData::StartTimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -8051,7 +8051,7 @@ impl NmeaSentence {
         match field_def_num {
             253 => {
                 Ok(NmeaSentence::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -8059,7 +8059,7 @@ impl NmeaSentence {
             },
             0 => {
                 Ok(NmeaSentence::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -8067,7 +8067,7 @@ impl NmeaSentence {
             },
             1 => {
                 Ok(NmeaSentence::Sentence(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8121,7 +8121,7 @@ impl AviationAttitude {
         match field_def_num {
             253 => {
                 Ok(AviationAttitude::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -8129,7 +8129,7 @@ impl AviationAttitude {
             },
             0 => {
                 Ok(AviationAttitude::TimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -8137,7 +8137,7 @@ impl AviationAttitude {
             },
             1 => {
                 Ok(AviationAttitude::SystemTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -8145,7 +8145,7 @@ impl AviationAttitude {
             },
             2 => {
                 Ok(AviationAttitude::Pitch(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(10430.38),
                     offset: None,
                     units:  Some("radians"),
@@ -8153,7 +8153,7 @@ impl AviationAttitude {
             },
             3 => {
                 Ok(AviationAttitude::Roll(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(10430.38),
                     offset: None,
                     units:  Some("radians"),
@@ -8161,7 +8161,7 @@ impl AviationAttitude {
             },
             4 => {
                 Ok(AviationAttitude::AccelLateral(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m/s^2"),
@@ -8169,7 +8169,7 @@ impl AviationAttitude {
             },
             5 => {
                 Ok(AviationAttitude::AccelNormal(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m/s^2"),
@@ -8177,7 +8177,7 @@ impl AviationAttitude {
             },
             6 => {
                 Ok(AviationAttitude::TurnRate(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1024.0),
                     offset: None,
                     units:  Some("radians/second"),
@@ -8185,7 +8185,7 @@ impl AviationAttitude {
             },
             7 => {
                 Ok(AviationAttitude::Stage(Field {
-                    value:  profile::types::AttitudeStage::decode::<T>(buffer)?,
+                    raw_value:  profile::types::AttitudeStage::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8193,7 +8193,7 @@ impl AviationAttitude {
             },
             8 => {
                 Ok(AviationAttitude::AttitudeStageComplete(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("%"),
@@ -8201,7 +8201,7 @@ impl AviationAttitude {
             },
             9 => {
                 Ok(AviationAttitude::Track(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(10430.38),
                     offset: None,
                     units:  Some("radians"),
@@ -8209,7 +8209,7 @@ impl AviationAttitude {
             },
             10 => {
                 Ok(AviationAttitude::Validity(Field {
-                    value:  profile::types::AttitudeValidity::decode::<T>(
+                    raw_value:  profile::types::AttitudeValidity::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -8245,7 +8245,7 @@ impl Video {
         match field_def_num {
             0 => {
                 Ok(Video::Url(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8253,7 +8253,7 @@ impl Video {
             },
             1 => {
                 Ok(Video::HostingProvider(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8261,7 +8261,7 @@ impl Video {
             },
             2 => {
                 Ok(Video::Duration(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -8296,7 +8296,7 @@ impl VideoTitle {
         match field_def_num {
             254 => {
                 Ok(VideoTitle::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8304,7 +8304,7 @@ impl VideoTitle {
             },
             0 => {
                 Ok(VideoTitle::MessageCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8312,7 +8312,7 @@ impl VideoTitle {
             },
             1 => {
                 Ok(VideoTitle::Text(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8347,7 +8347,7 @@ impl VideoDescription {
         match field_def_num {
             254 => {
                 Ok(VideoDescription::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8355,7 +8355,7 @@ impl VideoDescription {
             },
             0 => {
                 Ok(VideoDescription::MessageCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8363,7 +8363,7 @@ impl VideoDescription {
             },
             1 => {
                 Ok(VideoDescription::Text(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8402,7 +8402,7 @@ impl VideoClip {
         match field_def_num {
             0 => {
                 Ok(VideoClip::ClipNumber(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8410,7 +8410,7 @@ impl VideoClip {
             },
             1 => {
                 Ok(VideoClip::StartTimestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8418,7 +8418,7 @@ impl VideoClip {
             },
             2 => {
                 Ok(VideoClip::StartTimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8426,7 +8426,7 @@ impl VideoClip {
             },
             3 => {
                 Ok(VideoClip::EndTimestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8434,7 +8434,7 @@ impl VideoClip {
             },
             4 => {
                 Ok(VideoClip::EndTimestampMs(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8442,7 +8442,7 @@ impl VideoClip {
             },
             6 => {
                 Ok(VideoClip::ClipStart(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -8450,7 +8450,7 @@ impl VideoClip {
             },
             7 => {
                 Ok(VideoClip::ClipEnd(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("ms"),
@@ -8497,7 +8497,7 @@ impl Set {
         match field_def_num {
             254 => {
                 Ok(Set::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8505,7 +8505,7 @@ impl Set {
             },
             0 => {
                 Ok(Set::Duration(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -8513,7 +8513,7 @@ impl Set {
             },
             3 => {
                 Ok(Set::Repetitions(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8521,7 +8521,7 @@ impl Set {
             },
             4 => {
                 Ok(Set::Weight(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(16.0),
                     offset: None,
                     units:  Some("kg"),
@@ -8529,7 +8529,7 @@ impl Set {
             },
             5 => {
                 Ok(Set::SetType(Field {
-                    value:  profile::types::SetType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SetType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8537,7 +8537,7 @@ impl Set {
             },
             6 => {
                 Ok(Set::StartTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8545,7 +8545,7 @@ impl Set {
             },
             7 => {
                 Ok(Set::Category(Field {
-                    value:  profile::types::ExerciseCategory::decode::<T>(
+                    raw_value:  profile::types::ExerciseCategory::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -8555,7 +8555,7 @@ impl Set {
             },
             8 => {
                 Ok(Set::CategorySubtype(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8563,7 +8563,7 @@ impl Set {
             },
             9 => {
                 Ok(Set::WeightDisplayUnit(Field {
-                    value:  profile::types::FitBaseUnit::decode::<T>(buffer)?,
+                    raw_value:  profile::types::FitBaseUnit::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8571,7 +8571,7 @@ impl Set {
             },
             10 => {
                 Ok(Set::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8579,7 +8579,7 @@ impl Set {
             },
             11 => {
                 Ok(Set::WktStepIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8610,7 +8610,7 @@ impl Course {
         match field_def_num {
             4 => {
                 Ok(Course::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8618,7 +8618,7 @@ impl Course {
             },
             5 => {
                 Ok(Course::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8626,7 +8626,7 @@ impl Course {
             },
             6 => {
                 Ok(Course::Capabilities(Field {
-                    value:  profile::types::CourseCapabilities::decode::<T>(
+                    raw_value:  profile::types::CourseCapabilities::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -8636,7 +8636,7 @@ impl Course {
             },
             7 => {
                 Ok(Course::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8671,7 +8671,7 @@ impl CoursePoint {
         match field_def_num {
             254 => {
                 Ok(CoursePoint::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8679,7 +8679,7 @@ impl CoursePoint {
             },
             1 => {
                 Ok(CoursePoint::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8687,7 +8687,7 @@ impl CoursePoint {
             },
             2 => {
                 Ok(CoursePoint::PositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -8695,7 +8695,7 @@ impl CoursePoint {
             },
             3 => {
                 Ok(CoursePoint::PositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -8703,7 +8703,7 @@ impl CoursePoint {
             },
             4 => {
                 Ok(CoursePoint::Distance(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -8711,7 +8711,7 @@ impl CoursePoint {
             },
             5 => {
                 Ok(CoursePoint::Type(Field {
-                    value:  profile::types::CoursePoint::decode::<T>(buffer)?,
+                    raw_value:  profile::types::CoursePoint::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8719,7 +8719,7 @@ impl CoursePoint {
             },
             6 => {
                 Ok(CoursePoint::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8727,7 +8727,7 @@ impl CoursePoint {
             },
             8 => {
                 Ok(CoursePoint::Favorite(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8777,7 +8777,7 @@ impl SegmentId {
         match field_def_num {
             0 => {
                 Ok(SegmentId::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8785,7 +8785,7 @@ impl SegmentId {
             },
             1 => {
                 Ok(SegmentId::Uuid(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8793,7 +8793,7 @@ impl SegmentId {
             },
             2 => {
                 Ok(SegmentId::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8801,7 +8801,7 @@ impl SegmentId {
             },
             3 => {
                 Ok(SegmentId::Enabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8809,7 +8809,7 @@ impl SegmentId {
             },
             4 => {
                 Ok(SegmentId::UserProfilePrimaryKey(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8817,7 +8817,7 @@ impl SegmentId {
             },
             5 => {
                 Ok(SegmentId::DeviceId(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8825,7 +8825,7 @@ impl SegmentId {
             },
             6 => {
                 Ok(SegmentId::DefaultRaceLeader(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8833,7 +8833,7 @@ impl SegmentId {
             },
             7 => {
                 Ok(SegmentId::DeleteStatus(Field {
-                    value:  profile::types::SegmentDeleteStatus::decode::<T>(
+                    raw_value:  profile::types::SegmentDeleteStatus::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -8843,7 +8843,7 @@ impl SegmentId {
             },
             8 => {
                 Ok(SegmentId::SelectionType(Field {
-                    value:  profile::types::SegmentSelectionType::decode::<T>(
+                    raw_value:  profile::types::SegmentSelectionType::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -8891,7 +8891,7 @@ impl SegmentLeaderboardEntry {
         match field_def_num {
             254 => {
                 Ok(SegmentLeaderboardEntry::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8899,7 +8899,7 @@ impl SegmentLeaderboardEntry {
             },
             0 => {
                 Ok(SegmentLeaderboardEntry::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8907,7 +8907,7 @@ impl SegmentLeaderboardEntry {
             },
             1 => {
                 Ok(SegmentLeaderboardEntry::Type(Field {
-                    value:  profile::types::SegmentLeaderboardType::decode::<T>(
+                    raw_value:  profile::types::SegmentLeaderboardType::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -8917,7 +8917,7 @@ impl SegmentLeaderboardEntry {
             },
             2 => {
                 Ok(SegmentLeaderboardEntry::GroupPrimaryKey(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8925,7 +8925,7 @@ impl SegmentLeaderboardEntry {
             },
             3 => {
                 Ok(SegmentLeaderboardEntry::ActivityId(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8933,7 +8933,7 @@ impl SegmentLeaderboardEntry {
             },
             4 => {
                 Ok(SegmentLeaderboardEntry::SegmentTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -8941,7 +8941,7 @@ impl SegmentLeaderboardEntry {
             },
             5 => {
                 Ok(SegmentLeaderboardEntry::ActivityIdString(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8969,7 +8969,7 @@ pub enum SegmentPoint {
     #[doc = "Accumulated altitude along the segment at the described point"]
     Altitude(Field<profile::base::Uint16>),
     #[doc = "Accumualted time each leader board member required to reach the \
-             described point. This value is zero for all leader board members \
+             described point. This raw_value is zero for all leader board members \
              at the starting point of the segment."]
     LeaderTime(Field<profile::base::Uint32>),
     Unknown {
@@ -8985,7 +8985,7 @@ impl SegmentPoint {
         match field_def_num {
             254 => {
                 Ok(SegmentPoint::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -8993,7 +8993,7 @@ impl SegmentPoint {
             },
             1 => {
                 Ok(SegmentPoint::PositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9001,7 +9001,7 @@ impl SegmentPoint {
             },
             2 => {
                 Ok(SegmentPoint::PositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9009,7 +9009,7 @@ impl SegmentPoint {
             },
             3 => {
                 Ok(SegmentPoint::Distance(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -9017,7 +9017,7 @@ impl SegmentPoint {
             },
             4 => {
                 Ok(SegmentPoint::Altitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -9025,7 +9025,7 @@ impl SegmentPoint {
             },
             5 => {
                 Ok(SegmentPoint::LeaderTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9138,28 +9138,28 @@ pub enum SegmentLap {
     AvgLeftPco(Field<profile::base::Sint8>),
     #[doc = "Average right platform center offset"]
     AvgRightPco(Field<profile::base::Sint8>),
-    #[doc = "Average left power phase angles. Data value indexes defined by \
+    #[doc = "Average left power phase angles. Data raw_value indexes defined by \
              power_phase_type."]
     AvgLeftPowerPhase(Field<profile::base::Uint8>),
-    #[doc = "Average left power phase peak angles. Data value indexes defined \
+    #[doc = "Average left power phase peak angles. Data raw_value indexes defined \
              by power_phase_type."]
     AvgLeftPowerPhasePeak(Field<profile::base::Uint8>),
-    #[doc = "Average right power phase angles. Data value indexes defined by \
+    #[doc = "Average right power phase angles. Data raw_value indexes defined by \
              power_phase_type."]
     AvgRightPowerPhase(Field<profile::base::Uint8>),
-    #[doc = "Average right power phase peak angles. Data value indexes \
+    #[doc = "Average right power phase peak angles. Data raw_value indexes \
              defined by power_phase_type."]
     AvgRightPowerPhasePeak(Field<profile::base::Uint8>),
-    #[doc = "Average power by position. Data value indexes defined by \
+    #[doc = "Average power by position. Data raw_value indexes defined by \
              rider_position_type."]
     AvgPowerPosition(Field<profile::base::Uint16>),
-    #[doc = "Maximum power by position. Data value indexes defined by \
+    #[doc = "Maximum power by position. Data raw_value indexes defined by \
              rider_position_type."]
     MaxPowerPosition(Field<profile::base::Uint16>),
-    #[doc = "Average cadence by position. Data value indexes defined by \
+    #[doc = "Average cadence by position. Data raw_value indexes defined by \
              rider_position_type."]
     AvgCadencePosition(Field<profile::base::Uint8>),
-    #[doc = "Maximum cadence by position. Data value indexes defined by \
+    #[doc = "Maximum cadence by position. Data raw_value indexes defined by \
              rider_position_type."]
     MaxCadencePosition(Field<profile::base::Uint8>),
     #[doc = "Manufacturer that produced the segment"]
@@ -9177,7 +9177,7 @@ impl SegmentLap {
         match field_def_num {
             254 => {
                 Ok(SegmentLap::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9185,7 +9185,7 @@ impl SegmentLap {
             },
             253 => {
                 Ok(SegmentLap::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -9193,7 +9193,7 @@ impl SegmentLap {
             },
             0 => {
                 Ok(SegmentLap::Event(Field {
-                    value:  profile::types::Event::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Event::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9201,7 +9201,7 @@ impl SegmentLap {
             },
             1 => {
                 Ok(SegmentLap::EventType(Field {
-                    value:  profile::types::EventType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::EventType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9209,7 +9209,7 @@ impl SegmentLap {
             },
             2 => {
                 Ok(SegmentLap::StartTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9217,7 +9217,7 @@ impl SegmentLap {
             },
             3 => {
                 Ok(SegmentLap::StartPositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9225,7 +9225,7 @@ impl SegmentLap {
             },
             4 => {
                 Ok(SegmentLap::StartPositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9233,7 +9233,7 @@ impl SegmentLap {
             },
             5 => {
                 Ok(SegmentLap::EndPositionLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9241,7 +9241,7 @@ impl SegmentLap {
             },
             6 => {
                 Ok(SegmentLap::EndPositionLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9249,7 +9249,7 @@ impl SegmentLap {
             },
             7 => {
                 Ok(SegmentLap::TotalElapsedTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9257,7 +9257,7 @@ impl SegmentLap {
             },
             8 => {
                 Ok(SegmentLap::TotalTimerTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9265,7 +9265,7 @@ impl SegmentLap {
             },
             9 => {
                 Ok(SegmentLap::TotalDistance(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -9273,7 +9273,7 @@ impl SegmentLap {
             },
             10 => {
                 Ok(SegmentLap::TotalCycles(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("cycles"),
@@ -9281,7 +9281,7 @@ impl SegmentLap {
             },
             11 => {
                 Ok(SegmentLap::TotalCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -9289,7 +9289,7 @@ impl SegmentLap {
             },
             12 => {
                 Ok(SegmentLap::TotalFatCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -9297,7 +9297,7 @@ impl SegmentLap {
             },
             13 => {
                 Ok(SegmentLap::AvgSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -9305,7 +9305,7 @@ impl SegmentLap {
             },
             14 => {
                 Ok(SegmentLap::MaxSpeed(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -9313,7 +9313,7 @@ impl SegmentLap {
             },
             15 => {
                 Ok(SegmentLap::AvgHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -9321,7 +9321,7 @@ impl SegmentLap {
             },
             16 => {
                 Ok(SegmentLap::MaxHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -9329,7 +9329,7 @@ impl SegmentLap {
             },
             17 => {
                 Ok(SegmentLap::AvgCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -9337,7 +9337,7 @@ impl SegmentLap {
             },
             18 => {
                 Ok(SegmentLap::MaxCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -9345,7 +9345,7 @@ impl SegmentLap {
             },
             19 => {
                 Ok(SegmentLap::AvgPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -9353,7 +9353,7 @@ impl SegmentLap {
             },
             20 => {
                 Ok(SegmentLap::MaxPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -9361,7 +9361,7 @@ impl SegmentLap {
             },
             21 => {
                 Ok(SegmentLap::TotalAscent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -9369,7 +9369,7 @@ impl SegmentLap {
             },
             22 => {
                 Ok(SegmentLap::TotalDescent(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -9377,7 +9377,7 @@ impl SegmentLap {
             },
             23 => {
                 Ok(SegmentLap::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9385,7 +9385,7 @@ impl SegmentLap {
             },
             24 => {
                 Ok(SegmentLap::EventGroup(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9393,7 +9393,7 @@ impl SegmentLap {
             },
             25 => {
                 Ok(SegmentLap::NecLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9401,7 +9401,7 @@ impl SegmentLap {
             },
             26 => {
                 Ok(SegmentLap::NecLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9409,7 +9409,7 @@ impl SegmentLap {
             },
             27 => {
                 Ok(SegmentLap::SwcLat(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9417,7 +9417,7 @@ impl SegmentLap {
             },
             28 => {
                 Ok(SegmentLap::SwcLong(Field {
-                    value:  profile::base::Sint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("semicircles"),
@@ -9425,7 +9425,7 @@ impl SegmentLap {
             },
             29 => {
                 Ok(SegmentLap::Name(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9433,7 +9433,7 @@ impl SegmentLap {
             },
             30 => {
                 Ok(SegmentLap::NormalizedPower(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -9441,7 +9441,7 @@ impl SegmentLap {
             },
             31 => {
                 Ok(SegmentLap::LeftRightBalance(Field {
-                    value:  profile::types::LeftRightBalance100::decode::<T>(
+                    raw_value:  profile::types::LeftRightBalance100::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -9451,7 +9451,7 @@ impl SegmentLap {
             },
             32 => {
                 Ok(SegmentLap::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9459,7 +9459,7 @@ impl SegmentLap {
             },
             33 => {
                 Ok(SegmentLap::TotalWork(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("J"),
@@ -9467,7 +9467,7 @@ impl SegmentLap {
             },
             34 => {
                 Ok(SegmentLap::AvgAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -9475,7 +9475,7 @@ impl SegmentLap {
             },
             35 => {
                 Ok(SegmentLap::MaxAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -9483,7 +9483,7 @@ impl SegmentLap {
             },
             36 => {
                 Ok(SegmentLap::GpsAccuracy(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -9491,7 +9491,7 @@ impl SegmentLap {
             },
             37 => {
                 Ok(SegmentLap::AvgGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -9499,7 +9499,7 @@ impl SegmentLap {
             },
             38 => {
                 Ok(SegmentLap::AvgPosGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -9507,7 +9507,7 @@ impl SegmentLap {
             },
             39 => {
                 Ok(SegmentLap::AvgNegGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -9515,7 +9515,7 @@ impl SegmentLap {
             },
             40 => {
                 Ok(SegmentLap::MaxPosGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -9523,7 +9523,7 @@ impl SegmentLap {
             },
             41 => {
                 Ok(SegmentLap::MaxNegGrade(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -9531,7 +9531,7 @@ impl SegmentLap {
             },
             42 => {
                 Ok(SegmentLap::AvgTemperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -9539,7 +9539,7 @@ impl SegmentLap {
             },
             43 => {
                 Ok(SegmentLap::MaxTemperature(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("C"),
@@ -9547,7 +9547,7 @@ impl SegmentLap {
             },
             44 => {
                 Ok(SegmentLap::TotalMovingTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9555,7 +9555,7 @@ impl SegmentLap {
             },
             45 => {
                 Ok(SegmentLap::AvgPosVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -9563,7 +9563,7 @@ impl SegmentLap {
             },
             46 => {
                 Ok(SegmentLap::AvgNegVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -9571,7 +9571,7 @@ impl SegmentLap {
             },
             47 => {
                 Ok(SegmentLap::MaxPosVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -9579,7 +9579,7 @@ impl SegmentLap {
             },
             48 => {
                 Ok(SegmentLap::MaxNegVerticalSpeed(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m/s"),
@@ -9587,7 +9587,7 @@ impl SegmentLap {
             },
             49 => {
                 Ok(SegmentLap::TimeInHrZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9595,7 +9595,7 @@ impl SegmentLap {
             },
             50 => {
                 Ok(SegmentLap::TimeInSpeedZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9603,7 +9603,7 @@ impl SegmentLap {
             },
             51 => {
                 Ok(SegmentLap::TimeInCadenceZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9611,7 +9611,7 @@ impl SegmentLap {
             },
             52 => {
                 Ok(SegmentLap::TimeInPowerZone(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9619,7 +9619,7 @@ impl SegmentLap {
             },
             53 => {
                 Ok(SegmentLap::RepetitionNum(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9627,7 +9627,7 @@ impl SegmentLap {
             },
             54 => {
                 Ok(SegmentLap::MinAltitude(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5.0),
                     offset: Some(500.0),
                     units:  Some("m"),
@@ -9635,7 +9635,7 @@ impl SegmentLap {
             },
             55 => {
                 Ok(SegmentLap::MinHeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -9643,7 +9643,7 @@ impl SegmentLap {
             },
             56 => {
                 Ok(SegmentLap::ActiveTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9651,7 +9651,7 @@ impl SegmentLap {
             },
             57 => {
                 Ok(SegmentLap::WktStepIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9659,7 +9659,7 @@ impl SegmentLap {
             },
             58 => {
                 Ok(SegmentLap::SportEvent(Field {
-                    value:  profile::types::SportEvent::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SportEvent::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9667,7 +9667,7 @@ impl SegmentLap {
             },
             59 => {
                 Ok(SegmentLap::AvgLeftTorqueEffectiveness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -9675,7 +9675,7 @@ impl SegmentLap {
             },
             60 => {
                 Ok(SegmentLap::AvgRightTorqueEffectiveness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -9683,7 +9683,7 @@ impl SegmentLap {
             },
             61 => {
                 Ok(SegmentLap::AvgLeftPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -9691,7 +9691,7 @@ impl SegmentLap {
             },
             62 => {
                 Ok(SegmentLap::AvgRightPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -9699,7 +9699,7 @@ impl SegmentLap {
             },
             63 => {
                 Ok(SegmentLap::AvgCombinedPedalSmoothness(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("percent"),
@@ -9707,7 +9707,7 @@ impl SegmentLap {
             },
             64 => {
                 Ok(SegmentLap::Status(Field {
-                    value:  profile::types::SegmentLapStatus::decode::<T>(
+                    raw_value:  profile::types::SegmentLapStatus::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -9717,7 +9717,7 @@ impl SegmentLap {
             },
             65 => {
                 Ok(SegmentLap::Uuid(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9725,7 +9725,7 @@ impl SegmentLap {
             },
             66 => {
                 Ok(SegmentLap::AvgFractionalCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("rpm"),
@@ -9733,7 +9733,7 @@ impl SegmentLap {
             },
             67 => {
                 Ok(SegmentLap::MaxFractionalCadence(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("rpm"),
@@ -9741,7 +9741,7 @@ impl SegmentLap {
             },
             68 => {
                 Ok(SegmentLap::TotalFractionalCycles(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(128.0),
                     offset: None,
                     units:  Some("cycles"),
@@ -9749,7 +9749,7 @@ impl SegmentLap {
             },
             69 => {
                 Ok(SegmentLap::FrontGearShiftCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9757,7 +9757,7 @@ impl SegmentLap {
             },
             70 => {
                 Ok(SegmentLap::RearGearShiftCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9765,7 +9765,7 @@ impl SegmentLap {
             },
             71 => {
                 Ok(SegmentLap::TimeStanding(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -9773,7 +9773,7 @@ impl SegmentLap {
             },
             72 => {
                 Ok(SegmentLap::StandCount(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9781,7 +9781,7 @@ impl SegmentLap {
             },
             73 => {
                 Ok(SegmentLap::AvgLeftPco(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mm"),
@@ -9789,7 +9789,7 @@ impl SegmentLap {
             },
             74 => {
                 Ok(SegmentLap::AvgRightPco(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mm"),
@@ -9797,7 +9797,7 @@ impl SegmentLap {
             },
             75 => {
                 Ok(SegmentLap::AvgLeftPowerPhase(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -9805,7 +9805,7 @@ impl SegmentLap {
             },
             76 => {
                 Ok(SegmentLap::AvgLeftPowerPhasePeak(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -9813,7 +9813,7 @@ impl SegmentLap {
             },
             77 => {
                 Ok(SegmentLap::AvgRightPowerPhase(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -9821,7 +9821,7 @@ impl SegmentLap {
             },
             78 => {
                 Ok(SegmentLap::AvgRightPowerPhasePeak(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(0.7111111),
                     offset: None,
                     units:  Some("degrees"),
@@ -9829,7 +9829,7 @@ impl SegmentLap {
             },
             79 => {
                 Ok(SegmentLap::AvgPowerPosition(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -9837,7 +9837,7 @@ impl SegmentLap {
             },
             80 => {
                 Ok(SegmentLap::MaxPowerPosition(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("watts"),
@@ -9845,7 +9845,7 @@ impl SegmentLap {
             },
             81 => {
                 Ok(SegmentLap::AvgCadencePosition(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -9853,7 +9853,7 @@ impl SegmentLap {
             },
             82 => {
                 Ok(SegmentLap::MaxCadencePosition(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("rpm"),
@@ -9861,7 +9861,7 @@ impl SegmentLap {
             },
             83 => {
                 Ok(SegmentLap::Manufacturer(Field {
-                    value:  profile::types::Manufacturer::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Manufacturer::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9915,7 +9915,7 @@ impl SegmentFile {
         match field_def_num {
             254 => {
                 Ok(SegmentFile::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9923,7 +9923,7 @@ impl SegmentFile {
             },
             1 => {
                 Ok(SegmentFile::FileUuid(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9931,7 +9931,7 @@ impl SegmentFile {
             },
             3 => {
                 Ok(SegmentFile::Enabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9939,7 +9939,7 @@ impl SegmentFile {
             },
             4 => {
                 Ok(SegmentFile::UserProfilePrimaryKey(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9947,7 +9947,7 @@ impl SegmentFile {
             },
             7 => {
                 Ok(SegmentFile::LeaderType(Field {
-                    value:  profile::types::SegmentLeaderboardType::decode::<T>(
+                    raw_value:  profile::types::SegmentLeaderboardType::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -9957,7 +9957,7 @@ impl SegmentFile {
             },
             8 => {
                 Ok(SegmentFile::LeaderGroupPrimaryKey(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9965,7 +9965,7 @@ impl SegmentFile {
             },
             9 => {
                 Ok(SegmentFile::LeaderActivityId(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9973,7 +9973,7 @@ impl SegmentFile {
             },
             10 => {
                 Ok(SegmentFile::LeaderActivityIdString(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -9981,7 +9981,7 @@ impl SegmentFile {
             },
             11 => {
                 Ok(SegmentFile::DefaultRaceLeader(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10019,7 +10019,7 @@ impl Workout {
         match field_def_num {
             4 => {
                 Ok(Workout::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10027,7 +10027,7 @@ impl Workout {
             },
             5 => {
                 Ok(Workout::Capabilities(Field {
-                    value:  profile::types::WorkoutCapabilities::decode::<T>(
+                    raw_value:  profile::types::WorkoutCapabilities::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -10037,7 +10037,7 @@ impl Workout {
             },
             6 => {
                 Ok(Workout::NumValidSteps(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10045,7 +10045,7 @@ impl Workout {
             },
             8 => {
                 Ok(Workout::WktName(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10053,7 +10053,7 @@ impl Workout {
             },
             11 => {
                 Ok(Workout::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10061,7 +10061,7 @@ impl Workout {
             },
             14 => {
                 Ok(Workout::PoolLength(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -10069,7 +10069,7 @@ impl Workout {
             },
             15 => {
                 Ok(Workout::PoolLengthUnit(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -10105,7 +10105,7 @@ impl WorkoutSession {
         match field_def_num {
             254 => {
                 Ok(WorkoutSession::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10113,7 +10113,7 @@ impl WorkoutSession {
             },
             0 => {
                 Ok(WorkoutSession::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10121,7 +10121,7 @@ impl WorkoutSession {
             },
             1 => {
                 Ok(WorkoutSession::SubSport(Field {
-                    value:  profile::types::SubSport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::SubSport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10129,7 +10129,7 @@ impl WorkoutSession {
             },
             2 => {
                 Ok(WorkoutSession::NumValidSteps(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10137,7 +10137,7 @@ impl WorkoutSession {
             },
             3 => {
                 Ok(WorkoutSession::FirstStepIndex(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10145,7 +10145,7 @@ impl WorkoutSession {
             },
             4 => {
                 Ok(WorkoutSession::PoolLength(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -10153,7 +10153,7 @@ impl WorkoutSession {
             },
             5 => {
                 Ok(WorkoutSession::PoolLengthUnit(Field {
-                    value:  profile::types::DisplayMeasure::decode::<T>(
+                    raw_value:  profile::types::DisplayMeasure::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -10197,7 +10197,7 @@ impl WorkoutStep {
         match field_def_num {
             254 => {
                 Ok(WorkoutStep::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10205,7 +10205,7 @@ impl WorkoutStep {
             },
             0 => {
                 Ok(WorkoutStep::WktStepName(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10213,7 +10213,7 @@ impl WorkoutStep {
             },
             1 => {
                 Ok(WorkoutStep::DurationType(Field {
-                    value:  profile::types::WktStepDuration::decode::<T>(
+                    raw_value:  profile::types::WktStepDuration::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -10223,7 +10223,7 @@ impl WorkoutStep {
             },
             2 => {
                 Ok(WorkoutStep::DurationValue(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10231,7 +10231,7 @@ impl WorkoutStep {
             },
             3 => {
                 Ok(WorkoutStep::TargetType(Field {
-                    value:  profile::types::WktStepTarget::decode::<T>(buffer)?,
+                    raw_value:  profile::types::WktStepTarget::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10239,7 +10239,7 @@ impl WorkoutStep {
             },
             4 => {
                 Ok(WorkoutStep::TargetValue(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10247,7 +10247,7 @@ impl WorkoutStep {
             },
             5 => {
                 Ok(WorkoutStep::CustomTargetValueLow(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10255,7 +10255,7 @@ impl WorkoutStep {
             },
             6 => {
                 Ok(WorkoutStep::CustomTargetValueHigh(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10263,7 +10263,7 @@ impl WorkoutStep {
             },
             7 => {
                 Ok(WorkoutStep::Intensity(Field {
-                    value:  profile::types::Intensity::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Intensity::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10271,7 +10271,7 @@ impl WorkoutStep {
             },
             8 => {
                 Ok(WorkoutStep::Notes(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10279,7 +10279,7 @@ impl WorkoutStep {
             },
             9 => {
                 Ok(WorkoutStep::Equipment(Field {
-                    value:  profile::types::WorkoutEquipment::decode::<T>(
+                    raw_value:  profile::types::WorkoutEquipment::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -10289,7 +10289,7 @@ impl WorkoutStep {
             },
             10 => {
                 Ok(WorkoutStep::ExerciseCategory(Field {
-                    value:  profile::types::ExerciseCategory::decode::<T>(
+                    raw_value:  profile::types::ExerciseCategory::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -10299,7 +10299,7 @@ impl WorkoutStep {
             },
             11 => {
                 Ok(WorkoutStep::ExerciseName(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10307,7 +10307,7 @@ impl WorkoutStep {
             },
             12 => {
                 Ok(WorkoutStep::ExerciseWeight(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("kg"),
@@ -10315,7 +10315,7 @@ impl WorkoutStep {
             },
             13 => {
                 Ok(WorkoutStep::WeightDisplayUnit(Field {
-                    value:  profile::types::FitBaseUnit::decode::<T>(buffer)?,
+                    raw_value:  profile::types::FitBaseUnit::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10346,7 +10346,7 @@ impl ExerciseTitle {
         match field_def_num {
             254 => {
                 Ok(ExerciseTitle::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10354,7 +10354,7 @@ impl ExerciseTitle {
             },
             0 => {
                 Ok(ExerciseTitle::ExerciseCategory(Field {
-                    value:  profile::types::ExerciseCategory::decode::<T>(
+                    raw_value:  profile::types::ExerciseCategory::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -10364,7 +10364,7 @@ impl ExerciseTitle {
             },
             1 => {
                 Ok(ExerciseTitle::ExerciseName(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10372,7 +10372,7 @@ impl ExerciseTitle {
             },
             2 => {
                 Ok(ExerciseTitle::WktStepName(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10414,7 +10414,7 @@ impl Schedule {
         match field_def_num {
             0 => {
                 Ok(Schedule::Manufacturer(Field {
-                    value:  profile::types::Manufacturer::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Manufacturer::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10422,7 +10422,7 @@ impl Schedule {
             },
             1 => {
                 Ok(Schedule::Product(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10430,7 +10430,7 @@ impl Schedule {
             },
             2 => {
                 Ok(Schedule::SerialNumber(Field {
-                    value:  profile::base::Uint32z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10438,7 +10438,7 @@ impl Schedule {
             },
             3 => {
                 Ok(Schedule::TimeCreated(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10446,7 +10446,7 @@ impl Schedule {
             },
             4 => {
                 Ok(Schedule::Completed(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10454,7 +10454,7 @@ impl Schedule {
             },
             5 => {
                 Ok(Schedule::Type(Field {
-                    value:  profile::types::Schedule::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Schedule::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10462,7 +10462,7 @@ impl Schedule {
             },
             6 => {
                 Ok(Schedule::ScheduledTime(Field {
-                    value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10504,7 +10504,7 @@ impl Totals {
         match field_def_num {
             254 => {
                 Ok(Totals::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10512,7 +10512,7 @@ impl Totals {
             },
             253 => {
                 Ok(Totals::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -10520,7 +10520,7 @@ impl Totals {
             },
             0 => {
                 Ok(Totals::TimerTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -10528,7 +10528,7 @@ impl Totals {
             },
             1 => {
                 Ok(Totals::Distance(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("m"),
@@ -10536,7 +10536,7 @@ impl Totals {
             },
             2 => {
                 Ok(Totals::Calories(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -10544,7 +10544,7 @@ impl Totals {
             },
             3 => {
                 Ok(Totals::Sport(Field {
-                    value:  profile::types::Sport::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Sport::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10552,7 +10552,7 @@ impl Totals {
             },
             4 => {
                 Ok(Totals::ElapsedTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -10560,7 +10560,7 @@ impl Totals {
             },
             5 => {
                 Ok(Totals::Sessions(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10568,7 +10568,7 @@ impl Totals {
             },
             6 => {
                 Ok(Totals::ActiveTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -10576,7 +10576,7 @@ impl Totals {
             },
             9 => {
                 Ok(Totals::SportIndex(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10623,7 +10623,7 @@ impl WeightScale {
         match field_def_num {
             253 => {
                 Ok(WeightScale::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -10631,7 +10631,7 @@ impl WeightScale {
             },
             0 => {
                 Ok(WeightScale::Weight(Field {
-                    value:  profile::types::Weight::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Weight::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("kg"),
@@ -10639,7 +10639,7 @@ impl WeightScale {
             },
             1 => {
                 Ok(WeightScale::PercentFat(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -10647,7 +10647,7 @@ impl WeightScale {
             },
             2 => {
                 Ok(WeightScale::PercentHydration(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("%"),
@@ -10655,7 +10655,7 @@ impl WeightScale {
             },
             3 => {
                 Ok(WeightScale::VisceralFatMass(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("kg"),
@@ -10663,7 +10663,7 @@ impl WeightScale {
             },
             4 => {
                 Ok(WeightScale::BoneMass(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("kg"),
@@ -10671,7 +10671,7 @@ impl WeightScale {
             },
             5 => {
                 Ok(WeightScale::MuscleMass(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("kg"),
@@ -10679,7 +10679,7 @@ impl WeightScale {
             },
             7 => {
                 Ok(WeightScale::BasalMet(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(4.0),
                     offset: None,
                     units:  Some("kcal/day"),
@@ -10687,7 +10687,7 @@ impl WeightScale {
             },
             8 => {
                 Ok(WeightScale::PhysiqueRating(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10695,7 +10695,7 @@ impl WeightScale {
             },
             9 => {
                 Ok(WeightScale::ActiveMet(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(4.0),
                     offset: None,
                     units:  Some("kcal/day"),
@@ -10703,7 +10703,7 @@ impl WeightScale {
             },
             10 => {
                 Ok(WeightScale::MetabolicAge(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("years"),
@@ -10711,7 +10711,7 @@ impl WeightScale {
             },
             11 => {
                 Ok(WeightScale::VisceralFatRating(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10719,7 +10719,7 @@ impl WeightScale {
             },
             12 => {
                 Ok(WeightScale::UserProfileIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10763,7 +10763,7 @@ impl BloodPressure {
         match field_def_num {
             253 => {
                 Ok(BloodPressure::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -10771,7 +10771,7 @@ impl BloodPressure {
             },
             0 => {
                 Ok(BloodPressure::SystolicPressure(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mmHg"),
@@ -10779,7 +10779,7 @@ impl BloodPressure {
             },
             1 => {
                 Ok(BloodPressure::DiastolicPressure(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mmHg"),
@@ -10787,7 +10787,7 @@ impl BloodPressure {
             },
             2 => {
                 Ok(BloodPressure::MeanArterialPressure(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mmHg"),
@@ -10795,7 +10795,7 @@ impl BloodPressure {
             },
             3 => {
                 Ok(BloodPressure::Map3SampleMean(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mmHg"),
@@ -10803,7 +10803,7 @@ impl BloodPressure {
             },
             4 => {
                 Ok(BloodPressure::MapMorningValues(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mmHg"),
@@ -10811,7 +10811,7 @@ impl BloodPressure {
             },
             5 => {
                 Ok(BloodPressure::MapEveningValues(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("mmHg"),
@@ -10819,7 +10819,7 @@ impl BloodPressure {
             },
             6 => {
                 Ok(BloodPressure::HeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -10827,7 +10827,7 @@ impl BloodPressure {
             },
             7 => {
                 Ok(BloodPressure::HeartRateType(Field {
-                    value:  profile::types::HrType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::HrType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10835,7 +10835,7 @@ impl BloodPressure {
             },
             8 => {
                 Ok(BloodPressure::Status(Field {
-                    value:  profile::types::BpStatus::decode::<T>(buffer)?,
+                    raw_value:  profile::types::BpStatus::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10843,7 +10843,7 @@ impl BloodPressure {
             },
             9 => {
                 Ok(BloodPressure::UserProfileIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10883,7 +10883,7 @@ impl MonitoringInfo {
         match field_def_num {
             253 => {
                 Ok(MonitoringInfo::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -10891,7 +10891,7 @@ impl MonitoringInfo {
             },
             0 => {
                 Ok(MonitoringInfo::LocalTimestamp(Field {
-                    value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -10899,7 +10899,7 @@ impl MonitoringInfo {
             },
             1 => {
                 Ok(MonitoringInfo::ActivityType(Field {
-                    value:  profile::types::ActivityType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::ActivityType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -10907,7 +10907,7 @@ impl MonitoringInfo {
             },
             3 => {
                 Ok(MonitoringInfo::CyclesToDistance(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5000.0),
                     offset: None,
                     units:  Some("m/cycle"),
@@ -10915,7 +10915,7 @@ impl MonitoringInfo {
             },
             4 => {
                 Ok(MonitoringInfo::CyclesToCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(5000.0),
                     offset: None,
                     units:  Some("kcal/cycle"),
@@ -10923,7 +10923,7 @@ impl MonitoringInfo {
             },
             5 => {
                 Ok(MonitoringInfo::RestingMetabolicRate(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal / day"),
@@ -11000,7 +11000,7 @@ impl Monitoring {
         match field_def_num {
             253 => {
                 Ok(Monitoring::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -11008,7 +11008,7 @@ impl Monitoring {
             },
             0 => {
                 Ok(Monitoring::DeviceIndex(Field {
-                    value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11016,7 +11016,7 @@ impl Monitoring {
             },
             1 => {
                 Ok(Monitoring::Calories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -11024,7 +11024,7 @@ impl Monitoring {
             },
             2 => {
                 Ok(Monitoring::Distance(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("m"),
@@ -11032,7 +11032,7 @@ impl Monitoring {
             },
             3 => {
                 Ok(Monitoring::Cycles(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(2.0),
                     offset: None,
                     units:  Some("cycles"),
@@ -11040,7 +11040,7 @@ impl Monitoring {
             },
             4 => {
                 Ok(Monitoring::ActiveTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
@@ -11048,7 +11048,7 @@ impl Monitoring {
             },
             5 => {
                 Ok(Monitoring::ActivityType(Field {
-                    value:  profile::types::ActivityType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::ActivityType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11056,7 +11056,7 @@ impl Monitoring {
             },
             6 => {
                 Ok(Monitoring::ActivitySubtype(Field {
-                    value:  profile::types::ActivitySubtype::decode::<T>(
+                    raw_value:  profile::types::ActivitySubtype::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -11066,7 +11066,7 @@ impl Monitoring {
             },
             7 => {
                 Ok(Monitoring::ActivityLevel(Field {
-                    value:  profile::types::ActivityLevel::decode::<T>(buffer)?,
+                    raw_value:  profile::types::ActivityLevel::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11074,7 +11074,7 @@ impl Monitoring {
             },
             8 => {
                 Ok(Monitoring::Distance16(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("100 * m"),
@@ -11082,7 +11082,7 @@ impl Monitoring {
             },
             9 => {
                 Ok(Monitoring::Cycles16(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("2 * cycles (steps)"),
@@ -11090,7 +11090,7 @@ impl Monitoring {
             },
             10 => {
                 Ok(Monitoring::ActiveTime16(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -11098,7 +11098,7 @@ impl Monitoring {
             },
             11 => {
                 Ok(Monitoring::LocalTimestamp(Field {
-                    value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::LocalDateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11106,7 +11106,7 @@ impl Monitoring {
             },
             12 => {
                 Ok(Monitoring::Temperature(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("C"),
@@ -11114,7 +11114,7 @@ impl Monitoring {
             },
             14 => {
                 Ok(Monitoring::TemperatureMin(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("C"),
@@ -11122,7 +11122,7 @@ impl Monitoring {
             },
             15 => {
                 Ok(Monitoring::TemperatureMax(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  Some(100.0),
                     offset: None,
                     units:  Some("C"),
@@ -11130,7 +11130,7 @@ impl Monitoring {
             },
             16 => {
                 Ok(Monitoring::ActivityTime(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("minutes"),
@@ -11138,7 +11138,7 @@ impl Monitoring {
             },
             19 => {
                 Ok(Monitoring::ActiveCalories(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("kcal"),
@@ -11146,7 +11146,7 @@ impl Monitoring {
             },
             24 => {
                 Ok(Monitoring::CurrentActivityTypeIntensity(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11154,7 +11154,7 @@ impl Monitoring {
             },
             25 => {
                 Ok(Monitoring::TimestampMin8(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("min"),
@@ -11162,7 +11162,7 @@ impl Monitoring {
             },
             26 => {
                 Ok(Monitoring::Timestamp16(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -11170,7 +11170,7 @@ impl Monitoring {
             },
             27 => {
                 Ok(Monitoring::HeartRate(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -11178,7 +11178,7 @@ impl Monitoring {
             },
             28 => {
                 Ok(Monitoring::Intensity(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(10.0),
                     offset: None,
                     units:  None,
@@ -11186,7 +11186,7 @@ impl Monitoring {
             },
             29 => {
                 Ok(Monitoring::DurationMin(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("min"),
@@ -11194,7 +11194,7 @@ impl Monitoring {
             },
             30 => {
                 Ok(Monitoring::Duration(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -11202,7 +11202,7 @@ impl Monitoring {
             },
             31 => {
                 Ok(Monitoring::Ascent(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -11210,7 +11210,7 @@ impl Monitoring {
             },
             32 => {
                 Ok(Monitoring::Descent(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -11218,7 +11218,7 @@ impl Monitoring {
             },
             33 => {
                 Ok(Monitoring::ModerateActivityMinutes(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("minutes"),
@@ -11226,7 +11226,7 @@ impl Monitoring {
             },
             34 => {
                 Ok(Monitoring::VigorousActivityMinutes(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("minutes"),
@@ -11259,7 +11259,7 @@ impl Hr {
         match field_def_num {
             253 => {
                 Ok(Hr::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11267,7 +11267,7 @@ impl Hr {
             },
             0 => {
                 Ok(Hr::FractionalTimestamp(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(32768.0),
                     offset: None,
                     units:  Some("s"),
@@ -11275,7 +11275,7 @@ impl Hr {
             },
             1 => {
                 Ok(Hr::Time256(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(256.0),
                     offset: None,
                     units:  Some("s"),
@@ -11283,7 +11283,7 @@ impl Hr {
             },
             6 => {
                 Ok(Hr::FilteredBpm(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("bpm"),
@@ -11291,7 +11291,7 @@ impl Hr {
             },
             9 => {
                 Ok(Hr::EventTimestamp(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1024.0),
                     offset: None,
                     units:  Some("s"),
@@ -11299,7 +11299,7 @@ impl Hr {
             },
             10 => {
                 Ok(Hr::EventTimestamp12(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -11333,7 +11333,7 @@ impl StressLevel {
         match field_def_num {
             0 => {
                 Ok(StressLevel::StressLevelValue(Field {
-                    value:  profile::base::Sint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11341,7 +11341,7 @@ impl StressLevel {
             },
             1 => {
                 Ok(StressLevel::StressLevelTime(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -11380,7 +11380,7 @@ impl MemoGlob {
         match field_def_num {
             250 => {
                 Ok(MemoGlob::PartIndex(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11388,7 +11388,7 @@ impl MemoGlob {
             },
             0 => {
                 Ok(MemoGlob::Memo(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11396,7 +11396,7 @@ impl MemoGlob {
             },
             1 => {
                 Ok(MemoGlob::MessageNumber(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11404,7 +11404,7 @@ impl MemoGlob {
             },
             2 => {
                 Ok(MemoGlob::MessageIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11436,7 +11436,7 @@ impl AntChannelId {
         match field_def_num {
             0 => {
                 Ok(AntChannelId::ChannelNumber(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11444,7 +11444,7 @@ impl AntChannelId {
             },
             1 => {
                 Ok(AntChannelId::DeviceType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11452,7 +11452,7 @@ impl AntChannelId {
             },
             2 => {
                 Ok(AntChannelId::DeviceNumber(Field {
-                    value:  profile::base::Uint16z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11460,7 +11460,7 @@ impl AntChannelId {
             },
             3 => {
                 Ok(AntChannelId::TransmissionType(Field {
-                    value:  profile::base::Uint8z::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8z::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11468,7 +11468,7 @@ impl AntChannelId {
             },
             4 => {
                 Ok(AntChannelId::DeviceIndex(Field {
-                    value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DeviceIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11501,7 +11501,7 @@ impl AntRx {
         match field_def_num {
             253 => {
                 Ok(AntRx::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -11509,7 +11509,7 @@ impl AntRx {
             },
             0 => {
                 Ok(AntRx::FractionalTimestamp(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(32768.0),
                     offset: None,
                     units:  Some("s"),
@@ -11517,7 +11517,7 @@ impl AntRx {
             },
             1 => {
                 Ok(AntRx::MesgId(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11525,7 +11525,7 @@ impl AntRx {
             },
             2 => {
                 Ok(AntRx::MesgData(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11533,7 +11533,7 @@ impl AntRx {
             },
             3 => {
                 Ok(AntRx::ChannelNumber(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11541,7 +11541,7 @@ impl AntRx {
             },
             4 => {
                 Ok(AntRx::Data(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11574,7 +11574,7 @@ impl AntTx {
         match field_def_num {
             253 => {
                 Ok(AntTx::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -11582,7 +11582,7 @@ impl AntTx {
             },
             0 => {
                 Ok(AntTx::FractionalTimestamp(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(32768.0),
                     offset: None,
                     units:  Some("s"),
@@ -11590,7 +11590,7 @@ impl AntTx {
             },
             1 => {
                 Ok(AntTx::MesgId(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11598,7 +11598,7 @@ impl AntTx {
             },
             2 => {
                 Ok(AntTx::MesgData(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11606,7 +11606,7 @@ impl AntTx {
             },
             3 => {
                 Ok(AntTx::ChannelNumber(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11614,7 +11614,7 @@ impl AntTx {
             },
             4 => {
                 Ok(AntTx::Data(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11649,7 +11649,7 @@ impl ExdScreenConfiguration {
         match field_def_num {
             0 => {
                 Ok(ExdScreenConfiguration::ScreenIndex(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11657,7 +11657,7 @@ impl ExdScreenConfiguration {
             },
             1 => {
                 Ok(ExdScreenConfiguration::FieldCount(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11665,7 +11665,7 @@ impl ExdScreenConfiguration {
             },
             2 => {
                 Ok(ExdScreenConfiguration::Layout(Field {
-                    value:  profile::types::ExdLayout::decode::<T>(buffer)?,
+                    raw_value:  profile::types::ExdLayout::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11673,7 +11673,7 @@ impl ExdScreenConfiguration {
             },
             3 => {
                 Ok(ExdScreenConfiguration::ScreenEnabled(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11706,7 +11706,7 @@ impl ExdDataFieldConfiguration {
         match field_def_num {
             0 => {
                 Ok(ExdDataFieldConfiguration::ScreenIndex(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11714,7 +11714,7 @@ impl ExdDataFieldConfiguration {
             },
             1 => {
                 Ok(ExdDataFieldConfiguration::ConceptField(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11722,7 +11722,7 @@ impl ExdDataFieldConfiguration {
             },
             2 => {
                 Ok(ExdDataFieldConfiguration::FieldId(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11730,7 +11730,7 @@ impl ExdDataFieldConfiguration {
             },
             3 => {
                 Ok(ExdDataFieldConfiguration::ConceptCount(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11738,7 +11738,7 @@ impl ExdDataFieldConfiguration {
             },
             4 => {
                 Ok(ExdDataFieldConfiguration::DisplayType(Field {
-                    value:  profile::types::ExdDisplayType::decode::<T>(
+                    raw_value:  profile::types::ExdDisplayType::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -11748,7 +11748,7 @@ impl ExdDataFieldConfiguration {
             },
             5 => {
                 Ok(ExdDataFieldConfiguration::Title(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11786,7 +11786,7 @@ impl ExdDataConceptConfiguration {
         match field_def_num {
             0 => {
                 Ok(ExdDataConceptConfiguration::ScreenIndex(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11794,7 +11794,7 @@ impl ExdDataConceptConfiguration {
             },
             1 => {
                 Ok(ExdDataConceptConfiguration::ConceptField(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11802,7 +11802,7 @@ impl ExdDataConceptConfiguration {
             },
             2 => {
                 Ok(ExdDataConceptConfiguration::FieldId(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11810,7 +11810,7 @@ impl ExdDataConceptConfiguration {
             },
             3 => {
                 Ok(ExdDataConceptConfiguration::ConceptIndex(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11818,7 +11818,7 @@ impl ExdDataConceptConfiguration {
             },
             4 => {
                 Ok(ExdDataConceptConfiguration::DataPage(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11826,7 +11826,7 @@ impl ExdDataConceptConfiguration {
             },
             5 => {
                 Ok(ExdDataConceptConfiguration::ConceptKey(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11834,7 +11834,7 @@ impl ExdDataConceptConfiguration {
             },
             6 => {
                 Ok(ExdDataConceptConfiguration::Scaling(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11842,7 +11842,7 @@ impl ExdDataConceptConfiguration {
             },
             8 => {
                 Ok(ExdDataConceptConfiguration::DataUnits(Field {
-                    value:  profile::types::ExdDataUnits::decode::<T>(buffer)?,
+                    raw_value:  profile::types::ExdDataUnits::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11850,7 +11850,7 @@ impl ExdDataConceptConfiguration {
             },
             9 => {
                 Ok(ExdDataConceptConfiguration::Qualifier(Field {
-                    value:  profile::types::ExdQualifiers::decode::<T>(buffer)?,
+                    raw_value:  profile::types::ExdQualifiers::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11858,7 +11858,7 @@ impl ExdDataConceptConfiguration {
             },
             10 => {
                 Ok(ExdDataConceptConfiguration::Descriptor(Field {
-                    value:  profile::types::ExdDescriptors::decode::<T>(
+                    raw_value:  profile::types::ExdDescriptors::decode::<T>(
                         buffer,
                     )?,
                     scale:  None,
@@ -11868,7 +11868,7 @@ impl ExdDataConceptConfiguration {
             },
             11 => {
                 Ok(ExdDataConceptConfiguration::IsSigned(Field {
-                    value:  profile::base::Bool::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bool::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11910,7 +11910,7 @@ impl FieldDescription {
         match field_def_num {
             0 => {
                 Ok(FieldDescription::DeveloperDataIndex(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11918,7 +11918,7 @@ impl FieldDescription {
             },
             1 => {
                 Ok(FieldDescription::FieldDefinitionNumber(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11926,7 +11926,7 @@ impl FieldDescription {
             },
             2 => {
                 Ok(FieldDescription::FitBaseTypeId(Field {
-                    value:  profile::types::FitBaseType::decode::<T>(buffer)?,
+                    raw_value:  profile::types::FitBaseType::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11934,7 +11934,7 @@ impl FieldDescription {
             },
             3 => {
                 Ok(FieldDescription::FieldName(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11942,7 +11942,7 @@ impl FieldDescription {
             },
             4 => {
                 Ok(FieldDescription::Array(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11950,7 +11950,7 @@ impl FieldDescription {
             },
             5 => {
                 Ok(FieldDescription::Components(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11958,7 +11958,7 @@ impl FieldDescription {
             },
             6 => {
                 Ok(FieldDescription::Scale(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11966,7 +11966,7 @@ impl FieldDescription {
             },
             7 => {
                 Ok(FieldDescription::Offset(Field {
-                    value:  profile::base::Sint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Sint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11974,7 +11974,7 @@ impl FieldDescription {
             },
             8 => {
                 Ok(FieldDescription::Units(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11982,7 +11982,7 @@ impl FieldDescription {
             },
             9 => {
                 Ok(FieldDescription::Bits(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11990,7 +11990,7 @@ impl FieldDescription {
             },
             10 => {
                 Ok(FieldDescription::Accumulate(Field {
-                    value:  profile::base::Utf8String::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Utf8String::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -11998,7 +11998,7 @@ impl FieldDescription {
             },
             13 => {
                 Ok(FieldDescription::FitBaseUnitId(Field {
-                    value:  profile::types::FitBaseUnit::decode::<T>(buffer)?,
+                    raw_value:  profile::types::FitBaseUnit::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12006,7 +12006,7 @@ impl FieldDescription {
             },
             14 => {
                 Ok(FieldDescription::NativeMesgNum(Field {
-                    value:  profile::types::MesgNum::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MesgNum::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12014,7 +12014,7 @@ impl FieldDescription {
             },
             15 => {
                 Ok(FieldDescription::NativeFieldNum(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12047,7 +12047,7 @@ impl DeveloperDataId {
         match field_def_num {
             0 => {
                 Ok(DeveloperDataId::DeveloperId(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12055,7 +12055,7 @@ impl DeveloperDataId {
             },
             1 => {
                 Ok(DeveloperDataId::ApplicationId(Field {
-                    value:  profile::base::Bytes::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Bytes::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12063,7 +12063,7 @@ impl DeveloperDataId {
             },
             2 => {
                 Ok(DeveloperDataId::ManufacturerId(Field {
-                    value:  profile::types::Manufacturer::decode::<T>(buffer)?,
+                    raw_value:  profile::types::Manufacturer::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12071,7 +12071,7 @@ impl DeveloperDataId {
             },
             3 => {
                 Ok(DeveloperDataId::DeveloperDataIndex(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12079,7 +12079,7 @@ impl DeveloperDataId {
             },
             4 => {
                 Ok(DeveloperDataId::ApplicationVersion(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12125,7 +12125,7 @@ impl DiveSummary {
         match field_def_num {
             253 => {
                 Ok(DiveSummary::Timestamp(Field {
-                    value:  profile::types::DateTime::decode::<T>(buffer)?,
+                    raw_value:  profile::types::DateTime::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("s"),
@@ -12133,7 +12133,7 @@ impl DiveSummary {
             },
             0 => {
                 Ok(DiveSummary::ReferenceMesg(Field {
-                    value:  profile::types::MesgNum::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MesgNum::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12141,7 +12141,7 @@ impl DiveSummary {
             },
             1 => {
                 Ok(DiveSummary::ReferenceIndex(Field {
-                    value:  profile::types::MessageIndex::decode::<T>(buffer)?,
+                    raw_value:  profile::types::MessageIndex::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12149,7 +12149,7 @@ impl DiveSummary {
             },
             2 => {
                 Ok(DiveSummary::AvgDepth(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -12157,7 +12157,7 @@ impl DiveSummary {
             },
             3 => {
                 Ok(DiveSummary::MaxDepth(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("m"),
@@ -12165,7 +12165,7 @@ impl DiveSummary {
             },
             4 => {
                 Ok(DiveSummary::SurfaceInterval(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("s"),
@@ -12173,7 +12173,7 @@ impl DiveSummary {
             },
             5 => {
                 Ok(DiveSummary::StartCns(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("percent"),
@@ -12181,7 +12181,7 @@ impl DiveSummary {
             },
             6 => {
                 Ok(DiveSummary::EndCns(Field {
-                    value:  profile::base::Uint8::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint8::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("percent"),
@@ -12189,7 +12189,7 @@ impl DiveSummary {
             },
             7 => {
                 Ok(DiveSummary::StartN2(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("percent"),
@@ -12197,7 +12197,7 @@ impl DiveSummary {
             },
             8 => {
                 Ok(DiveSummary::EndN2(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  Some(1.0),
                     offset: None,
                     units:  Some("percent"),
@@ -12205,7 +12205,7 @@ impl DiveSummary {
             },
             9 => {
                 Ok(DiveSummary::O2Toxicity(Field {
-                    value:  profile::base::Uint16::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint16::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  Some("OTUs"),
@@ -12213,7 +12213,7 @@ impl DiveSummary {
             },
             10 => {
                 Ok(DiveSummary::DiveNumber(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  None,
                     offset: None,
                     units:  None,
@@ -12221,7 +12221,7 @@ impl DiveSummary {
             },
             11 => {
                 Ok(DiveSummary::BottomTime(Field {
-                    value:  profile::base::Uint32::decode::<T>(buffer)?,
+                    raw_value:  profile::base::Uint32::decode::<T>(buffer)?,
                     scale:  Some(1000.0),
                     offset: None,
                     units:  Some("s"),
