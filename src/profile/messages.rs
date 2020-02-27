@@ -7,11 +7,20 @@ use types;
 #[doc = r" The actual data of a `Message`."]
 #[derive(Debug,Clone)]
 pub struct Field<T> {
-    value:     T,
-    scale:     Option<f64>,
-    offset:    Option<f64>,
+    pub value:     T,
+    pub scale:     Option<f64>,
+    pub offset:    Option<f64>,
     pub units: Option<&'static str>,
 }
+
+impl types::field::Field for Field<profile::base::Float32> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
 impl types::field::Field for Field<profile::base::Float64> {
     type Value = f64;
 
@@ -19,6 +28,103 @@ impl types::field::Field for Field<profile::base::Float64> {
         self.value.0 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
     }
 }
+
+impl types::field::Field for Field<profile::base::Uint8> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value  {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Uint8z> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value  {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Sint8> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Uint16> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value  {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Uint16z> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value  {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Sint16> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Uint32> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value  {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Uint32z> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value  {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Sint32> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Uint64> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value  {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Uint64z> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value  {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
+impl types::field::Field for Field<profile::base::Sint64> {
+    type Value = f64;
+
+    fn value(&self) -> Self::Value {
+        self.value.0 as f64 / self.scale.unwrap_or(1.0) - self.offset.unwrap_or(0.0)
+    }
+}
+
 #[doc = r" All the FIT message types."]
 #[derive(Debug,Clone)]
 pub enum Message {
