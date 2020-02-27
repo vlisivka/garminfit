@@ -13,6 +13,12 @@ pub struct Field<T> {
     pub units: Option<&'static str>,
 }
 
+impl<T: profile::base::Valid> Field<T> {
+    pub fn is_valid(&self) -> bool {
+        self.raw_value.is_valid()
+    }
+}
+
 impl types::field::Field for Field<profile::base::Float32> {
     type Value = f64;
 

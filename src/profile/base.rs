@@ -13,6 +13,10 @@ use std::{
     f64,
 };
 
+pub trait Valid {
+  fn is_valid(&self) -> bool;
+}
+
 macro_rules! base_type {
     (
         $sdk_name:expr,
@@ -27,9 +31,10 @@ macro_rules! base_type {
 
         impl $name {
             base_type_decode!($name, $read_method);
-
-            pub(crate) fn is_valid(&self) -> bool {
-                self.0 == $invalid
+        }
+        impl Valid for $name {
+            fn is_valid(&self) -> bool {
+                self.0 != $invalid
             }
         }
         impl Default for $name {
@@ -89,13 +94,16 @@ pub struct Utf8String(pub String);
 impl Utf8String {
     pub(crate) fn decode<T: ByteOrder>(buffer: &[u8]) -> Result<Self> {
         unsafe {
+            // TODO: FIXME: Ignore trailing zero
             let string = String::from_utf8_unchecked(buffer.to_vec());
             Ok(Utf8String(string))
         }
     }
+}
 
-    pub(crate) fn is_valid(&self) -> bool {
-        true // TODO?
+impl Valid for Utf8String {
+    fn is_valid(&self) -> bool {
+        self.0.len() > 0
     }
 }
 
@@ -115,9 +123,11 @@ impl Bytes {
     pub(crate) fn decode<T: ByteOrder>(buffer: &[u8]) -> Result<Self> {
         Ok(Bytes(buffer.to_vec()))
     }
+}
 
-    pub(crate) fn is_valid(&self) -> bool {
-        true // TODO?
+impl Valid for Bytes {
+    fn is_valid(&self) -> bool {
+        self.0.len() > 0
     }
 }
 
@@ -140,9 +150,11 @@ impl Bool {
         something_else => Err(Error::from(ErrorKind::Decode{what:format!("Cann't decode boolean: {:?}", something_else)})),
       }
     }
+}
 
-    pub(crate) fn is_valid(&self) -> bool {
-        true // TODO?
+impl Valid for Bool {
+    fn is_valid(&self) -> bool {
+        true
     }
 }
 
