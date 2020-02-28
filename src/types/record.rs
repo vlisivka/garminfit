@@ -272,13 +272,13 @@ impl Data {
             for field_def in devfield_defs.iter() {
                 let mut buffer = vec![0; field_def.size as usize];
                 r.read(&mut buffer).map_err(Error::reading("buffer"))?;
-                let _mesg = profile::messages::Message::decode::<T>(
+                let mesg = profile::messages::Message::decode::<T>(
                     &buffer,
                     definition.global_mesg_num,
                     field_def.num,
                 )?;
                 // FIXME: It produces garbage value, so it easier to skip it.
-                //mesgs.push(mesg);
+                mesgs.push(mesg);
             }
         }
 
