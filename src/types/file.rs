@@ -45,9 +45,12 @@ impl File {
 
         while bytes_left > 0 {
             let position_before = current_position(r)?;
+            //*DEBUG*/dbg!(position_before);
 
             let record = Record::decode(r, &mut local_mesgs)
                 .map_err(Error::decoding(format!("record #{}", count)))?;
+
+            //*DEBUG*/dbg!(record.clone());
 
             // If we got a definition message we need
             // to add it to the `local_mesgs` map

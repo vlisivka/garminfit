@@ -147,6 +147,7 @@ pub enum Message {
     CompressedTimestamp, // TODO (CompressedTimestamp),
 }
 
+/// Definition record contains definitions for messages in Data records.
 #[derive(Debug, Clone)]
 pub struct Definition {
     // NOTE: Reserved byte here!
@@ -186,20 +187,24 @@ impl Definition {
 
         let mut field_defs = Vec::with_capacity(nfields as usize);
         for i in 0..nfields {
-            let field_def = FieldDefinition::decode(r)
+            let field_def = FieldDefinition::decode(r, false)
                 .map_err(Error::reading(format!("field definition #{}", i)))?;
             field_defs.push(field_def);
         }
 
+
+        // Reading developer felds, which were added in FIT 1.9
         if has_dev_fields {
             let ndevfields =
                 r.read_u8().map_err(Error::reading("number of fields"))?;
+
             let mut devfield_defs = Vec::with_capacity(nfields as usize);
             for i in 0..ndevfields {
-                let field_def = FieldDefinition::decode(r)
+                let field_def = FieldDefinition::decode(r, true)
                     .map_err(Error::reading(format!("field definition #{}", i)))?;
                 devfield_defs.push(field_def);
             }
+
             Ok(Definition {
                 arch,
                 global_mesg_num,
@@ -229,60 +234,98 @@ pub struct FieldDefinition {
 }
 
 impl FieldDefinition {
-    pub(super) fn decode<R: ReadBytesExt>(r: &mut R) -> Result<Self> {
-        let num = r.read_u8().map_err(Error::reading("number"))?;
 
-        let size = r.read_u8().map_err(Error::reading("size"))?;
+    // TODO: Pass full Field Description message instead of `is_developer_field: bool`
+    pub(super) fn decode<R: ReadBytesExt>(reader: &mut R, is_developer_field: bool) -> Result<Self> {
+        match is_developer_field {
+            // Regular field
+            false => {
+                let field_number = reader.read_u8().map_err(Error::reading("field number"))?;
 
-        let _base_type_num =
-            r.read_u8().map_err(Error::reading("base type"))?;
+                let field_size = reader.read_u8().map_err(Error::reading("field size"))?;
 
-        Ok(FieldDefinition {
-            num,
-            size,
-            _base_type_num,
-        })
+                let base_type_id =
+                    reader.read_u8().map_err(Error::reading("field base type id"))?;
+
+                Ok(FieldDefinition {
+                    num: field_number,
+                    size: field_size,
+                    _base_type_num: base_type_id,
+                })
+            }
+
+            // Developer field
+            true => {
+                // Maps to field_definition_number of Field Description Message
+                let _field_number = reader.read_u8().map_err(Error::reading("developer field number"))?;
+
+                let field_size = reader.read_u8().map_err(Error::reading("developer field size"))?;
+
+                // Index of Field Descripion Message
+                let _developer_data_index =
+                    reader.read_u8().map_err(Error::reading("developer field data index"))?;
+
+                Ok(FieldDefinition {
+                    // TODO: FIXME: Update FieldDefiniton to support developer fields.
+                    num: 255,
+                    size: field_size,
+                    // TODO: FIXME: Update FieldDefiniton to support developer fields.
+                    _base_type_num: 13, // Array of bytes, to just skip value, to be able to parse file.
+                })
+            }
+        }
     }
+
 }
 
+/// Data record contains messages.
 #[derive(Debug,Clone)]
 pub struct Data(pub Vec<profile::messages::Message>);
 
-// TODO
 impl Data {
     pub(super) fn decode<R: ReadBytesExt, T: ByteOrder>(
-        r: &mut R,
+        reader: &mut R,
         definition: &Definition,
     ) -> Result<Self> {
-        let mut mesgs = Vec::with_capacity(definition.field_defs.len());
+        let mut messages = Vec::with_capacity(definition.field_defs.len());
 
         for field_def in definition.field_defs.iter() {
+
+            // Read required number of bytes, as required by field
             let mut buffer = vec![0; field_def.size as usize];
-            r.read(&mut buffer).map_err(Error::reading("buffer"))?;
-            let mesg = profile::messages::Message::decode::<T>(
+            reader.read(&mut buffer).map_err(Error::reading("buffer"))?;
+
+            // Decode field from buffer
+            let message = profile::messages::Message::decode::<T>(
                 &buffer,
                 definition.global_mesg_num,
                 field_def.num,
             )?;
-            mesgs.push(mesg);
+
+            // Append message to 
+            messages.push(message);
         }
 
         if let Some(devfield_defs) = definition.clone().devfield_defs {
-            // TODO: FIXME: Decode developer fields properly!
+
             for field_def in devfield_defs.iter() {
+
+                // Read required number of bytes, as required by field
                 let mut buffer = vec![0; field_def.size as usize];
-                r.read(&mut buffer).map_err(Error::reading("buffer"))?;
-                let mesg = profile::messages::Message::decode::<T>(
+                reader.read(&mut buffer).map_err(Error::reading("buffer"))?;
+
+                // Decode field from buffer
+                let message = profile::messages::Message::decode::<T>(
                     &buffer,
                     definition.global_mesg_num,
                     field_def.num,
                 )?;
-                // FIXME: It produces garbage value, so it easier to skip it.
-                mesgs.push(mesg);
+
+                messages.push(message);
             }
         }
 
-        Ok(Data(mesgs))
+        Ok(Data(messages))
     }
 }
 

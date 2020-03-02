@@ -28,21 +28,6 @@ fn main() {
         Ok(decoded) => {
             for record in decoded.records {
                 println!("Record: {:?}", record);
-/*
-                match record.content {
-                    fit::record::Message::Data(fit::record::Data(mesgs)) => {
-                        for mesg in mesgs {
-                            match mesg {
-                                fit::messages::Message::Record(
-                                    fit::messages::Record::Power(pwr),
-                                ) => println!("{:?}", pwr),
-                                _ => (),
-                            }
-                        }
-                    },
-                    _ => (),
-                }
-*/
             }
         },
         Err(err) => eprintln!("{}", pretty_error(&err.into())),
